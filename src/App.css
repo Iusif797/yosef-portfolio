@@ -1,38 +1,653 @@
+/* src/App.css */
+
+/* CSS Variables for Dark Theme */
+:root {
+  --primary-color: #1e1e1e;
+  --secondary-color: #272727;
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --accent-color: #ffd700; /* Gold color */
+  --button-hover: #ffa500; /* Orange color for hover effects */
+  --border-color: #ffd700; /* Border color */
+}
+
+/* Reset Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Overlay для затемнения фона */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.85); /* Полупрозрачный слой для улучшения читаемости */
+  z-index: -1;
+}
+
+/* Main Container */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  z-index: 0; /* Чтобы оверлей был за контентом */
+}
+
+/* Header Section */
+.App-header {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: var(--accent-color);
+  padding: 6rem 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Header Content */
+.header-content {
+  max-width: 800px;
+  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон для лучшего контраста */
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+/* Стили для вашей иконки */
+.portfolio-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  /* Стили для выделения иконки белым цветом на чёрном фоне */
+  filter: invert(1);
+  transition: transform 0.6s, filter 0.6s;
+  /* Добавляем свечение */
+  filter: invert(1) drop-shadow(0 0 10px var(--accent-color));
+}
+
+/* Анимация при наведении */
+.portfolio-icon:hover {
+  transform: rotateY(360deg);
+  /* Усиливаем свечение при наведении */
+  filter: invert(1) drop-shadow(0 0 20px var(--accent-color));
+}
+
+/* Studio Title */
+.studio-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  color: var(--accent-color); /* Желтый цвет */
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* About Me Section */
+.about-me {
+  font-size: 1.5rem;
+  color: #e0e0e0;
+  margin-top: 1rem;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* "My Projects" Section */
+.projects-section {
+  padding: 6rem 1rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Заголовок секции проектов */
+.projects-section h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Projects Carousel */
+.projects-carousel {
+  width: 100%;
+  max-width: 1200px;
+  height: 700px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Floating Elements */
+.project-item.floating {
+  position: absolute;
+  width: 180px;
+  height: 280px;
+  top: 50%;
+  left: 50%;
+  margin: -140px 0 0 -90px;
+  animation-timing-function: ease-in-out;
+}
+
+/* Individual Animations for Floating Items */
+.float1 {
+  animation: float1 12s infinite;
+}
+
+.float2 {
+  animation: float2 10s infinite reverse;
+}
+
+.float3 {
+  animation: float3 14s infinite;
+}
+
+.float4 {
+  animation: float4 11s infinite reverse;
+}
+
+.float5 {
+  animation: float5 13s infinite;
+}
+
+.float6 {
+  animation: float6 9s infinite reverse;
+}
+
+.float7 {
+  animation: float7 15s infinite;
+}
+
+/* Keyframes for Floating Animations */
+@keyframes float1 {
+  0% {
+    transform: translate(-220px, -120px);
+  }
+  50% {
+    transform: translate(220px, 120px);
+  }
+  100% {
+    transform: translate(-220px, -120px);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translate(170px, -170px);
+  }
+  50% {
+    transform: translate(-170px, 170px);
+  }
+  100% {
+    transform: translate(170px, -170px);
+  }
+}
+
+@keyframes float3 {
+  0% {
+    transform: translate(-120px, 220px);
+  }
+  50% {
+    transform: translate(120px, -220px);
+  }
+  100% {
+    transform: translate(-120px, 220px);
+  }
+}
+
+@keyframes float4 {
+  0% {
+    transform: translate(200px, 200px);
+  }
+  50% {
+    transform: translate(-200px, -200px);
+  }
+  100% {
+    transform: translate(200px, 200px);
+  }
+}
+
+@keyframes float5 {
+  0% {
+    transform: translate(150px, -150px);
+  }
+  50% {
+    transform: translate(-150px, 150px);
+  }
+  100% {
+    transform: translate(150px, -150px);
+  }
+}
+
+@keyframes float6 {
+  0% {
+    transform: translate(-110px, 110px);
+  }
+  50% {
+    transform: translate(110px, -110px);
+  }
+  100% {
+    transform: translate(-110px, 110px);
+  }
+}
+
+@keyframes float7 {
+  0% {
+    transform: translate(180px, -180px);
+  }
+  50% {
+    transform: translate(-180px, 180px);
+  }
+  100% {
+    transform: translate(180px, -180px);
+  }
+}
+
+/* Styles for Project Screenshots */
+.project-screenshot {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-screenshot:hover {
+  transform: scale(1.15);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8);
+}
+
+/* Styles for Modal Window */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  z-index: 1000;
 }
 
-.App-link {
-  color: #61dafb;
+.modal-image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 15px;
+  animation: zoomIn 0.5s;
 }
 
-@keyframes App-logo-spin {
+@keyframes zoomIn {
   from {
-    transform: rotate(0deg);
+    transform: scale(0.7);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal img {
+  cursor: pointer;
+}
+
+/* Pricing Section */
+.pricing-section {
+  background-color: rgba(30, 30, 30, 0.9);
+  padding: 6rem 1rem;
+  text-align: center;
+}
+
+.pricing-section h2 {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: var(--accent-color);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.pricing-card {
+  background-color: var(--primary-color);
+  padding: 2rem;
+  border-radius: 15px;
+  width: 300px;
+  transition: transform 0.3s;
+  border: 2px solid var(--border-color);
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+}
+
+.pricing-icon {
+  font-size: 4rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.pricing-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.price {
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+/* "Skills" Section */
+.skills {
+  background-color: rgba(30, 30, 30, 0.9); /* Полупрозрачный фон для секции */
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.skills h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.skills ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.skills li {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover Animation for Skills */
+.skills li:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-8px) scale(1.1);
+}
+
+/* "Contact Me" Section */
+.contact {
+  background-color: rgba(39, 39, 39, 0.9); /* Полупрозрачный фон для секции */
+  padding: 6rem 1rem;
+  text-align: center;
+  border-top: 2px solid var(--border-color);
+}
+
+.contact h2 {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: var(--accent-color);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.contact form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact input,
+.contact textarea,
+.contact select {
+  padding: 1.5rem;
+  border: 3px solid #333;
+  border-radius: 15px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.contact input:focus,
+.contact textarea:focus,
+.contact select:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  background-color: var(--secondary-color);
+}
+
+.contact .styled-select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="10" height="7" viewBox="0 0 10 7" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffd700" d="M0 0l5 7 5-7z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 10px 7px;
+}
+
+.contact button {
+  padding: 1.5rem;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  font-size: 1.5rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.contact button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.1);
+}
+
+.status-message {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+  padding: 3rem 1rem;
+  background-color: rgba(39, 39, 39, 0.9); /* Полупрозрачный фон для футера */
+  color: var(--text-color);
+  text-align: center;
+  border-top: 3px solid var(--border-color);
+}
+
+footer p {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.social-icons a {
+  color: var(--accent-color);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+  color: var(--button-hover);
+  transform: scale(1.2);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .studio-title {
+    font-size: 2.5rem;
+  }
+
+  .about-me {
+    font-size: 1rem;
+  }
+
+  .projects-section h2,
+  .skills h2,
+  .contact h2,
+  .pricing-section h2 {
+    font-size: 2rem;
+  }
+
+  /* Reduced Carousel Size for Mobile Devices */
+  .projects-carousel {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+  }
+
+  .project-item.floating {
+    width: 100px;
+    height: 170px;
+    margin: -85px 0 0 -50px;
+  }
+
+  /* Adjust pricing cards on mobile */
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Individual Animations for Mobile */
+  .float1 {
+    animation: float1-mobile 8s infinite;
+  }
+
+  .float2 {
+    animation: float2-mobile 10s infinite reverse;
+  }
+
+  .float3 {
+    animation: float3-mobile 7s infinite;
+  }
+
+  .float4 {
+    animation: float4-mobile 9s infinite reverse;
+  }
+
+  .float5 {
+    animation: float5-mobile 8s infinite;
+  }
+
+  .float6 {
+    animation: float6-mobile 6s infinite reverse;
+  }
+
+  .float7 {
+    animation: float7-mobile 10s infinite;
+  }
+
+  /* Keyframes for Mobile Animations */
+  @keyframes float1-mobile {
+    0% {
+      transform: translate(-120px, -60px);
+    }
+    50% {
+      transform: translate(120px, 60px);
+    }
+    100% {
+      transform: translate(-120px, -60px);
+    }
+  }
+
+  @keyframes float2-mobile {
+    0% {
+      transform: translate(90px, -90px);
+    }
+    50% {
+      transform: translate(-90px, 90px);
+    }
+    100% {
+      transform: translate(90px, -90px);
+    }
+  }
+
+  @keyframes float3-mobile {
+    0% {
+      transform: translate(-60px, 120px);
+    }
+    50% {
+      transform: translate(60px, -120px);
+    }
+    100% {
+      transform: translate(-60px, 120px);
+    }
+  }
+
+  @keyframes float4-mobile {
+    0% {
+      transform: translate(108px, 108px);
+    }
+    50% {
+      transform: translate(-108px, -108px);
+    }
+    100% {
+      transform: translate(108px, 108px);
+    }
+  }
+
+  @keyframes float5-mobile {
+    0% {
+      transform: translate(100px, -100px);
+    }
+    50% {
+      transform: translate(-100px, 100px);
+    }
+    100% {
+      transform: translate(100px, -100px);
+    }
+  }
+
+  @keyframes float6-mobile {
+    0% {
+      transform: translate(-75px, 75px);
+    }
+    50% {
+      transform: translate(75px, -75px);
+    }
+    100% {
+      transform: translate(-75px, 75px);
+    }
+  }
+
+  @keyframes float7-mobile {
+    0% {
+      transform: translate(140px, -140px);
+    }
+    50% {
+      transform: translate(-140px, 140px);
+    }
+    100% {
+      transform: translate(140px, -140px);
+    }
   }
 }
