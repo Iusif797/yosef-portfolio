@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/yosef-portfolio/static/css/main.5cf89cee.css",
+    "main.js": "/yosef-portfolio/static/js/main.8bd4d436.js",
+    "static/js/453.b00c161f.chunk.js": "/yosef-portfolio/static/js/453.b00c161f.chunk.js",
+    "static/media/best-background.jpg": "/yosef-portfolio/static/media/best-background.04eb0e4a829bb61252d7.jpg",
+    "static/media/DJ-beckerman.png": "/yosef-portfolio/static/media/DJ-beckerman.565bc44f5e6be7ac8f11.png",
+    "static/media/CarRentIMG2.png": "/yosef-portfolio/static/media/CarRentIMG2.fd1d5a9e28d5528ef83a.png",
+    "static/media/CarRentIMG.png": "/yosef-portfolio/static/media/CarRentIMG.0bac9ebdbfb38a479ce7.png",
+    "static/media/business-card2.jpg": "/yosef-portfolio/static/media/business-card2.688a07776fde097d8dba.jpg",
+    "static/media/business-card.jpg": "/yosef-portfolio/static/media/business-card.9574c8b669aa1c7500e8.jpg",
+    "static/media/G-3.jpg": "/yosef-portfolio/static/media/G-3.c8b5e27c81fd12def8ca.jpg",
+    "static/media/contact-book.jpg": "/yosef-portfolio/static/media/contact-book.63eb80c75464768536c2.jpg",
+    "index.html": "/yosef-portfolio/index.html",
+    "main.5cf89cee.css.map": "/yosef-portfolio/static/css/main.5cf89cee.css.map",
+    "main.8bd4d436.js.map": "/yosef-portfolio/static/js/main.8bd4d436.js.map",
+    "453.b00c161f.chunk.js.map": "/yosef-portfolio/static/js/453.b00c161f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5cf89cee.css",
+    "static/js/main.8bd4d436.js"
+  ]
+}
