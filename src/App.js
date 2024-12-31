@@ -32,331 +32,355 @@ import BusinessCard7 from "./assets/business-card7.png";
 import RentCar from "./assets/rent-car.png";
 import VisitCard from "./assets/visit-card.png";
 import PortfolioIcon from "./assets/portfolio-icon.png";
+import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png"; // Новый импорт
 
-// Импорт флагов
-import RuFlag from "./assets/flags/ru.webp";
-import EnFlag from "./assets/flags/en.webp";
-import HeFlag from "./assets/flags/he.png";
+// Импорт флагов (удалены, так как не используются)
+const translations = {
+  ru: {
+    title: "Портфолио Юсифа Мамедова - Веб-разработчик",
+    description: "Описание вашего портфолио на русском языке.",
+    keywords: "веб-разработка, портфолио, Юсиф Мамедов",
+    author: "Юсиф Мамедов",
+    header: {
+      studioTitle: "Моё Портфолио",
+      aboutMe:
+        "Привет! Я веб-разработчик с опытом создания красивых и функциональных сайтов.",
+    },
+    projects: {
+      myProjects: "Мои Проекты",
+      djBeckermanWebsite: "Сайт DJ Beckerman",
+      djBeckermanWebsiteDescription:
+        "Сайт DJ Beckerman представляет собой современную платформу для продвижения музыкальной карьеры DJ Beckerman. Здесь вы найдете информацию о предстоящих мероприятиях, последних треках и эксклюзивных интервью.",
+      g3Project: "Проект G-3",
+      g3ProjectDescription:
+        "Проект G-3 – это инновационное веб-приложение, разработанное для улучшения взаимодействия пользователей с цифровыми сервисами. Включает в себя передовые технологии и интуитивно понятный дизайн.",
+      businessCard1: "Бизнес Визитка 1",
+      businessCard1Description:
+        "Бизнес визитка 1 представляет собой элегантный дизайн, отражающий профессионализм и индивидуальность владельца. Создана с использованием современных графических решений.",
+      businessCard2: "Бизнес Визитка 2",
+      businessCard2Description:
+        "Бизнес визитка 2 сочетает в себе минимализм и функциональность, идеально подходя для современных предпринимателей. Высокое качество печати гарантирует долговечность.",
+      businessCard3: "Бизнес Визитка 3",
+      businessCard3Description:
+        "Бизнес визитка 3 разработана с акцентом на креативность и уникальность, подчеркивая индивидуальный подход к каждому клиенту. Использованы нестандартные материалы для особого эффекта.",
+      businessCard7: "Бизнес Визитка 7",
+      businessCard7Description:
+        "Бизнес визитка 7 – это пример сочетания классического стиля и современных трендов. Идеально подходит для профессионалов, стремящихся к элегантности.",
+      rentCarApplication: "Приложение Rent Car",
+      rentCarApplicationDescription:
+        "Приложение Rent Car позволяет быстро и удобно арендовать автомобили через мобильное устройство. Включает интуитивно понятный интерфейс и широкий выбор моделей.",
+      visitCardProject: "Проект Visit Card",
+      visitCardProjectDescription:
+        "Проект Visit Card предоставляет современные решения для создания виртуальных визиток, интегрированных с социальными сетями и профессиональными платформами.",
+      castaweyWebsite: "Сайт Castawey",
+      castaweyWebsiteDescription:
+        "Сайт Castawey.netlify.app представляет собой современную платформу для демонстрации услуг компании Castawey. Включает портфолио, контактную информацию и интерактивные элементы для взаимодействия с пользователями.",
+    },
+    pricing: {
+      pricing: "Цены",
+      mobileApp: "Мобильное Приложение",
+      website: "Сайт",
+      businessCard: "Бизнес Визитка",
+      priceMobileApp: "От 5000 ₽",
+      priceWebsite: "От 3000 ₽",
+      priceBusinessCard: "От 1000 ₽",
+    },
+    howIWork: {
+      title: "Как Я Работаю",
+      steps: [
+        {
+          title: "Анализ",
+          description: "Понимание ваших потребностей и целей.",
+        },
+        {
+          title: "Дизайн",
+          description: "Создание привлекательного и удобного дизайна.",
+        },
+        {
+          title: "Разработка",
+          description: "Кодирование и реализация функционала.",
+        },
+        {
+          title: "Тестирование",
+          description: "Проверка на наличие ошибок и оптимизация.",
+        },
+        {
+          title: "Запуск",
+          description: "Размещение сайта в интернете и поддержка.",
+        },
+      ],
+    },
+    skills: {
+      skills: "Навыки",
+      list: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Git",
+        "Responsive Design",
+        "SEO",
+      ],
+    },
+    contact: {
+      contact: "Связаться со мной",
+      yourName: "Ваше Имя",
+      yourEmail: "Ваш Email",
+      message: "Ваше Сообщение",
+      projectType: "Тип Проекта",
+      website: "Сайт",
+      mobileApp: "Мобильное Приложение",
+      businessCard: "Бизнес Визитка",
+      send: "Отправить",
+      scrollToContact: "Связаться со мной",
+      nameRequired: "Пожалуйста, введите ваше имя.",
+      emailRequired: "Пожалуйста, введите ваш Email.",
+      emailInvalid: "Пожалуйста, введите корректный Email.",
+      messageRequired: "Пожалуйста, введите сообщение.",
+      statusSuccess: "Сообщение успешно отправлено!",
+    },
+    footer: {
+      footerSection: {
+        header: "Заполните бриф",
+        description: "Получите бесплатную консультацию по вашему проекту.",
+        fillBrief: "Заполнить бриф",
+      },
+      portfolio: "© 2024 Портфолио Юсифа Мамедова",
+    },
+    languageName: "Русский",
+  },
+  en: {
+    title: "Yosef Mamedov's Portfolio - Web Developer",
+    description: "Description of your portfolio in English.",
+    keywords: "web development, portfolio, Yosef Mamedov",
+    author: "Yosef Mamedov",
+    header: {
+      studioTitle: "My Portfolio",
+      aboutMe:
+        "Hello! I'm a web developer with experience in creating beautiful and functional websites.",
+    },
+    projects: {
+      myProjects: "My Projects",
+      djBeckermanWebsite: "DJ Beckerman Website",
+      djBeckermanWebsiteDescription:
+        "The DJ Beckerman website serves as a modern platform for promoting DJ Beckerman's musical career. Here you can find information about upcoming events, latest tracks, and exclusive interviews.",
+      g3Project: "G-3 Project",
+      g3ProjectDescription:
+        "The G-3 Project is an innovative web application designed to enhance user interaction with digital services. It incorporates cutting-edge technologies and an intuitive design.",
+      businessCard1: "Business Card 1",
+      businessCard1Description:
+        "Business Card 1 features an elegant design that reflects the professionalism and individuality of the owner. Created using modern graphic solutions.",
+      businessCard2: "Business Card 2",
+      businessCard2Description:
+        "Business Card 2 combines minimalism and functionality, perfect for modern entrepreneurs. High-quality printing ensures durability.",
+      businessCard3: "Business Card 3",
+      businessCard3Description:
+        "Business Card 3 is designed with an emphasis on creativity and uniqueness, highlighting an individual approach to each client. Unconventional materials are used for a special effect.",
+      businessCard7: "Business Card 7",
+      businessCard7Description:
+        "Business Card 7 is an example of combining classic style with modern trends. Perfect for professionals seeking elegance.",
+      rentCarApplication: "Rent Car Application",
+      rentCarApplicationDescription:
+        "The Rent Car application allows you to quickly and conveniently rent cars through a mobile device. It features an intuitive interface and a wide selection of models.",
+      visitCardProject: "Visit Card Project",
+      visitCardProjectDescription:
+        "The Visit Card Project offers modern solutions for creating virtual business cards, integrated with social networks and professional platforms.",
+      castaweyWebsite: "Castawey Website",
+      castaweyWebsiteDescription:
+        "The Castawey.netlify.app website is a modern platform for showcasing Castawey company's services. It includes a portfolio, contact information, and interactive elements for user engagement.",
+    },
+    pricing: {
+      pricing: "Pricing",
+      mobileApp: "Mobile Application",
+      website: "Website",
+      businessCard: "Business Card",
+      priceMobileApp: "From 5000 ₽",
+      priceWebsite: "From 3000 ₽",
+      priceBusinessCard: "From 1000 ₽",
+    },
+    howIWork: {
+      title: "How I Work",
+      steps: [
+        {
+          title: "Analysis",
+          description: "Understanding your needs and goals.",
+        },
+        {
+          title: "Design",
+          description: "Creating an attractive and user-friendly design.",
+        },
+        {
+          title: "Development",
+          description: "Coding and implementing functionality.",
+        },
+        {
+          title: "Testing",
+          description: "Checking for errors and optimization.",
+        },
+        {
+          title: "Launch",
+          description: "Deploying the website and providing support.",
+        },
+      ],
+    },
+    skills: {
+      skills: "Skills",
+      list: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Git",
+        "Responsive Design",
+        "SEO",
+      ],
+    },
+    contact: {
+      contact: "Contact Me",
+      yourName: "Your Name",
+      yourEmail: "Your Email",
+      message: "Your Message",
+      projectType: "Project Type",
+      website: "Website",
+      mobileApp: "Mobile Application",
+      businessCard: "Business Card",
+      send: "Send",
+      scrollToContact: "Contact Me",
+      nameRequired: "Please enter your name.",
+      emailRequired: "Please enter your Email.",
+      emailInvalid: "Please enter a valid Email.",
+      messageRequired: "Please enter a message.",
+      statusSuccess: "Message sent successfully!",
+    },
+    footer: {
+      footerSection: {
+        header: "Fill Out the Brief",
+        description: "Get a free consultation for your project.",
+        fillBrief: "Fill Out Brief",
+      },
+      portfolio: "© 2024 Yosef Mamedov's Portfolio",
+    },
+    languageName: "English",
+  },
+  he: {
+    title: "פורטפוליו של יוסף ממדוב - מפתח אתרים",
+    description: "תיאור הפורטפוליו שלך בעברית.",
+    keywords: "פיתוח אתרים, פורטפוליו, יוסף ממדוב",
+    author: "יוסף ממדוב",
+    header: {
+      studioTitle: "הפורטפוליו שלי",
+      aboutMe:
+        "שלום! אני מפתח אתרים עם ניסיון ביצירת אתרים יפים ופונקציונליים.",
+    },
+    projects: {
+      myProjects: "הפרויקטים שלי",
+      djBeckermanWebsite: "אתר DJ Beckerman",
+      djBeckermanWebsiteDescription:
+        "אתר DJ Beckerman מהווה פלטפורמה מודרנית לקידום הקריירה המוזיקלית של DJ Beckerman. כאן תוכלו למצוא מידע על אירועים קרובים, טראקים אחרונים וראיונות בלעדיים.",
+      g3Project: "פרויקט G-3",
+      g3ProjectDescription:
+        "פרויקט G-3 הוא אפליקציית ווב חדשנית שנועדה לשפר את האינטראקציה של המשתמשים עם שירותים דיגיטליים. הוא כולל טכנולוגיות מתקדמות ועיצוב אינטואיטיבי.",
+      businessCard1: "כרטיס ביקור 1",
+      businessCard1Description:
+        "כרטיס ביקור 1 מציג עיצוב אלגנטי שמשקף את המקצועיות והאינדיבידואליות של הבעלים. נוצר תוך שימוש בפתרונות גרפיים מודרניים.",
+      businessCard2: "כרטיס ביקור 2",
+      businessCard2Description:
+        "כרטיס ביקור 2 משלב מינימליזם ופונקציונליות, מושלם ליזמים מודרניים. הדפסה באיכות גבוהה מבטיחה עמידות.",
+      businessCard3: "כרטיס ביקור 3",
+      businessCard3Description:
+        "כרטיס ביקור 3 נוצר עם דגש על יצירתיות וייחודיות, מדגיש גישה אישית לכל לקוח. נעשה שימוש בחומרים לא קונבנציונליים לאפקט מיוחד.",
+      businessCard7: "כרטיס ביקור 7",
+      businessCard7Description:
+        "כרטיס ביקור 7 הוא דוגמה לשילוב של סגנון קלאסי עם מגמות מודרניות. מושלם לאנשי מקצוע המחפשים אלגנטיות.",
+      rentCarApplication: "אפליקציית Rent Car",
+      rentCarApplicationDescription:
+        "אפליקציית Rent Car מאפשרת השכרת רכבים במהירות ובנוחות דרך מכשיר נייד. כוללת ממשק אינטואיטיבי ומבחר רחב של דגמים.",
+      visitCardProject: "פרויקט Visit Card",
+      visitCardProjectDescription:
+        "פרויקט Visit Card מציע פתרונות מודרניים ליצירת כרטיסי ביקור וירטואליים, המשולבים עם רשתות חברתיות ופלטפורמות מקצועיות.",
+      castaweyWebsite: "אתר Castawey",
+      castaweyWebsiteDescription:
+        "אתר Castawey.netlify.app הוא פלטפורמה מודרנית להצגת שירותי חברת Castawey. כולל פורטפוליו, מידע ליצירת קשר ואלמנטים אינטראקטיביים לאינטראקציה עם המשתמשים.",
+    },
+    pricing: {
+      pricing: "מחירים",
+      mobileApp: "אפליקציה ניידת",
+      website: "אתר",
+      businessCard: "כרטיס ביקור",
+      priceMobileApp: "מתחיל מ-5000 ₽",
+      priceWebsite: "מתחיל מ-3000 ₽",
+      priceBusinessCard: "מתחיל מ-1000 ₽",
+    },
+    howIWork: {
+      title: "איך אני עובד",
+      steps: [
+        {
+          title: "אנליזה",
+          description: "הבנת הצרכים והמטרות שלך.",
+        },
+        {
+          title: "עיצוב",
+          description: "יצירת עיצוב אטרקטיבי וידידותי למשתמש.",
+        },
+        {
+          title: "פיתוח",
+          description: "קידוד ויישום הפונקציונליות.",
+        },
+        {
+          title: "בדיקות",
+          description: "בדיקה לאיתור שגיאות ואופטימיזציה.",
+        },
+        {
+          title: "השקה",
+          description: "פריסת האתר ומתן תמיכה.",
+        },
+      ],
+    },
+    skills: {
+      skills: "כישורים",
+      list: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Git",
+        "עיצוב רספונסיבי",
+        "SEO",
+      ],
+    },
+    contact: {
+      contact: "צור קשר",
+      yourName: "שמך",
+      yourEmail: "האימייל שלך",
+      message: "ההודעה שלך",
+      projectType: "סוג הפרויקט",
+      website: "אתר",
+      mobileApp: "אפליקציה ניידת",
+      businessCard: "כרטיס ביקור",
+      send: "שלח",
+      scrollToContact: "צור קשר",
+      nameRequired: "אנא הכנס את שמך.",
+      emailRequired: "אנא הכנס את האימייל שלך.",
+      emailInvalid: "אנא הכנס אימייל תקין.",
+      messageRequired: "אנא הכנס הודעה.",
+      statusSuccess: "ההודעה נשלחה בהצלחה!",
+    },
+    footer: {
+      footerSection: {
+        header: "מלא את הבריף",
+        description: "קבל ייעוץ חינמי לפרויקט שלך.",
+        fillBrief: "מלא בריף",
+      },
+      portfolio: "© 2024 פורטפוליו של יוסף ממדוב",
+    },
+    languageName: "עברית",
+  },
+};
 
 function App() {
-  // Переводы для разных языков
-  const translations = {
-    ru: {
-      title: "Портфолио Юсифа Мамедова - Веб-разработчик",
-      description: "Описание вашего портфолио на русском языке.",
-      keywords: "веб-разработка, портфолио, Юсиф Мамедов",
-      author: "Юсиф Мамедов",
-      header: {
-        studioTitle: "Моё Портфолио",
-        aboutMe:
-          "Привет! Я веб-разработчик с опытом создания красивых и функциональных сайтов.",
-      },
-      projects: {
-        myProjects: "Мои Проекты",
-        djBeckermanWebsite: "Сайт DJ Beckerman",
-        djBeckermanWebsiteDescription: "Описание проекта сайта DJ Beckerman.",
-        g3Project: "Проект G-3",
-        g3ProjectDescription: "Описание проекта G-3.",
-        businessCard1: "Бизнес Визитка 1",
-        businessCard1Description: "Описание бизнес визитки 1.",
-        businessCard2: "Бизнес Визитка 2",
-        businessCard2Description: "Описание бизнес визитки 2.",
-        businessCard3: "Бизнес Визитка 3",
-        businessCard3Description: "Описание бизнес визитки 3.",
-        businessCard7: "Бизнес Визитка 7",
-        businessCard7Description: "Описание бизнес визитки 7.",
-        rentCarApplication: "Приложение Rent Car",
-        rentCarApplicationDescription: "Описание приложения Rent Car.",
-        visitCardProject: "Проект Visit Card",
-        visitCardProjectDescription: "Описание проекта Visit Card.",
-      },
-      pricing: {
-        pricing: "Цены",
-        mobileApp: "Мобильное Приложение",
-        website: "Сайт",
-        businessCard: "Бизнес Визитка",
-        priceMobileApp: "От 5000 ₽",
-        priceWebsite: "От 3000 ₽",
-        priceBusinessCard: "От 1000 ₽",
-      },
-      howIWork: {
-        title: "Как Я Работаю",
-        steps: [
-          {
-            title: "Анализ",
-            description: "Понимание ваших потребностей и целей.",
-          },
-          {
-            title: "Дизайн",
-            description: "Создание привлекательного и удобного дизайна.",
-          },
-          {
-            title: "Разработка",
-            description: "Кодирование и реализация функционала.",
-          },
-          {
-            title: "Тестирование",
-            description: "Проверка на наличие ошибок и оптимизация.",
-          },
-          {
-            title: "Запуск",
-            description: "Размещение сайта в интернете и поддержка.",
-          },
-        ],
-      },
-      skills: {
-        skills: "Навыки",
-        list: [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React",
-          "Node.js",
-          "Git",
-          "Responsive Design",
-          "SEO",
-        ],
-      },
-      contact: {
-        contact: "Связаться со мной",
-        yourName: "Ваше Имя",
-        yourEmail: "Ваш Email",
-        message: "Ваше Сообщение",
-        projectType: "Тип Проекта",
-        website: "Сайт",
-        mobileApp: "Мобильное Приложение",
-        businessCard: "Бизнес Визитка",
-        send: "Отправить",
-        scrollToContact: "Связаться со мной",
-        nameRequired: "Пожалуйста, введите ваше имя.",
-        emailRequired: "Пожалуйста, введите ваш Email.",
-        emailInvalid: "Пожалуйста, введите корректный Email.",
-        messageRequired: "Пожалуйста, введите сообщение.",
-        statusSuccess: "Сообщение успешно отправлено!",
-      },
-      footer: {
-        footerSection: {
-          header: "Заполните бриф",
-          description: "Получите бесплатную консультацию по вашему проекту.",
-          fillBrief: "Заполнить бриф",
-        },
-        portfolio: "© 2024 Портфолио Юсифа Мамедова",
-      },
-      languageName: "Русский",
-      languageFlag: RuFlag,
-    },
-    en: {
-      title: "Yosef Mamedov's Portfolio - Web Developer",
-      description: "Description of your portfolio in English.",
-      keywords: "web development, portfolio, Yosef Mamedov",
-      author: "Yosef Mamedov",
-      header: {
-        studioTitle: "My Portfolio",
-        aboutMe:
-          "Hello! I'm a web developer with experience in creating beautiful and functional websites.",
-      },
-      projects: {
-        myProjects: "My Projects",
-        djBeckermanWebsite: "DJ Beckerman Website",
-        djBeckermanWebsiteDescription:
-          "Description of DJ Beckerman's website project.",
-        g3Project: "G-3 Project",
-        g3ProjectDescription: "Description of the G-3 project.",
-        businessCard1: "Business Card 1",
-        businessCard1Description: "Description of Business Card 1.",
-        businessCard2: "Business Card 2",
-        businessCard2Description: "Description of Business Card 2.",
-        businessCard3: "Business Card 3",
-        businessCard3Description: "Description of Business Card 3.",
-        businessCard7: "Business Card 7",
-        businessCard7Description: "Description of Business Card 7.",
-        rentCarApplication: "Rent Car Application",
-        rentCarApplicationDescription:
-          "Description of the Rent Car application.",
-        visitCardProject: "Visit Card Project",
-        visitCardProjectDescription: "Description of the Visit Card project.",
-      },
-      pricing: {
-        pricing: "Pricing",
-        mobileApp: "Mobile Application",
-        website: "Website",
-        businessCard: "Business Card",
-        priceMobileApp: "From 5000 ₽",
-        priceWebsite: "From 3000 ₽",
-        priceBusinessCard: "From 1000 ₽",
-      },
-      howIWork: {
-        title: "How I Work",
-        steps: [
-          {
-            title: "Analysis",
-            description: "Understanding your needs and goals.",
-          },
-          {
-            title: "Design",
-            description: "Creating an attractive and user-friendly design.",
-          },
-          {
-            title: "Development",
-            description: "Coding and implementing functionality.",
-          },
-          {
-            title: "Testing",
-            description: "Checking for errors and optimization.",
-          },
-          {
-            title: "Launch",
-            description: "Deploying the website and providing support.",
-          },
-        ],
-      },
-      skills: {
-        skills: "Skills",
-        list: [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React",
-          "Node.js",
-          "Git",
-          "Responsive Design",
-          "SEO",
-        ],
-      },
-      contact: {
-        contact: "Contact Me",
-        yourName: "Your Name",
-        yourEmail: "Your Email",
-        message: "Your Message",
-        projectType: "Project Type",
-        website: "Website",
-        mobileApp: "Mobile Application",
-        businessCard: "Business Card",
-        send: "Send",
-        scrollToContact: "Contact Me",
-        nameRequired: "Please enter your name.",
-        emailRequired: "Please enter your Email.",
-        emailInvalid: "Please enter a valid Email.",
-        messageRequired: "Please enter a message.",
-        statusSuccess: "Message sent successfully!",
-      },
-      footer: {
-        footerSection: {
-          header: "Fill Out the Brief",
-          description: "Get a free consultation for your project.",
-          fillBrief: "Fill Out Brief",
-        },
-        portfolio: "© 2024 Yosef Mamedov's Portfolio",
-      },
-      languageName: "English",
-      languageFlag: EnFlag,
-    },
-    he: {
-      title: "פורטפוליו של יוסף ממדוב - מפתח אתרים",
-      description: "תיאור הפורטפוליו שלך בעברית.",
-      keywords: "פיתוח אתרים, פורטפוליו, יוסף ממדוב",
-      author: "יוסף ממדוב",
-      header: {
-        studioTitle: "הפורטפוליו שלי",
-        aboutMe:
-          "שלום! אני מפתח אתרים עם ניסיון ביצירת אתרים יפים ופונקציונליים.",
-      },
-      projects: {
-        myProjects: "הפרויקטים שלי",
-        djBeckermanWebsite: "אתר DJ Beckerman",
-        djBeckermanWebsiteDescription: "תיאור פרויקט האתר של DJ Beckerman.",
-        g3Project: "פרויקט G-3",
-        g3ProjectDescription: "תיאור פרויקט G-3.",
-        businessCard1: "כרטיס ביקור 1",
-        businessCard1Description: "תיאור כרטיס ביקור 1.",
-        businessCard2: "כרטיס ביקור 2",
-        businessCard2Description: "תיאור כרטיס ביקור 2.",
-        businessCard3: "כרטיס ביקור 3",
-        businessCard3Description: "תיאור כרטיס ביקור 3.",
-        businessCard7: "כרטיס ביקור 7",
-        businessCard7Description: "תיאור כרטיס ביקור 7.",
-        rentCarApplication: "אפליקציית Rent Car",
-        rentCarApplicationDescription: "תיאור אפליקציית Rent Car.",
-        visitCardProject: "פרויקט Visit Card",
-        visitCardProjectDescription: "תיאור פרויקט Visit Card.",
-      },
-      pricing: {
-        pricing: "מחירים",
-        mobileApp: "אפליקציה ניידת",
-        website: "אתר",
-        businessCard: "כרטיס ביקור",
-        priceMobileApp: "מתחיל מ-5000 ₽",
-        priceWebsite: "מתחיל מ-3000 ₽",
-        priceBusinessCard: "מתחיל מ-1000 ₽",
-      },
-      howIWork: {
-        title: "איך אני עובד",
-        steps: [
-          {
-            title: "אנליזה",
-            description: "הבנת הצרכים והמטרות שלך.",
-          },
-          {
-            title: "עיצוב",
-            description: "יצירת עיצוב אטרקטיבי וידידותי למשתמש.",
-          },
-          {
-            title: "פיתוח",
-            description: "קידוד ויישום הפונקציונליות.",
-          },
-          {
-            title: "בדיקות",
-            description: "בדיקה לאיתור שגיאות ואופטימיזציה.",
-          },
-          {
-            title: "השקה",
-            description: "פריסת האתר ומתן תמיכה.",
-          },
-        ],
-      },
-      skills: {
-        skills: "כישורים",
-        list: [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React",
-          "Node.js",
-          "Git",
-          "עיצוב רספונסיבי",
-          "SEO",
-        ],
-      },
-      contact: {
-        contact: "צור קשר",
-        yourName: "שמך",
-        yourEmail: "האימייל שלך",
-        message: "ההודעה שלך",
-        projectType: "סוג הפרויקט",
-        website: "אתר",
-        mobileApp: "אפליקציה ניידת",
-        businessCard: "כרטיס ביקור",
-        send: "שלח",
-        scrollToContact: "צור קשר",
-        nameRequired: "אנא הכנס את שמך.",
-        emailRequired: "אנא הכנס את האימייל שלך.",
-        emailInvalid: "אנא הכנס אימייל תקין.",
-        messageRequired: "אנא הכנס הודעה.",
-        statusSuccess: "ההודעה נשלחה בהצלחה!",
-      },
-      footer: {
-        footerSection: {
-          header: "מלא את הבריף",
-          description: "קבל ייעוץ חינמי לפרויקט שלך.",
-          fillBrief: "מלא בריף",
-        },
-        portfolio: "© 2024 פורטפוליו של יוסף ממדוב",
-      },
-      languageName: "עברית",
-      languageFlag: HeFlag,
-    },
-  };
-
   // Состояние для выбранного языка
   const [language, setLanguage] = useState("ru");
 
@@ -490,6 +514,14 @@ function App() {
       סוג הפרויקט: ${projectType}
       הודעה: ${message}
     `
+        : language === "en"
+        ? `
+      New request from portfolio:
+      Name: ${name}
+      Email: ${email}
+      Project Type: ${projectType}
+      Message: ${message}
+    `
         : `
       Новая заявка с портфолио:
       Имя: ${name}
@@ -505,7 +537,8 @@ function App() {
     setFormData({
       name: "",
       email: "",
-      projectType: language === "he" ? "אתר" : "Сайт",
+      projectType:
+        language === "he" ? "אתר" : language === "en" ? "Website" : "Сайт",
       message: "",
     });
     setStatus(translations[language].contact.statusSuccess);
@@ -667,38 +700,31 @@ function App() {
           </script>
         </Helmet>
 
-        {/* Переключатель языков (Кастомный выпадающий список с флагами) */}
+        {/* Переключатель языков (без флагов) */}
         <div className="language-switcher" ref={dropdownRef}>
           <button
-            className="language-button"
+            className={`language-button ${dropdownOpen ? "active" : ""}`}
             onClick={() => setDropdownOpen((prev) => !prev)}
             aria-label="Select Language"
+            aria-haspopup="listbox"
+            aria-expanded={dropdownOpen}
           >
-            <img
-              src={translations[language].languageFlag}
-              alt={`${translations[language].languageName} flag`}
-              className="language-flag-image"
-            />
-            <span className="language-code">{language.toUpperCase()}</span>
-            <span
-              className={`dropdown-arrow ${dropdownOpen ? "open" : ""}`}
-            ></span>
+            <span className="language-code">
+              {translations[language].languageName}
+            </span>
           </button>
           {dropdownOpen && (
-            <ul className="language-dropdown">
+            <ul className="language-dropdown" role="listbox">
               {Object.keys(translations).map((lng) => (
                 <li key={lng}>
                   <button
                     className="language-option-button"
                     onClick={() => changeLanguage(lng)}
+                    role="option"
+                    aria-selected={language === lng}
                   >
-                    <img
-                      src={translations[lng].languageFlag}
-                      alt={`${translations[lng].languageName} flag`}
-                      className="language-option-flag"
-                    />
                     <span className="language-option-code">
-                      {lng.toUpperCase()}
+                      {lng.toUpperCase()} - {translations[lng].languageName}
                     </span>
                   </button>
                 </li>
@@ -746,7 +772,7 @@ function App() {
           <div className="header-decorative decoration-4"></div>
           <div className="header-decorative decoration-5"></div>
 
-          {/* Удалён обработчик onClick с header-content */}
+          {/* Контент заголовка */}
           <div className="header-content">
             <img
               src={PortfolioIcon}
@@ -757,7 +783,7 @@ function App() {
               {translations[language].header.studioTitle}
             </h1>
             <p className="about-me">{translations[language].header.aboutMe}</p>
-            {/* Кнопка "Связаться со мной" без вызова модала */}
+            {/* Кнопка "Связаться со мной" без флага */}
             <button
               className="contact-button-top"
               onClick={(e) => scrollToContact(e)}
@@ -830,6 +856,14 @@ function App() {
                 description:
                   translations[language].projects.visitCardProjectDescription,
               },
+              {
+                img: MacbookAirCastawey,
+                alt: "Castawey Website",
+                title: translations[language].projects.castaweyWebsite,
+                description:
+                  translations[language].projects.castaweyWebsiteDescription,
+                link: "https://castawey.netlify.app/", // Ссылка на сайт
+              },
             ].map((project, index) => (
               <div className="project-item" key={index}>
                 <div
@@ -855,8 +889,21 @@ function App() {
                       />
                     </div>
                     <div className="project-back">
-                      {/* Убрано название проекта */}
                       <p>{project.description}</p>
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link"
+                        >
+                          {language === "he"
+                            ? "בקר באתר"
+                            : language === "en"
+                            ? "Visit Website"
+                            : "Посетить сайт"}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -957,20 +1004,36 @@ function App() {
                 value={formData.projectType}
                 onChange={handleChange}
               >
-                <option value={language === "he" ? "אתר" : "Сайт"}>
+                <option
+                  value={
+                    language === "he"
+                      ? "אתר"
+                      : language === "en"
+                      ? "Website"
+                      : "Сайт"
+                  }
+                >
                   {translations[language].pricing.website}
                 </option>
                 <option
                   value={
                     language === "he"
                       ? "אפליקציה ניידת"
+                      : language === "en"
+                      ? "Mobile Application"
                       : "Мобильное приложение"
                   }
                 >
                   {translations[language].pricing.mobileApp}
                 </option>
                 <option
-                  value={language === "he" ? "כרטיס ביקור" : "Бизнес-визитка"}
+                  value={
+                    language === "he"
+                      ? "כרטיס ביקור"
+                      : language === "en"
+                      ? "Business Card"
+                      : "Бизнес-визитка"
+                  }
                 >
                   {translations[language].pricing.businessCard}
                 </option>

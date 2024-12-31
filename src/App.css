@@ -1,18 +1,23 @@
 /* src/App.css */
 
-/* CSS Variables for Black and Yellow Theme */
+/* Импорт шрифтов */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* CSS-переменные для цветовой схемы */
 :root {
-  --primary-color: #000000; /* Black primary color */
-  --secondary-color: #1a1a1a; /* Darker secondary color */
-  --background-color: #000000; /* Black background */
-  --text-color: #ffff00; /* Yellow text */
-  --accent-color: #ffd700; /* Gold/yellow accent */
-  --accent-color-hover: #fffacd; /* Light yellow on hover */
-  --button-hover: #ffd700; /* Gold/yellow for button hover */
-  --border-color: #ffd700; /* Gold/yellow border color */
+  --primary-color: #000000; /* Чёрный основной цвет */
+  --secondary-color: #1a1a1a; /* Ещё более тёмный вторичный цвет */
+  --background-color: #000000; /* Чёрный фон */
+  --text-color: #ffff00; /* Жёлтый текст */
+  --accent-color: #ffd700; /* Золотой акцент */
+  --accent-color-hover: #fffacd; /* Светло-жёлтый акцент при наведении */
+  --button-hover: #ffd700; /* Золотой цвет для кнопок при наведении */
+  --border-color: #ffd700; /* Золотая граница */
+  --font-primary: "Poppins", sans-serif; /* Основной шрифт */
+  --font-secondary: "Plus Jakarta Sans", sans-serif; /* Вторичный шрифт */
 }
 
-/* Reset Styles */
+/* Сброс стандартных стилей */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,13 +25,13 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-primary);
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
 }
 
-/* Directionality for RTL languages */
+/* Направление текста для RTL языков */
 body[dir="rtl"] {
   direction: rtl;
 }
@@ -39,7 +44,7 @@ body[dir="ltr"] .language-switcher .language-button {
   flex-direction: row;
 }
 
-/* Overlay for Darkening Background */
+/* Оверлей для затемнения фона */
 .background-overlay {
   position: fixed;
   top: 0;
@@ -50,7 +55,7 @@ body[dir="ltr"] .language-switcher .language-button {
   z-index: -1;
 }
 
-/* Main Container */
+/* Основной контейнер приложения */
 .App {
   display: flex;
   flex-direction: column;
@@ -59,11 +64,11 @@ body[dir="ltr"] .language-switcher .language-button {
   z-index: 0;
 }
 
-/* Language Switcher (Custom Dropdown with Flags) */
+/* Языковой переключатель (удалены флаги) */
 .language-switcher {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   z-index: 1001;
   display: flex;
   align-items: center;
@@ -73,28 +78,26 @@ body[dir="ltr"] .language-switcher .language-button {
 .language-button {
   display: flex;
   align-items: center;
-  background-color: #333;
+  background-color: rgba(255, 215, 0, 0.1); /* Полупрозрачный золотой фон */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 0.3rem 0.6rem; /* Уменьшены отступы */
   cursor: pointer;
   position: relative;
   color: #fff;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-secondary);
+}
+
+.language-button.active {
+  background-color: rgba(255, 215, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .language-button:hover {
-  background-color: #444;
-  box-shadow: 0 0 5px var(--accent-color);
-}
-
-.language-flag-image {
-  width: 20px; /* Уменьшена ширина */
-  height: 20px; /* Уменьшена высота */
-  margin-right: 0.3rem; /* Уменьшен отступ */
-  border-radius: 50%; /* Круглые края */
-  object-fit: cover;
-  border: 2px solid #fff; /* Белая рамка для контраста */
+  background-color: rgba(255, 215, 0, 0.15);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 .language-code {
@@ -102,29 +105,31 @@ body[dir="ltr"] .language-switcher .language-button {
   font-weight: bold;
 }
 
-.dropdown-arrow {
-  margin-left: 0.3rem; /* Уменьшен отступ */
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 7px solid #fff;
-  transition: transform 0.3s;
-}
-
-.dropdown-arrow.open {
-  transform: rotate(180deg);
-}
-
+/* Удалены стрелки и флаги из выпадающего списка */
 .language-dropdown {
   position: absolute;
   top: 110%;
   right: 0;
-  background-color: #333;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 215, 0, 0.9); /* Золотой фон */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   list-style: none;
   padding: 0.3rem 0; /* Уменьшены отступы */
-  width: 120px; /* Уменьшена ширина */
+  width: 140px; /* Немного увеличена ширина для названий языков */
   z-index: 1002;
+  animation: fadeInDropdown 0.3s ease-in-out;
+  font-family: var(--font-secondary);
+}
+
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .language-dropdown li {
@@ -135,33 +140,20 @@ body[dir="ltr"] .language-switcher .language-button {
   width: 100%;
   background: none;
   border: none;
-  color: #fff;
-  padding: 0.3rem 0.6rem; /* Уменьшены отступы */
-  display: flex;
-  align-items: center;
+  color: #000;
+  padding: 0.5rem 1rem; /* Уменьшены отступы */
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: var(--font-secondary);
 }
 
 .language-option-button:hover {
-  background-color: #444;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-.language-option-flag {
-  width: 18px; /* Уменьшена ширина */
-  height: 12px; /* Уменьшена высота */
-  margin-right: 0.3rem; /* Уменьшен отступ */
-  border-radius: 50%; /* Круглые края */
-  object-fit: cover;
-  border: 1px solid #fff; /* Белая рамка для контраста */
-}
+/* Остальные стили вашего проекта */
 
-.language-option-code {
-  font-size: 0.8rem; /* Уменьшен размер шрифта */
-  font-weight: bold;
-}
-
-/* Header Section */
+/* Header */
 .App-header {
   position: relative;
   color: var(--accent-color);
@@ -171,11 +163,10 @@ body[dir="ltr"] .language-switcher .language-button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* Фон задаётся через инлайн-стили в App.js */
   transition: background-color 0.3s;
 }
 
-/* Анимированные декоративные элементы (квадраты и треугольники) */
+/* Декоративные элементы в заголовке */
 .header-decorative {
   position: absolute;
   background-color: var(--accent-color);
@@ -201,7 +192,7 @@ body[dir="ltr"] .language-switcher .language-button {
   animation: floatTriangle 12s linear infinite;
 }
 
-/* Новые анимированные элементы */
+/* Анимации для декоративных элементов */
 @keyframes floatDecorative {
   0% {
     transform: translateY(0) rotate(0deg);
@@ -241,7 +232,7 @@ body[dir="ltr"] .language-switcher .language-button {
   }
 }
 
-/* Header Content */
+/* Контент заголовка */
 .header-content {
   max-width: 800px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -286,13 +277,14 @@ body[dir="ltr"] .language-switcher .language-button {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Portfolio Icon */
+/* Иконка портфолио */
 .portfolio-icon {
   width: 100px;
   height: 100px;
   margin-bottom: 20px;
   filter: invert(1) drop-shadow(0 0 10px var(--accent-color));
   transition: transform 0.6s, filter 0.6s;
+  cursor: pointer;
 }
 
 .portfolio-icon:hover {
@@ -300,29 +292,31 @@ body[dir="ltr"] .language-switcher .language-button {
   filter: invert(1) drop-shadow(0 0 20px var(--accent-color-hover));
 }
 
-/* Studio Title */
+/* Заголовок студии */
 .studio-title {
   font-size: 3.5rem;
   font-weight: bold;
   letter-spacing: 2px;
   margin-bottom: 1rem;
   color: var(--accent-color);
-  text-shadow: 3px 3px 12px rgba(255, 215, 0, 0.7); /* Yellow shadow */
+  text-shadow: 3px 3px 12px rgba(255, 215, 0, 0.7); /* Жёлтая тень */
   transition: color 0.3s, text-shadow 0.3s;
+  font-family: var(--font-secondary);
 }
 
 .studio-title:hover {
   color: var(--accent-color-hover);
-  text-shadow: 4px 4px 16px rgba(255, 215, 0, 0.8); /* Light yellow shadow */
+  text-shadow: 4px 4px 16px rgba(255, 215, 0, 0.8); /* Светло-жёлтая тень */
 }
 
-/* About Me Section */
+/* Раздел "Обо мне" */
 .about-me {
   font-size: 1.5rem;
-  color: #ffffe0; /* Light yellow */
+  color: #ffffe0; /* Светло-жёлтый */
   margin-top: 1rem;
-  text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.5); /* Yellow shadow */
+  text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.5); /* Жёлтая тень */
   animation: fadeInText 2s ease-in-out;
+  font-family: var(--font-secondary);
 }
 
 @keyframes fadeInText {
@@ -336,7 +330,7 @@ body[dir="ltr"] .language-switcher .language-button {
   }
 }
 
-/* "Связаться со мной" Кнопка с анимированной стрелкой */
+/* Кнопка "Связаться со мной" с анимированной стрелкой */
 .contact-button-top {
   background-color: var(--accent-color);
   color: var(--background-color);
@@ -350,6 +344,7 @@ body[dir="ltr"] .language-switcher .language-button {
   justify-content: center;
   margin-top: 2rem;
   transition: background-color 0.3s, transform 0.3s;
+  font-family: var(--font-secondary);
 }
 
 .contact-button-top:hover {
@@ -385,7 +380,7 @@ body[dir="ltr"] .language-switcher .language-button {
   }
 }
 
-/* "My Projects" Section */
+/* Раздел "Мои проекты" */
 .projects-section {
   padding: 6rem 1rem;
   position: relative;
@@ -400,10 +395,11 @@ body[dir="ltr"] .language-switcher .language-button {
   font-size: 3rem;
   margin-bottom: 2rem;
   color: var(--accent-color);
-  text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7); /* Yellow shadow */
+  text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7); /* Жёлтая тень */
+  font-family: var(--font-secondary);
 }
 
-/* Projects Container */
+/* Контейнер проектов */
 .projects-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -413,18 +409,18 @@ body[dir="ltr"] .language-switcher .language-button {
   position: relative;
 }
 
-/* Project Item */
+/* Элемент проекта */
 .project-item {
   perspective: 1000px; /* Для эффекта переворота */
   cursor: pointer; /* Указатель курсора */
 }
 
-/* Floating Container */
+/* Контейнер с анимацией парения */
 .floating-container {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Inner Container for Flip Effect */
+/* Внутренний контейнер для эффекта переворота */
 .project-inner {
   position: relative;
   width: 100%;
@@ -441,7 +437,7 @@ body[dir="ltr"] .language-switcher .language-button {
   transform: rotateY(180deg);
 }
 
-/* Front and Back Faces */
+/* Передняя и задняя стороны карточки проекта */
 .project-front,
 .project-back {
   position: absolute;
@@ -452,7 +448,7 @@ body[dir="ltr"] .language-switcher .language-button {
   backface-visibility: hidden;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(255, 215, 0, 0.6); /* Yellow shadow */
+  box-shadow: 0 6px 18px rgba(255, 215, 0, 0.6); /* Жёлтая тень */
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -482,12 +478,29 @@ body[dir="ltr"] .language-switcher .language-button {
   justify-content: center;
   align-items: center;
   text-align: center; /* Центрирование текста */
+  font-family: var(--font-secondary);
 }
 
-/* Убедимся, что описание не обрезается */
+/* Описание проекта */
 .project-back p {
   font-size: 1rem;
-  /* Удалены лишние свойства */
+  margin-bottom: 1rem;
+  white-space: pre-wrap; /* Позволяет переносить текст */
+}
+
+/* Ссылка на сайт проекта */
+.project-link {
+  margin-top: 1rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+  font-family: var(--font-secondary);
+}
+
+.project-link:hover {
+  color: var(--accent-color-hover);
+  text-decoration: underline;
 }
 
 /* Анимация плавного перемещения */
@@ -512,7 +525,7 @@ body[dir="ltr"] .language-switcher .language-button {
   animation-delay: 3s;
 }
 
-/* Modal Window */
+/* Модальное окно */
 .modal {
   position: fixed;
   top: 0;
@@ -540,7 +553,7 @@ body[dir="ltr"] .language-switcher .language-button {
   animation: zoomIn 0.5s;
 }
 
-/* Кнопка закрытия */
+/* Кнопка закрытия модального окна */
 .modal-close-button {
   position: absolute;
   top: -30px; /* Уменьшено значение */
@@ -550,6 +563,7 @@ body[dir="ltr"] .language-switcher .language-button {
   color: var(--accent-color);
   cursor: pointer;
   transition: color 0.3s, transform 0.3s;
+  font-family: var(--font-secondary);
 }
 
 .modal-close-button:hover {
@@ -569,7 +583,7 @@ body[dir="ltr"] .language-switcher .language-button {
   }
 }
 
-/* Pricing Section */
+/* Раздел "Цены" */
 .pricing-section {
   padding: 6rem 1rem;
   text-align: center;
@@ -581,10 +595,11 @@ body[dir="ltr"] .language-switcher .language-button {
   font-size: 3rem;
   margin-bottom: 3rem;
   color: var(--accent-color);
-  text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7); /* Yellow shadow */
+  text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7); /* Жёлтая тень */
+  font-family: var(--font-secondary);
 }
 
-/* Pricing Cards Container */
+/* Контейнер цен */
 .pricing-cards {
   display: flex;
   flex-wrap: wrap;
@@ -592,7 +607,7 @@ body[dir="ltr"] .language-switcher .language-button {
   gap: 2rem;
 }
 
-/* Pricing Card */
+/* Карточка цены */
 .pricing-card {
   background-color: var(--primary-color);
   padding: 2rem;
@@ -604,6 +619,7 @@ body[dir="ltr"] .language-switcher .language-button {
   flex-direction: column;
   align-items: center;
   justify-content: space-between; /* Выравнивание по вертикали */
+  font-family: var(--font-secondary);
 }
 
 .pricing-card:hover {
@@ -630,7 +646,7 @@ body[dir="ltr"] .language-switcher .language-button {
   margin-top: auto; /* Позиционирование цены внизу */
 }
 
-/* How I Work Section */
+/* Раздел "Как я работаю" */
 .how-i-work-section {
   padding: 6rem 1rem;
   text-align: center;
@@ -643,6 +659,7 @@ body[dir="ltr"] .language-switcher .language-button {
   margin-bottom: 3rem;
   color: var(--accent-color);
   text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7);
+  font-family: var(--font-secondary);
 }
 
 .steps-container {
@@ -652,6 +669,7 @@ body[dir="ltr"] .language-switcher .language-button {
   gap: 2rem;
 }
 
+/* Карточка шага */
 .step-card {
   background-color: var(--primary-color);
   padding: 2rem;
@@ -662,6 +680,7 @@ body[dir="ltr"] .language-switcher .language-button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: var(--font-secondary);
 }
 
 .step-card:hover {
@@ -686,7 +705,7 @@ body[dir="ltr"] .language-switcher .language-button {
   color: var(--text-color);
 }
 
-/* "Skills" Section */
+/* Раздел "Навыки" */
 .skills {
   padding: 4rem 1rem;
   text-align: center;
@@ -697,7 +716,8 @@ body[dir="ltr"] .language-switcher .language-button {
   font-size: 3rem;
   margin-bottom: 2rem;
   color: var(--accent-color);
-  text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.7); /* Yellow shadow */
+  text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.7); /* Жёлтая тень */
+  font-family: var(--font-secondary);
 }
 
 .skills ul {
@@ -716,8 +736,10 @@ body[dir="ltr"] .language-switcher .language-button {
   padding: 1rem 2rem;
   border-radius: 25px;
   font-size: 1.2rem;
-  font-weight: bold; /* Сделать текст жирным */
+  font-weight: bold; /* Жирный текст */
   transition: background-color 0.3s, transform 0.3s;
+  cursor: default;
+  font-family: var(--font-secondary);
 }
 
 .skills li:hover {
@@ -725,7 +747,7 @@ body[dir="ltr"] .language-switcher .language-button {
   transform: translateY(-8px) scale(1.1);
 }
 
-/* "Contact Me" Section */
+/* Раздел "Контакты" */
 .contact {
   padding: 6rem 1rem;
   text-align: center;
@@ -737,7 +759,8 @@ body[dir="ltr"] .language-switcher .language-button {
   font-size: 3rem;
   margin-bottom: 3rem;
   color: var(--accent-color);
-  text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.7); /* Yellow shadow */
+  text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.7); /* Жёлтая тень */
+  font-family: var(--font-secondary);
 }
 
 .contact-form {
@@ -763,6 +786,7 @@ body[dir="ltr"] .language-switcher .language-button {
   font-size: 1.2rem;
   transition: border-color 0.3s, background-color 0.3s;
   width: 100%;
+  font-family: var(--font-secondary);
 }
 
 .contact-input:focus,
@@ -779,7 +803,12 @@ body[dir="ltr"] .language-switcher .language-button {
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 10px 7px;
-  font-weight: bold; /* Сделать опции жирными */
+  font-weight: bold; /* Жирные опции */
+}
+
+.contact-textarea {
+  resize: vertical; /* Позволяет менять размер вертикально */
+  min-height: 150px;
 }
 
 .contact-button {
@@ -791,6 +820,7 @@ body[dir="ltr"] .language-switcher .language-button {
   border-radius: 15px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
+  font-family: var(--font-secondary);
 }
 
 .contact-button:hover {
@@ -808,15 +838,17 @@ body[dir="ltr"] .language-switcher .language-button {
   position: absolute;
   bottom: -1.2rem;
   left: 0;
+  font-family: var(--font-secondary);
 }
 
 .status-message {
   margin-top: 1rem;
   font-size: 1.2rem;
   color: var(--accent-color);
+  font-family: var(--font-secondary);
 }
 
-/* Новая Footer Section */
+/* Новая секция футера */
 .footer-section {
   background-color: #000;
   color: #fff;
@@ -830,12 +862,14 @@ body[dir="ltr"] .language-switcher .language-button {
   margin-bottom: 1rem;
   color: #fff;
   font-weight: bold;
+  font-family: var(--font-secondary);
 }
 
 .footer-content p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   color: #bbb;
+  font-family: var(--font-secondary);
 }
 
 .footer-button {
@@ -850,6 +884,7 @@ body[dir="ltr"] .language-switcher .language-button {
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s, transform 0.3s;
+  font-family: var(--font-secondary);
 }
 
 .footer-button:hover {
@@ -857,7 +892,7 @@ body[dir="ltr"] .language-switcher .language-button {
   transform: scale(1.05);
 }
 
-/* Arrow Animation */
+/* Анимационная стрелка */
 .footer-button .arrow {
   display: inline-block;
   margin-left: 0.5rem;
@@ -885,13 +920,14 @@ body[dir="ltr"] .language-switcher .language-button {
   }
 }
 
-/* Footer */
+/* Существующий футер */
 footer {
   padding: 3rem 1rem;
-  background-color: rgba(26, 26, 26, 0.9); /* Dark background */
+  background-color: rgba(26, 26, 26, 0.9); /* Тёмный фон */
   color: var(--text-color);
   text-align: center;
   border-top: 3px solid var(--border-color);
+  font-family: var(--font-secondary);
 }
 
 footer p {
@@ -915,7 +951,22 @@ footer p {
   transform: scale(1.2);
 }
 
-/* Media Queries for Responsiveness */
+/* Стилизация ссылки на проект */
+.project-link {
+  margin-top: 1rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+  font-family: var(--font-secondary);
+}
+
+.project-link:hover {
+  color: var(--accent-color-hover);
+  text-decoration: underline;
+}
+
+/* Медиа-запросы для адаптивности */
 @media (max-width: 1024px) {
   .projects-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -967,13 +1018,13 @@ footer p {
 
   /* Адаптация переключателя языков на мобильных устройствах */
   .language-switcher {
-    top: 5px;
-    right: 5px;
-    gap: 0.3rem;
+    top: 10px;
+    right: 10px;
+    gap: 0.2rem;
   }
 
   .language-button {
-    padding: 0.3rem 0.6rem;
+    padding: 0.2rem 0.5rem;
     font-size: 0.8rem;
   }
 
@@ -1074,7 +1125,7 @@ footer p {
   }
 }
 
-/* Optional: Smooth scrolling for better UX */
+/* Дополнительно: Плавная прокрутка для лучшего UX */
 html {
   scroll-behavior: smooth;
 }
