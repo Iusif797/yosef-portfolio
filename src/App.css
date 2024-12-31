@@ -5,11 +5,11 @@
   --primary-color: #000000; /* Black primary color */
   --secondary-color: #1a1a1a; /* Darker secondary color */
   --background-color: #000000; /* Black background */
-  --text-color: #FFFF00; /* Yellow text */
-  --accent-color: #FFD700; /* Gold/yellow accent */
-  --accent-color-hover: #FFFACD; /* Light yellow on hover */
-  --button-hover: #FFD700; /* Gold/yellow for button hover */
-  --border-color: #FFD700; /* Gold/yellow border color */
+  --text-color: #ffff00; /* Yellow text */
+  --accent-color: #ffd700; /* Gold/yellow accent */
+  --accent-color-hover: #fffacd; /* Light yellow on hover */
+  --button-hover: #ffd700; /* Gold/yellow for button hover */
+  --border-color: #ffd700; /* Gold/yellow border color */
 }
 
 /* Reset Styles */
@@ -20,25 +20,23 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
 }
 
 /* Directionality for RTL languages */
-body[dir='rtl'] {
+body[dir="rtl"] {
   direction: rtl;
 }
 
-body[dir='rtl'] .language-switcher button {
-  margin-left: 0.5rem;
-  margin-right: 0;
+body[dir="rtl"] .language-switcher .language-button {
+  flex-direction: row-reverse;
 }
 
-body[dir='ltr'] .language-switcher button {
-  margin-right: 0.5rem;
-  margin-left: 0;
+body[dir="ltr"] .language-switcher .language-button {
+  flex-direction: row;
 }
 
 /* Overlay for Darkening Background */
@@ -61,7 +59,7 @@ body[dir='ltr'] .language-switcher button {
   z-index: 0;
 }
 
-/* Language Switcher */
+/* Language Switcher (Custom Dropdown with Flags) */
 .language-switcher {
   position: fixed;
   top: 10px;
@@ -69,37 +67,98 @@ body[dir='ltr'] .language-switcher button {
   z-index: 1001;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  animation: fadeIn 1s ease-in-out;
+  gap: 0.3rem; /* Уменьшено пространство между элементами */
 }
 
-.language-switcher button {
-  background-color: var(--accent-color);
+.language-button {
+  display: flex;
+  align-items: center;
+  background-color: #333;
   border: none;
-  color: var(--background-color);
-  padding: 0.5rem 1rem;
   border-radius: 5px;
+  padding: 0.3rem 0.6rem; /* Уменьшены отступы */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
-  opacity: 0.8;
+  position: relative;
+  color: #fff;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.language-switcher button:hover {
-  background-color: var(--button-hover);
-  transform: scale(1.1);
-  opacity: 1;
+.language-button:hover {
+  background-color: #444;
+  box-shadow: 0 0 5px var(--accent-color);
 }
 
-/* Анимация появления переключателя языков */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 0.8;
-    transform: translateY(0);
-  }
+.language-flag-image {
+  width: 20px; /* Уменьшена ширина */
+  height: 20px; /* Уменьшена высота */
+  margin-right: 0.3rem; /* Уменьшен отступ */
+  border-radius: 50%; /* Круглые края */
+  object-fit: cover;
+  border: 2px solid #fff; /* Белая рамка для контраста */
+}
+
+.language-code {
+  font-size: 0.9rem; /* Уменьшен размер шрифта */
+  font-weight: bold;
+}
+
+.dropdown-arrow {
+  margin-left: 0.3rem; /* Уменьшен отступ */
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #fff;
+  transition: transform 0.3s;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  list-style: none;
+  padding: 0.3rem 0; /* Уменьшены отступы */
+  width: 120px; /* Уменьшена ширина */
+  z-index: 1002;
+}
+
+.language-dropdown li {
+  width: 100%;
+}
+
+.language-option-button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 0.3rem 0.6rem; /* Уменьшены отступы */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.language-option-button:hover {
+  background-color: #444;
+}
+
+.language-option-flag {
+  width: 18px; /* Уменьшена ширина */
+  height: 12px; /* Уменьшена высота */
+  margin-right: 0.3rem; /* Уменьшен отступ */
+  border-radius: 50%; /* Круглые края */
+  object-fit: cover;
+  border: 1px solid #fff; /* Белая рамка для контраста */
+}
+
+.language-option-code {
+  font-size: 0.8rem; /* Уменьшен размер шрифта */
+  font-weight: bold;
 }
 
 /* Header Section */
@@ -198,7 +257,7 @@ body[dir='ltr'] .language-switcher button {
 
 /* Анимированная рамка вокруг контента заголовка */
 .header-content::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -10px;
   left: -10px;
@@ -260,7 +319,7 @@ body[dir='ltr'] .language-switcher button {
 /* About Me Section */
 .about-me {
   font-size: 1.5rem;
-  color: #FFFFE0; /* Light yellow */
+  color: #ffffe0; /* Light yellow */
   margin-top: 1rem;
   text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.5); /* Yellow shadow */
   animation: fadeInText 2s ease-in-out;
@@ -277,7 +336,7 @@ body[dir='ltr'] .language-switcher button {
   }
 }
 
-/* Дублирование "Связаться со мной" с анимированной стрелкой */
+/* "Связаться со мной" Кнопка с анимированной стрелкой */
 .contact-button-top {
   background-color: var(--accent-color);
   color: var(--background-color);
@@ -311,7 +370,11 @@ body[dir='ltr'] .language-switcher button {
 }
 
 @keyframes bounceArrow {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
@@ -480,8 +543,8 @@ body[dir='ltr'] .language-switcher button {
 /* Кнопка закрытия */
 .modal-close-button {
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: -30px; /* Уменьшено значение */
+  right: -30px; /* Уменьшено значение */
   background: transparent;
   border: none;
   color: var(--accent-color);
@@ -567,6 +630,62 @@ body[dir='ltr'] .language-switcher button {
   margin-top: auto; /* Позиционирование цены внизу */
 }
 
+/* How I Work Section */
+.how-i-work-section {
+  padding: 6rem 1rem;
+  text-align: center;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.how-i-work-section h2 {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: var(--accent-color);
+  text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7);
+}
+
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.step-card {
+  background-color: var(--primary-color);
+  padding: 2rem;
+  border-radius: 15px;
+  width: 300px;
+  transition: transform 0.3s, border-color 0.3s;
+  border: 2px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-color-hover);
+}
+
+.step-icon {
+  font-size: 4rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.step-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.step-card p {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
 /* "Skills" Section */
 .skills {
   padding: 4rem 1rem;
@@ -597,6 +716,7 @@ body[dir='ltr'] .language-switcher button {
   padding: 1rem 2rem;
   border-radius: 25px;
   font-size: 1.2rem;
+  font-weight: bold; /* Сделать текст жирным */
   transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -655,10 +775,11 @@ body[dir='ltr'] .language-switcher button {
 
 .styled-select {
   appearance: none;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="10" height="7" viewBox="0 0 10 7" xmlns="http://www.w3.org/2000/svg"><path fill="%23FFD700" d="M0 0l5 7 5-7z"/></svg>');
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="10" height="7" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 5,7 10,0"/></svg>');
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 10px 7px;
+  font-weight: bold; /* Сделать опции жирными */
 }
 
 .contact-button {
@@ -678,11 +799,11 @@ body[dir='ltr'] .language-switcher button {
 }
 
 .error {
-  border-color: #FFD700;
+  border-color: #ffd700;
 }
 
 .error-message {
-  color: #FFD700;
+  color: #ffd700;
   font-size: 0.9rem;
   position: absolute;
   bottom: -1.2rem;
@@ -693,6 +814,75 @@ body[dir='ltr'] .language-switcher button {
   margin-top: 1rem;
   font-size: 1.2rem;
   color: var(--accent-color);
+}
+
+/* Новая Footer Section */
+.footer-section {
+  background-color: #000;
+  color: #fff;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.footer-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.footer-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #bbb;
+}
+
+.footer-button {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.footer-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+/* Arrow Animation */
+.footer-button .arrow {
+  display: inline-block;
+  margin-left: 0.5rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid #000;
+  animation: bounceArrowFooter 2s infinite;
+}
+
+@keyframes bounceArrowFooter {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
 }
 
 /* Footer */
@@ -744,7 +934,8 @@ footer p {
   .projects-section h2,
   .skills h2,
   .contact h2,
-  .pricing-section h2 {
+  .pricing-section h2,
+  .how-i-work-section h2 {
     font-size: 2rem;
   }
 
@@ -753,12 +944,14 @@ footer p {
     gap: 1rem;
   }
 
-  .pricing-cards {
+  .pricing-cards,
+  .steps-container {
     flex-direction: column;
     align-items: center;
   }
 
-  .pricing-card {
+  .pricing-card,
+  .step-card {
     width: 80%;
   }
 
@@ -779,9 +972,40 @@ footer p {
     gap: 0.3rem;
   }
 
-  .language-switcher button {
+  .language-button {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
+  }
+
+  /* Корректировка позиции кнопки закрытия модала для маленьких экранов */
+  .modal-close-button {
+    top: -30px;
+    right: -30px;
+  }
+
+  /* Адаптивные размеры новой секции футера */
+  .footer-section {
+    padding: 3rem 1rem;
+  }
+
+  .footer-content h2 {
+    font-size: 2rem;
+  }
+
+  .footer-content p {
+    font-size: 1rem;
+  }
+
+  .footer-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .footer-button .arrow {
+    margin-left: 0.3rem;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 7px solid #000;
   }
 }
 
@@ -798,7 +1022,8 @@ footer p {
     grid-template-columns: 1fr;
   }
 
-  .pricing-card {
+  .pricing-card,
+  .step-card {
     width: 100%;
   }
 
@@ -812,7 +1037,7 @@ footer p {
     gap: 0.2rem;
   }
 
-  .language-switcher button {
+  .language-button {
     padding: 0.3rem 0.5rem;
     font-size: 0.7rem;
   }
@@ -821,6 +1046,31 @@ footer p {
   .modal-close-button {
     top: -30px;
     right: -30px;
+  }
+
+  /* Адаптивные размеры новой секции футера */
+  .footer-section {
+    padding: 3rem 1rem;
+  }
+
+  .footer-content h2 {
+    font-size: 2rem;
+  }
+
+  .footer-content p {
+    font-size: 1rem;
+  }
+
+  .footer-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .footer-button .arrow {
+    margin-left: 0.3rem;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 7px solid #000;
   }
 }
 

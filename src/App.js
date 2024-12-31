@@ -1,8 +1,14 @@
 // src/App.js
 
-import React, { useState, useCallback, useEffect, Suspense } from 'react';
-import { Helmet } from 'react-helmet';
-import './App.css';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  Suspense,
+  useRef,
+} from "react";
+import { Helmet } from "react-helmet";
+import "./App.css";
 import {
   FaTelegram,
   FaLinkedin,
@@ -10,73 +16,93 @@ import {
   FaMobileAlt,
   FaLaptopCode,
   FaIdBadge,
-  FaGlobe,
-  FaTimes, // Иконка крестика для закрытия
-} from 'react-icons/fa';
-import ReactDOM from 'react-dom';
+  FaTimes,
+  FaLightbulb, // Иконка для раздела "Как я работаю"
+} from "react-icons/fa";
+import ReactDOM from "react-dom";
 
 // Импорт изображений из src/assets
-import BestBackground from './assets/best-background.jpg';
-import DJBeckerman from './assets/DJ-beckerman.png';
-import G3 from './assets/G-3.jpg';
-import BusinessCard from './assets/business-card.png';
-import BusinessCard2 from './assets/business-card2.png'; // Новый проект
-import BusinessCard3 from './assets/business-card3.png'; // Новый проект
-import BusinessCard7 from './assets/business-card7.png'; // Новый проект
-import RentCar from './assets/rent-car.png';
-import VisitCard from './assets/visit-card.png';
-import PortfolioIcon from './assets/portfolio-icon.png';
+import BestBackground from "./assets/best-background.jpg";
+import DJBeckerman from "./assets/DJ-beckerman.png";
+import G3 from "./assets/G-3.jpg";
+import BusinessCard from "./assets/business-card.png";
+import BusinessCard2 from "./assets/business-card2.png";
+import BusinessCard3 from "./assets/business-card3.png";
+import BusinessCard7 from "./assets/business-card7.png";
+import RentCar from "./assets/rent-car.png";
+import VisitCard from "./assets/visit-card.png";
+import PortfolioIcon from "./assets/portfolio-icon.png";
+
+// Импорт флагов
+import RuFlag from "./assets/flags/ru.webp";
+import EnFlag from "./assets/flags/en.webp";
+import HeFlag from "./assets/flags/he.png";
 
 function App() {
   // Переводы для разных языков
   const translations = {
     ru: {
       title: "Портфолио Юсифа Мамедова - Веб-разработчик",
-      description:
-        "Портфолио веб-разработчика Юсифа Мамедова: создание сайтов и мобильных приложений на React, Wix, WordPress, Flutter и React Native.",
-      keywords:
-        "web development, React, Wix, WordPress, Flutter, React Native, Юсиф Мамедов, портфолио, веб-разработчик",
+      description: "Описание вашего портфолио на русском языке.",
+      keywords: "веб-разработка, портфолио, Юсиф Мамедов",
       author: "Юсиф Мамедов",
       header: {
-        studioTitle: "Портфолио Web-Studio",
+        studioTitle: "Моё Портфолио",
         aboutMe:
-          "Привет! Меня зовут Юсиф, я веб-разработчик с опытом создания сайтов на React, Wix, WordPress, а также разработки мобильных приложений на Flutter и React Native. Я стремлюсь создавать красивые и функциональные решения для бизнеса и частных клиентов.",
+          "Привет! Я веб-разработчик с опытом создания красивых и функциональных сайтов.",
       },
       projects: {
-        myProjects: "Мои проекты",
+        myProjects: "Мои Проекты",
         djBeckermanWebsite: "Сайт DJ Beckerman",
+        djBeckermanWebsiteDescription: "Описание проекта сайта DJ Beckerman.",
         g3Project: "Проект G-3",
-        businessCard1: "Бизнес-визитка 1",
-        businessCard2: "Бизнес-визитка 2",
-        businessCard3: "Бизнес-визитка 3",
-        businessCard7: "Бизнес-визитка 7",
+        g3ProjectDescription: "Описание проекта G-3.",
+        businessCard1: "Бизнес Визитка 1",
+        businessCard1Description: "Описание бизнес визитки 1.",
+        businessCard2: "Бизнес Визитка 2",
+        businessCard2Description: "Описание бизнес визитки 2.",
+        businessCard3: "Бизнес Визитка 3",
+        businessCard3Description: "Описание бизнес визитки 3.",
+        businessCard7: "Бизнес Визитка 7",
+        businessCard7Description: "Описание бизнес визитки 7.",
         rentCarApplication: "Приложение Rent Car",
-        visitCardProject: "Проект визитки",
-        djBeckermanWebsiteDescription:
-          "Создание сайта для DJ Beckerman на React и CSS Grid. Интерактивный дизайн и адаптивная верстка для всех устройств.",
-        g3ProjectDescription:
-          "Разработка веб-приложения G-3 для управления бизнес-процессами с использованием React и интеграцией внешних API.",
-        businessCard1Description:
-          "Разработка бизнес-визитки на WordPress с использованием современных плагинов для расширения функционала.",
-        businessCard2Description:
-          "Вторая версия бизнес-визитки с улучшенной интерактивностью и SEO-оптимизацией для лучшей видимости.",
-        businessCard3Description:
-          "Третья версия бизнес-визитки с анимациями и интеграцией с CRM-системами для автоматизации процессов.",
-        businessCard7Description:
-          "Лендинг для диджея с акцентом на привлечение аудитории, оптимизированный для мобильных устройств.",
-        rentCarApplicationDescription:
-          "Создание приложения Rent Car на React Native и Flutter с интеграцией платежных систем и геолокации.",
-        visitCardProjectDescription:
-          "Цифровая визитка с анимациями и интерактивными элементами для повышения вовлеченности клиентов.",
+        rentCarApplicationDescription: "Описание приложения Rent Car.",
+        visitCardProject: "Проект Visit Card",
+        visitCardProjectDescription: "Описание проекта Visit Card.",
       },
       pricing: {
-        pricing: "Прайс",
-        mobileApp: "Мобильное приложение",
+        pricing: "Цены",
+        mobileApp: "Мобильное Приложение",
         website: "Сайт",
-        businessCard: "Бизнес-визитка",
-        priceMobileApp: "$1000",
-        priceWebsite: "$500",
-        priceBusinessCard: "$100", // Изменено с $30 на $100
+        businessCard: "Бизнес Визитка",
+        priceMobileApp: "От 5000 ₽",
+        priceWebsite: "От 3000 ₽",
+        priceBusinessCard: "От 1000 ₽",
+      },
+      howIWork: {
+        title: "Как Я Работаю",
+        steps: [
+          {
+            title: "Анализ",
+            description: "Понимание ваших потребностей и целей.",
+          },
+          {
+            title: "Дизайн",
+            description: "Создание привлекательного и удобного дизайна.",
+          },
+          {
+            title: "Разработка",
+            description: "Кодирование и реализация функционала.",
+          },
+          {
+            title: "Тестирование",
+            description: "Проверка на наличие ошибок и оптимизация.",
+          },
+          {
+            title: "Запуск",
+            description: "Размещение сайта в интернете и поддержка.",
+          },
+        ],
       },
       skills: {
         skills: "Навыки",
@@ -85,79 +111,104 @@ function App() {
           "CSS",
           "JavaScript",
           "React",
-          "React Native",
-          "Flutter",
-          "WordPress",
-          "Wix",
+          "Node.js",
           "Git",
-          "UI/UX Design",
+          "Responsive Design",
+          "SEO",
         ],
       },
       contact: {
         contact: "Связаться со мной",
-        yourName: "Ваше имя",
-        yourEmail: "Ваш email",
-        projectType: "Тип проекта",
-        message: "Ваше сообщение",
+        yourName: "Ваше Имя",
+        yourEmail: "Ваш Email",
+        message: "Ваше Сообщение",
+        projectType: "Тип Проекта",
+        website: "Сайт",
+        mobileApp: "Мобильное Приложение",
+        businessCard: "Бизнес Визитка",
         send: "Отправить",
-        statusSuccess: "Ваше сообщение успешно отправлено!",
-        nameRequired: "Имя обязательно",
-        emailRequired: "Email обязателен",
-        emailInvalid: "Неверный формат email",
-        messageRequired: "Сообщение обязательно",
         scrollToContact: "Связаться со мной",
+        nameRequired: "Пожалуйста, введите ваше имя.",
+        emailRequired: "Пожалуйста, введите ваш Email.",
+        emailInvalid: "Пожалуйста, введите корректный Email.",
+        messageRequired: "Пожалуйста, введите сообщение.",
+        statusSuccess: "Сообщение успешно отправлено!",
       },
       footer: {
-        portfolio: "Портфолио Юсифа Мамедова",
+        footerSection: {
+          header: "Заполните бриф",
+          description: "Получите бесплатную консультацию по вашему проекту.",
+          fillBrief: "Заполнить бриф",
+        },
+        portfolio: "© 2024 Портфолио Юсифа Мамедова",
       },
+      languageName: "Русский",
+      languageFlag: RuFlag,
     },
     en: {
       title: "Yosef Mamedov's Portfolio - Web Developer",
-      description:
-        "Portfolio of web developer Yosef Mamedov: creating websites and mobile applications using React, Wix, WordPress, Flutter, and React Native.",
-      keywords:
-        "web development, React, Wix, WordPress, Flutter, React Native, Yosef Mamedov, portfolio, web developer",
+      description: "Description of your portfolio in English.",
+      keywords: "web development, portfolio, Yosef Mamedov",
       author: "Yosef Mamedov",
       header: {
-        studioTitle: "Web-Studio Portfolio",
+        studioTitle: "My Portfolio",
         aboutMe:
-          "Hello! I'm Yosef, a web developer experienced in creating websites with React, Wix, WordPress, and developing mobile applications with Flutter and React Native. I strive to create beautiful and functional solutions for businesses and private clients.",
+          "Hello! I'm a web developer with experience in creating beautiful and functional websites.",
       },
       projects: {
         myProjects: "My Projects",
         djBeckermanWebsite: "DJ Beckerman Website",
-        g3Project: "G-3 Project",
-        businessCard1: "Business Card 1",
-        businessCard2: "Business Card 2",
-        businessCard3: "Business Card 3",
-        businessCard7: "Business Card 7",
-        rentCarApplication: "Rent Car Application",
-        visitCardProject: "Visit Card Project",
         djBeckermanWebsiteDescription:
-          "Developed a website for DJ Beckerman using React and CSS Grid. Interactive design and responsive layout for all devices.",
-        g3ProjectDescription:
-          "Built the G-3 web application for managing business processes with React and external API integrations.",
-        businessCard1Description:
-          "Created a business card on WordPress using modern plugins to extend functionality.",
-        businessCard2Description:
-          "Second version of the business card with enhanced interactivity and SEO optimization for better visibility.",
-        businessCard3Description:
-          "Third version of the business card with animations and CRM system integrations for process automation.",
-        businessCard7Description:
-          "Landing page for a DJ focused on audience engagement, optimized for mobile devices.",
+          "Description of DJ Beckerman's website project.",
+        g3Project: "G-3 Project",
+        g3ProjectDescription: "Description of the G-3 project.",
+        businessCard1: "Business Card 1",
+        businessCard1Description: "Description of Business Card 1.",
+        businessCard2: "Business Card 2",
+        businessCard2Description: "Description of Business Card 2.",
+        businessCard3: "Business Card 3",
+        businessCard3Description: "Description of Business Card 3.",
+        businessCard7: "Business Card 7",
+        businessCard7Description: "Description of Business Card 7.",
+        rentCarApplication: "Rent Car Application",
         rentCarApplicationDescription:
-          "Developed the Rent Car application using React Native and Flutter with payment systems and geolocation integration.",
-        visitCardProjectDescription:
-          "Digital business card with animations and interactive elements to boost client engagement.",
+          "Description of the Rent Car application.",
+        visitCardProject: "Visit Card Project",
+        visitCardProjectDescription: "Description of the Visit Card project.",
       },
       pricing: {
         pricing: "Pricing",
         mobileApp: "Mobile Application",
         website: "Website",
         businessCard: "Business Card",
-        priceMobileApp: "$1000",
-        priceWebsite: "$500",
-        priceBusinessCard: "$100", // Изменено с $30 на $100
+        priceMobileApp: "From 5000 ₽",
+        priceWebsite: "From 3000 ₽",
+        priceBusinessCard: "From 1000 ₽",
+      },
+      howIWork: {
+        title: "How I Work",
+        steps: [
+          {
+            title: "Analysis",
+            description: "Understanding your needs and goals.",
+          },
+          {
+            title: "Design",
+            description: "Creating an attractive and user-friendly design.",
+          },
+          {
+            title: "Development",
+            description: "Coding and implementing functionality.",
+          },
+          {
+            title: "Testing",
+            description: "Checking for errors and optimization.",
+          },
+          {
+            title: "Launch",
+            description: "Deploying the website and providing support.",
+          },
+        ],
       },
       skills: {
         skills: "Skills",
@@ -166,79 +217,102 @@ function App() {
           "CSS",
           "JavaScript",
           "React",
-          "React Native",
-          "Flutter",
-          "WordPress",
-          "Wix",
+          "Node.js",
           "Git",
-          "UI/UX Design",
+          "Responsive Design",
+          "SEO",
         ],
       },
       contact: {
         contact: "Contact Me",
         yourName: "Your Name",
         yourEmail: "Your Email",
-        projectType: "Project Type",
         message: "Your Message",
+        projectType: "Project Type",
+        website: "Website",
+        mobileApp: "Mobile Application",
+        businessCard: "Business Card",
         send: "Send",
-        statusSuccess: "Your message has been successfully sent!",
-        nameRequired: "Name is required",
-        emailRequired: "Email is required",
-        emailInvalid: "Invalid email format",
-        messageRequired: "Message is required",
         scrollToContact: "Contact Me",
+        nameRequired: "Please enter your name.",
+        emailRequired: "Please enter your Email.",
+        emailInvalid: "Please enter a valid Email.",
+        messageRequired: "Please enter a message.",
+        statusSuccess: "Message sent successfully!",
       },
       footer: {
-        portfolio: "Yosef Mamedov's Portfolio",
+        footerSection: {
+          header: "Fill Out the Brief",
+          description: "Get a free consultation for your project.",
+          fillBrief: "Fill Out Brief",
+        },
+        portfolio: "© 2024 Yosef Mamedov's Portfolio",
       },
+      languageName: "English",
+      languageFlag: EnFlag,
     },
     he: {
       title: "פורטפוליו של יוסף ממדוב - מפתח אתרים",
-      description:
-        "פורטפוליו של מפתח אתרים יוסף ממדוב: יצירת אתרים ואפליקציות ניידות באמצעות React, Wix, WordPress, Flutter ו-React Native.",
-      keywords:
-        "פיתוח אתרים, React, Wix, WordPress, Flutter, React Native, יוסף ממדוב, פורטפוליו, מפתח אתרים",
+      description: "תיאור הפורטפוליו שלך בעברית.",
+      keywords: "פיתוח אתרים, פורטפוליו, יוסף ממדוב",
       author: "יוסף ממדוב",
       header: {
-        studioTitle: "פורטפוליו Web-Studio",
+        studioTitle: "הפורטפוליו שלי",
         aboutMe:
-          "שלום! אני יוסף, מפתח אתרים עם ניסיון ביצירת אתרים ב-React, Wix, WordPress ופיתוח אפליקציות ניידות ב-Flutter ו-React Native. אני שואף ליצור פתרונות יפים ופונקציונליים לעסקים וללקוחות פרטיים.",
+          "שלום! אני מפתח אתרים עם ניסיון ביצירת אתרים יפים ופונקציונליים.",
       },
       projects: {
         myProjects: "הפרויקטים שלי",
         djBeckermanWebsite: "אתר DJ Beckerman",
+        djBeckermanWebsiteDescription: "תיאור פרויקט האתר של DJ Beckerman.",
         g3Project: "פרויקט G-3",
+        g3ProjectDescription: "תיאור פרויקט G-3.",
         businessCard1: "כרטיס ביקור 1",
+        businessCard1Description: "תיאור כרטיס ביקור 1.",
         businessCard2: "כרטיס ביקור 2",
+        businessCard2Description: "תיאור כרטיס ביקור 2.",
         businessCard3: "כרטיס ביקור 3",
+        businessCard3Description: "תיאור כרטיס ביקור 3.",
         businessCard7: "כרטיס ביקור 7",
-        rentCarApplication: "אפליקציית השכרת רכבים",
-        visitCardProject: "פרויקט כרטיס ביקור",
-        djBeckermanWebsiteDescription:
-          "פיתחנו אתר ל-DJ Beckerman באמצעות React ו-CSS Grid. עיצוב אינטראקטיבי ותצוגה רספונסיבית לכל המכשירים.",
-        g3ProjectDescription:
-          "בניית אפליקציית ה-G-3 לניהול תהליכים עסקיים ב-React עם שילוב APIs חיצוניים.",
-        businessCard1Description:
-          "יצירת כרטיס ביקור ב-WordPress תוך שימוש בתוספים מודרניים להרחבת הפונקציונליות.",
-        businessCard2Description:
-          "גרסה שנייה של כרטיס ביקור עם אינטראקטיביות משופרת ואופטימיזציה ל-SEO לנראות טובה יותר.",
-        businessCard3Description:
-          "גרסה שלישית של כרטיס ביקור עם אנימציות והטמעת מערכות CRM לאוטומציה של תהליכים.",
-        businessCard7Description:
-          "דף נחיתה לדיג'יי המתמקד במעורבות קהל, מותאם למכשירים ניידים.",
-        rentCarApplicationDescription:
-          "פיתוח אפליקציית Rent Car ב-React Native ו-Flutter עם שילוב מערכות תשלום וגאולוקציה.",
-        visitCardProjectDescription:
-          "כרטיס ביקור דיגיטלי עם אנימציות ואלמנטים אינטראקטיביים להגברת מעורבות הלקוחות.",
+        businessCard7Description: "תיאור כרטיס ביקור 7.",
+        rentCarApplication: "אפליקציית Rent Car",
+        rentCarApplicationDescription: "תיאור אפליקציית Rent Car.",
+        visitCardProject: "פרויקט Visit Card",
+        visitCardProjectDescription: "תיאור פרויקט Visit Card.",
       },
       pricing: {
         pricing: "מחירים",
         mobileApp: "אפליקציה ניידת",
         website: "אתר",
         businessCard: "כרטיס ביקור",
-        priceMobileApp: "$1000",
-        priceWebsite: "$500",
-        priceBusinessCard: "$100", // Изменено с $30 на $100
+        priceMobileApp: "מתחיל מ-5000 ₽",
+        priceWebsite: "מתחיל מ-3000 ₽",
+        priceBusinessCard: "מתחיל מ-1000 ₽",
+      },
+      howIWork: {
+        title: "איך אני עובד",
+        steps: [
+          {
+            title: "אנליזה",
+            description: "הבנת הצרכים והמטרות שלך.",
+          },
+          {
+            title: "עיצוב",
+            description: "יצירת עיצוב אטרקטיבי וידידותי למשתמש.",
+          },
+          {
+            title: "פיתוח",
+            description: "קידוד ויישום הפונקציונליות.",
+          },
+          {
+            title: "בדיקות",
+            description: "בדיקה לאיתור שגיאות ואופטימיזציה.",
+          },
+          {
+            title: "השקה",
+            description: "פריסת האתר ומתן תמיכה.",
+          },
+        ],
       },
       skills: {
         skills: "כישורים",
@@ -247,69 +321,81 @@ function App() {
           "CSS",
           "JavaScript",
           "React",
-          "React Native",
-          "Flutter",
-          "WordPress",
-          "Wix",
+          "Node.js",
           "Git",
-          "UI/UX Design",
+          "עיצוב רספונסיבי",
+          "SEO",
         ],
       },
       contact: {
-        contact: "צור קשר איתי",
+        contact: "צור קשר",
         yourName: "שמך",
         yourEmail: "האימייל שלך",
-        projectType: "סוג הפרויקט",
         message: "ההודעה שלך",
+        projectType: "סוג הפרויקט",
+        website: "אתר",
+        mobileApp: "אפליקציה ניידת",
+        businessCard: "כרטיס ביקור",
         send: "שלח",
-        statusSuccess: "ההודעה שלך נשלחה בהצלחה!",
-        nameRequired: "שם נדרש",
-        emailRequired: "אימייל נדרש",
-        emailInvalid: "פורמט האימייל אינו תקין",
-        messageRequired: "ההודעה נדרשת",
-        scrollToContact: "צור קשר איתי",
+        scrollToContact: "צור קשר",
+        nameRequired: "אנא הכנס את שמך.",
+        emailRequired: "אנא הכנס את האימייל שלך.",
+        emailInvalid: "אנא הכנס אימייל תקין.",
+        messageRequired: "אנא הכנס הודעה.",
+        statusSuccess: "ההודעה נשלחה בהצלחה!",
       },
       footer: {
-        portfolio: "פורטפוליו של יוסף ממדוב",
+        footerSection: {
+          header: "מלא את הבריף",
+          description: "קבל ייעוץ חינמי לפרויקט שלך.",
+          fillBrief: "מלא בריף",
+        },
+        portfolio: "© 2024 פורטפוליו של יוסף ממדוב",
       },
+      languageName: "עברית",
+      languageFlag: HeFlag,
     },
   };
 
   // Состояние для выбранного языка
-  const [language, setLanguage] = useState('ru');
+  const [language, setLanguage] = useState("ru");
+
+  // Ref для закрытия выпадающего списка при клике вне
+  const dropdownRef = useRef(null);
 
   // Функция для изменения языка
   const changeLanguage = (lng) => {
     setLanguage(lng);
     // Изменение направления текста для иврита
-    if (lng === 'he') {
-      document.body.dir = 'rtl';
+    if (lng === "he") {
+      document.body.dir = "rtl";
     } else {
-      document.body.dir = 'ltr';
+      document.body.dir = "ltr";
     }
+    setDropdownOpen(false); // Закрыть выпадающий список после выбора
   };
 
   // Состояния для модального окна и формы
   const [modalImage, setModalImage] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    projectType: language === 'he' ? 'אתר' : 'Сайт',
-    message: '',
+    name: "",
+    email: "",
+    projectType: language === "he" ? "אתר" : "Сайт",
+    message: "",
   });
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
 
   // Закрыть модальное окно
   const closeModal = useCallback(() => {
     setModalImage(null);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   }, []);
 
   // Обработчик клавиши Esc
   const handleKeyDown = useCallback(
     (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         closeModal();
       }
     },
@@ -319,19 +405,19 @@ function App() {
   // useEffect для добавления/удаления слушателя событий
   useEffect(() => {
     if (modalImage) {
-      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener("keydown", handleKeyDown);
     } else {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     }
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [modalImage, handleKeyDown]);
 
   // Открыть модальное окно
   const openModal = (imageSrc) => {
     setModalImage(imageSrc);
-    document.body.style.overflow = 'hidden'; // Отключить прокрутку при открытом модале
+    document.body.style.overflow = "hidden"; // Отключить прокрутку при открытом модале
   };
 
   // Обработка изменений в форме
@@ -344,14 +430,15 @@ function App() {
     // Удалить ошибку при изменении
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: '',
+      [name]: "",
     }));
   };
 
   // Валидация формы
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = translations[language].contact.nameRequired;
+    if (!formData.name.trim())
+      newErrors.name = translations[language].contact.nameRequired;
     if (!formData.email.trim()) {
       newErrors.email = translations[language].contact.emailRequired;
     } else if (
@@ -359,8 +446,26 @@ function App() {
     ) {
       newErrors.email = translations[language].contact.emailInvalid;
     }
-    if (!formData.message.trim()) newErrors.message = translations[language].contact.messageRequired;
+    if (!formData.message.trim())
+      newErrors.message = translations[language].contact.messageRequired;
     return newErrors;
+  };
+
+  // Функция для отправки сообщения в Telegram
+  const sendToTelegram = (message) => {
+    const telegramBotToken = "YOUR_TELEGRAM_BOT_TOKEN"; // Замените на ваш токен бота
+    const telegramChatId = "1077514837";
+    const telegramMessage = encodeURIComponent(message);
+    const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${telegramMessage}`;
+
+    fetch(telegramUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.ok) {
+          console.error("Telegram Error:", data);
+        }
+      })
+      .catch((error) => console.error("Telegram Error:", error));
   };
 
   // Обработка отправки формы
@@ -376,13 +481,16 @@ function App() {
     const { name, email, projectType, message } = formData;
 
     // Формирование сообщения
-    const fullMessage = language === 'he' ? `
+    const fullMessage =
+      language === "he"
+        ? `
       בקשה חדשה מהפורטפוליו:
       שם: ${name}
       אימייל: ${email}
       סוג הפרויקט: ${projectType}
       הודעה: ${message}
-    ` : `
+    `
+        : `
       Новая заявка с портфолио:
       Имя: ${name}
       Email: ${email}
@@ -390,24 +498,15 @@ function App() {
       Сообщение: ${message}
     `;
 
-    // Кодирование сообщения для URL
-    const encodedMessage = encodeURIComponent(fullMessage);
-
-    // Ваш номер WhatsApp в международном формате (без плюса)
-    const whatsappNumber = '972528057734';
-
-    // Ссылка для WhatsApp Click-to-Chat
-    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-    // Перенаправление на WhatsApp
-    window.open(whatsappLink, '_blank');
+    // Отправка сообщения в Telegram
+    sendToTelegram(fullMessage);
 
     // Очистка формы и отображение статуса
     setFormData({
-      name: '',
-      email: '',
-      projectType: language === 'he' ? 'אתר' : 'Сайт',
-      message: '',
+      name: "",
+      email: "",
+      projectType: language === "he" ? "אתר" : "Сайт",
+      message: "",
     });
     setStatus(translations[language].contact.statusSuccess);
     setErrors({});
@@ -416,11 +515,41 @@ function App() {
   // Функция для плавного прокручивания к контактной секции
   const scrollToContact = (e) => {
     e.stopPropagation(); // Останавливаем всплытие события
-    const contactSection = document.getElementById('contact-section');
+    const contactSection = document.getElementById("contact-section");
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Функция для скачивания брифа
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/Brief_for_Web_or_App_Creation.docx";
+    link.download = "Brief_for_Web_or_App_Creation.docx";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Состояние для управления выпадающим списком
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Обработчик клика вне выпадающего списка для его закрытия
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    if (dropdownOpen) {
+      window.addEventListener("click", handleClickOutside);
+    } else {
+      window.removeEventListener("click", handleClickOutside);
+    }
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   return (
     <Suspense fallback="Loading...">
@@ -428,99 +557,188 @@ function App() {
         className="App"
         style={{
           backgroundImage: `url(${BestBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
         }}
       >
         {/* Meta Tags и Google Analytics */}
-        <Helmet>
+        <Helmet
+          htmlAttributes={{
+            lang: language === "he" ? "he" : language === "ru" ? "ru" : "en",
+          }}
+        >
           {/* Favicon и иконки */}
-          <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+          <link
+            rel="icon"
+            href="/favicon.svg"
+            type="image/svg+xml"
+            sizes="any"
+          />
           <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
           <link rel="apple-touch-icon" href="/favicon.svg" />
 
           {/* Основные мета-теги */}
           <title>{translations[language].title}</title>
-          <meta name="description" content={translations[language].description} />
+          <meta
+            name="description"
+            content={translations[language].description}
+          />
           <meta name="keywords" content={translations[language].keywords} />
           <meta name="author" content={translations[language].author} />
 
           {/* Open Graph */}
           <meta property="og:title" content={translations[language].title} />
-          <meta property="og:description" content={translations[language].description} />
+          <meta
+            property="og:description"
+            content={translations[language].description}
+          />
           <meta property="og:image" content="/favicon.svg" />
           <meta property="og:url" content="https://www.yosef-portfolio.ru/" />
           <meta property="og:type" content="website" />
           <meta
             property="og:locale"
-            content={language === 'he' ? 'he_IL' : language === 'ru' ? 'ru_RU' : 'en_US'}
+            content={
+              language === "he"
+                ? "he_IL"
+                : language === "ru"
+                ? "ru_RU"
+                : "en_US"
+            }
           />
+          <meta property="og:locale:alternate" content="ru_RU" />
+          <meta property="og:locale:alternate" content="en_US" />
+          <meta property="og:locale:alternate" content="he_IL" />
 
           {/* Twitter Card */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={translations[language].title} />
-          <meta name="twitter:description" content={translations[language].description} />
+          <meta
+            name="twitter:description"
+            content={translations[language].description}
+          />
           <meta name="twitter:image" content="/favicon.svg" />
 
-          {/* Hreflang Tags */}
-          <link rel="alternate" hrefLang="ru" href="https://www.yosef-portfolio.ru/" />
-          <link rel="alternate" hrefLang="en" href="https://www.yosef-portfolio.ru/en" />
-          <link rel="alternate" hrefLang="he" href="https://www.yosef-portfolio.ru/he" />
+          {/* Географические мета-теги для Праги */}
+          <meta name="geo.region" content="CZ-PR" />
+          <meta name="geo.placename" content="Prague" />
+          <meta name="geo.position" content="50.0755;14.4378" />
+          <meta name="ICBM" content="50.0755,14.4378" />
 
           {/* Структурированные данные */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "Yosef Mamedov's Portfolio",
-              "url": "https://www.yosef-portfolio.ru/",
-              "potentialAction": {
+              name: "Yosef Mamedov's Portfolio",
+              url: "https://www.yosef-portfolio.ru/",
+              potentialAction: {
                 "@type": "SearchAction",
-                "target": "https://www.yosef-portfolio.ru/search?q={search_term_string}",
+                target:
+                  "https://www.yosef-portfolio.ru/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 50.0755,
+                longitude: 14.4378,
               },
             })}
           </script>
 
           {/* Google Analytics */}
           {/* Google tag (gtag.js) */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGNWSHB9TC"></script>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-VGNWSHB9TC"
+          ></script>
           <script>
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', 'G-VGNWSHB9TC');
+              gtag('config', 'G-VGNWSHB9TC', {
+                'page_location': window.location.href,
+                'page_path': window.location.pathname
+              });
             `}
           </script>
         </Helmet>
 
-        {/* Переключатель языков */}
-        <div className="language-switcher">
-          <FaGlobe size={20} />
-          <button onClick={() => changeLanguage('ru')}>RU</button>
-          <button onClick={() => changeLanguage('en')}>EN</button>
-          <button onClick={() => changeLanguage('he')}>HE</button>
+        {/* Переключатель языков (Кастомный выпадающий список с флагами) */}
+        <div className="language-switcher" ref={dropdownRef}>
+          <button
+            className="language-button"
+            onClick={() => setDropdownOpen((prev) => !prev)}
+            aria-label="Select Language"
+          >
+            <img
+              src={translations[language].languageFlag}
+              alt={`${translations[language].languageName} flag`}
+              className="language-flag-image"
+            />
+            <span className="language-code">{language.toUpperCase()}</span>
+            <span
+              className={`dropdown-arrow ${dropdownOpen ? "open" : ""}`}
+            ></span>
+          </button>
+          {dropdownOpen && (
+            <ul className="language-dropdown">
+              {Object.keys(translations).map((lng) => (
+                <li key={lng}>
+                  <button
+                    className="language-option-button"
+                    onClick={() => changeLanguage(lng)}
+                  >
+                    <img
+                      src={translations[lng].languageFlag}
+                      alt={`${translations[lng].languageName} flag`}
+                      className="language-option-flag"
+                    />
+                    <span className="language-option-code">
+                      {lng.toUpperCase()}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Overlay */}
         <div className="background-overlay"></div>
 
         {/* Модальное окно */}
-        {modalImage && ReactDOM.createPortal(
-          <div className="modal" onClick={closeModal} aria-modal="true" role="dialog">
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close-button" onClick={closeModal} aria-label="Close Modal">
-                <FaTimes size={24} />
-              </button>
-              <img src={modalImage} alt="Project Fullscreen" className="modal-image" />
-            </div>
-          </div>,
-          document.body
-        )}
+        {modalImage &&
+          ReactDOM.createPortal(
+            <div
+              className="modal"
+              onClick={closeModal}
+              aria-modal="true"
+              role="dialog"
+            >
+              <div
+                className="modal-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="modal-close-button"
+                  onClick={closeModal}
+                  aria-label="Close Modal"
+                >
+                  <FaTimes size={24} />
+                </button>
+                <img
+                  src={modalImage}
+                  alt="Project Fullscreen"
+                  className="modal-image"
+                />
+              </div>
+            </div>,
+            document.body
+          )}
 
         {/* Header */}
         <header className="App-header">
@@ -530,11 +748,20 @@ function App() {
 
           {/* Удалён обработчик onClick с header-content */}
           <div className="header-content">
-            <img src={PortfolioIcon} alt="Моё портфолио иконка" className="portfolio-icon" />
-            <h1 className="studio-title">{translations[language].header.studioTitle}</h1>
+            <img
+              src={PortfolioIcon}
+              alt="Моё портфолио иконка"
+              className="portfolio-icon"
+            />
+            <h1 className="studio-title">
+              {translations[language].header.studioTitle}
+            </h1>
             <p className="about-me">{translations[language].header.aboutMe}</p>
             {/* Кнопка "Связаться со мной" без вызова модала */}
-            <button className="contact-button-top" onClick={(e) => scrollToContact(e)}>
+            <button
+              className="contact-button-top"
+              onClick={(e) => scrollToContact(e)}
+            >
               {translations[language].contact.scrollToContact}
               <span className="arrow"></span>
             </button>
@@ -549,68 +776,81 @@ function App() {
             {[
               {
                 img: DJBeckerman,
-                alt: 'DJ Beckerman Website',
+                alt: "DJ Beckerman Website",
                 title: translations[language].projects.djBeckermanWebsite,
-                description: translations[language].projects.djBeckermanWebsiteDescription,
+                description:
+                  translations[language].projects.djBeckermanWebsiteDescription,
               },
               {
                 img: G3,
-                alt: 'G-3 Project',
+                alt: "G-3 Project",
                 title: translations[language].projects.g3Project,
-                description: translations[language].projects.g3ProjectDescription,
+                description:
+                  translations[language].projects.g3ProjectDescription,
               },
               {
                 img: BusinessCard,
-                alt: 'Business Card 1',
+                alt: "Business Card 1",
                 title: translations[language].projects.businessCard1,
-                description: translations[language].projects.businessCard1Description,
+                description:
+                  translations[language].projects.businessCard1Description,
               },
               {
                 img: BusinessCard2,
-                alt: 'Business Card 2',
+                alt: "Business Card 2",
                 title: translations[language].projects.businessCard2,
-                description: translations[language].projects.businessCard2Description,
+                description:
+                  translations[language].projects.businessCard2Description,
               },
               {
                 img: BusinessCard3,
-                alt: 'Business Card 3',
+                alt: "Business Card 3",
                 title: translations[language].projects.businessCard3,
-                description: translations[language].projects.businessCard3Description,
+                description:
+                  translations[language].projects.businessCard3Description,
               },
               {
                 img: BusinessCard7,
-                alt: 'Business Card 7',
+                alt: "Business Card 7",
                 title: translations[language].projects.businessCard7,
-                description: translations[language].projects.businessCard7Description,
+                description:
+                  translations[language].projects.businessCard7Description,
               },
               {
                 img: RentCar,
-                alt: 'Rent Car Application',
+                alt: "Rent Car Application",
                 title: translations[language].projects.rentCarApplication,
-                description: translations[language].projects.rentCarApplicationDescription,
+                description:
+                  translations[language].projects.rentCarApplicationDescription,
               },
               {
                 img: VisitCard,
-                alt: 'Visit Card Project',
+                alt: "Visit Card Project",
                 title: translations[language].projects.visitCardProject,
-                description: translations[language].projects.visitCardProjectDescription,
+                description:
+                  translations[language].projects.visitCardProjectDescription,
               },
             ].map((project, index) => (
               <div className="project-item" key={index}>
-                <div className="floating-container" onClick={() => openModal(project.img)}>
+                <div
+                  className="floating-container"
+                  onClick={() => openModal(project.img)}
+                >
                   <div className="project-inner">
                     <div className="project-front">
                       <img
                         src={project.img}
                         alt={project.alt}
                         className={`project-screenshot ${
-                          project.title === translations[language].projects.rentCarApplication
-                            ? 'rent-car-screenshot'
-                            : ''
+                          project.title ===
+                          translations[language].projects.rentCarApplication
+                            ? "rent-car-screenshot"
+                            : ""
                         } ${
-                          project.title === translations[language].projects.visitCardProject
-                            ? 'visit-card-screenshot'
-                            : ''
+                          project.title ===
+                          translations[language].projects.visitCardProject
+                            ? "visit-card-screenshot"
+                            : ""
                         }`}
                       />
                     </div>
@@ -632,18 +872,38 @@ function App() {
             <div className="pricing-card">
               <FaMobileAlt className="pricing-icon" />
               <h3>{translations[language].pricing.mobileApp}</h3>
-              <p className="price">{translations[language].pricing.priceMobileApp}</p>
+              <p className="price">
+                {translations[language].pricing.priceMobileApp}
+              </p>
             </div>
             <div className="pricing-card">
               <FaLaptopCode className="pricing-icon" />
               <h3>{translations[language].pricing.website}</h3>
-              <p className="price">{translations[language].pricing.priceWebsite}</p>
+              <p className="price">
+                {translations[language].pricing.priceWebsite}
+              </p>
             </div>
             <div className="pricing-card">
               <FaIdBadge className="pricing-icon" />
               <h3>{translations[language].pricing.businessCard}</h3>
-              <p className="price">{translations[language].pricing.priceBusinessCard}</p>
+              <p className="price">
+                {translations[language].pricing.priceBusinessCard}
+              </p>
             </div>
+          </div>
+        </section>
+
+        {/* How I Work Section */}
+        <section className="how-i-work-section">
+          <h2>{translations[language].howIWork.title}</h2>
+          <div className="steps-container">
+            {translations[language].howIWork.steps.map((step, index) => (
+              <div className="step-card" key={index}>
+                <FaLightbulb className="step-icon" />
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -667,11 +927,13 @@ function App() {
                 name="name"
                 placeholder={translations[language].contact.yourName}
                 required
-                className={`contact-input ${errors.name ? 'error' : ''}`}
+                className={`contact-input ${errors.name ? "error" : ""}`}
                 value={formData.name}
                 onChange={handleChange}
               />
-              {errors.name && <span className="error-message">{errors.name}</span>}
+              {errors.name && (
+                <span className="error-message">{errors.name}</span>
+              )}
             </div>
             <div className="form-group">
               <input
@@ -679,11 +941,13 @@ function App() {
                 name="email"
                 placeholder={translations[language].contact.yourEmail}
                 required
-                className={`contact-input ${errors.email ? 'error' : ''}`}
+                className={`contact-input ${errors.email ? "error" : ""}`}
                 value={formData.email}
                 onChange={handleChange}
               />
-              {errors.email && <span className="error-message">{errors.email}</span>}
+              {errors.email && (
+                <span className="error-message">{errors.email}</span>
+              )}
             </div>
             <div className="form-group">
               <select
@@ -693,13 +957,21 @@ function App() {
                 value={formData.projectType}
                 onChange={handleChange}
               >
-                <option value={language === 'he' ? 'אתר' : 'Сайт'}>
+                <option value={language === "he" ? "אתר" : "Сайт"}>
                   {translations[language].pricing.website}
                 </option>
-                <option value={language === 'he' ? 'אפליקציה ניידת' : 'Мобильное приложение'}>
+                <option
+                  value={
+                    language === "he"
+                      ? "אפליקציה ניידת"
+                      : "Мобильное приложение"
+                  }
+                >
                   {translations[language].pricing.mobileApp}
                 </option>
-                <option value={language === 'he' ? 'כרטיס ביקור' : 'Бизнес-визитка'}>
+                <option
+                  value={language === "he" ? "כרטיס ביקור" : "Бизнес-визитка"}
+                >
                   {translations[language].pricing.businessCard}
                 </option>
               </select>
@@ -709,11 +981,13 @@ function App() {
                 name="message"
                 placeholder={translations[language].contact.message}
                 required
-                className={`contact-textarea ${errors.message ? 'error' : ''}`}
+                className={`contact-textarea ${errors.message ? "error" : ""}`}
                 value={formData.message}
                 onChange={handleChange}
               ></textarea>
-              {errors.message && <span className="error-message">{errors.message}</span>}
+              {errors.message && (
+                <span className="error-message">{errors.message}</span>
+              )}
             </div>
             <button type="submit" className="contact-button">
               {translations[language].contact.send}
@@ -722,11 +996,27 @@ function App() {
           {status && <p className="status-message">{status}</p>}
         </section>
 
-        {/* Footer */}
+        {/* Новая Footer Section */}
+        <div className="footer-section">
+          <div className="footer-content">
+            <h2>{translations[language].footer.footerSection.header}</h2>
+            <p>{translations[language].footer.footerSection.description}</p>
+            <button className="footer-button" onClick={handleDownload}>
+              {translations[language].footer.footerSection.fillBrief}
+              <span className="arrow"></span>
+            </button>
+          </div>
+        </div>
+
+        {/* Существующий Footer */}
         <footer>
           <p>{translations[language].footer.portfolio}</p>
           <div className="social-icons">
-            <a href="https://t.me/beckerman979" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://t.me/beckerman979"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaTelegram size={24} />
             </a>
             <a
@@ -736,7 +1026,11 @@ function App() {
             >
               <FaLinkedin size={24} />
             </a>
-            <a href="https://github.com/Iusif797" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/Iusif797"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaGithub size={24} />
             </a>
           </div>
