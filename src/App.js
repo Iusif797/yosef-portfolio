@@ -17,11 +17,17 @@ import {
   FaLaptopCode,
   FaIdBadge,
   FaTimes,
-  FaLightbulb, // Иконка для раздела "Как я работаю"
+  FaLightbulb,
+  FaQuoteLeft,
 } from "react-icons/fa";
 import ReactDOM from "react-dom";
 
-// Импорт изображений из src/assets
+// ===== Слайдер для отзывов (Testimonials) =====
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+// Импорт изображений (no parallax-bg.jpg!)
 import BestBackground from "./assets/best-background.jpg";
 import DJBeckerman from "./assets/DJ-beckerman.png";
 import G3 from "./assets/G-3.jpg";
@@ -32,9 +38,9 @@ import BusinessCard7 from "./assets/business-card7.png";
 import RentCar from "./assets/rent-car.png";
 import VisitCard from "./assets/visit-card.png";
 import PortfolioIcon from "./assets/portfolio-icon.png";
-import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png"; // Новый импорт
+import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png";
 
-// Импорт флагов (удалены, так как не используются)
+// Переводы
 const translations = {
   ru: {
     title: "Портфолио Юсифа Мамедова - Веб-разработчик",
@@ -81,9 +87,9 @@ const translations = {
       mobileApp: "Мобильное Приложение",
       website: "Сайт",
       businessCard: "Бизнес Визитка",
-      priceMobileApp: "От 5000 ₽",
-      priceWebsite: "От 3000 ₽",
-      priceBusinessCard: "От 1000 ₽",
+      priceMobileApp: "От 200 $",
+      priceWebsite: "От 100 $",
+      priceBusinessCard: "От 50 $",
     },
     howIWork: {
       title: "Как Я Работаю",
@@ -123,6 +129,26 @@ const translations = {
         "SEO",
       ],
     },
+    testimonials: {
+      title: "Отзывы",
+      list: [
+        {
+          name: "Иван Петров",
+          feedback:
+            "Отличный специалист, выполнил всё быстро и качественно. Рекомендую!",
+        },
+        {
+          name: "ООО «Прогресс»",
+          feedback:
+            "Работаем с Юсифом не в первый раз. Всегда на связи, соблюдает сроки, предлагает свежие идеи.",
+        },
+        {
+          name: "Александр",
+          feedback:
+            "Заказал лендинг, результат превзошёл ожидания. Буду обращаться снова!",
+        },
+      ],
+    },
     contact: {
       contact: "Связаться со мной",
       yourName: "Ваше Имя",
@@ -154,7 +180,7 @@ const translations = {
     title: "Yosef Mamedov's Portfolio - Web Developer",
     description: "Description of your portfolio in English.",
     keywords: "web development, portfolio, Yosef Mamedov",
-    author: "Yosef Mamedov",
+    author: "Yosef Mamедov",
     header: {
       studioTitle: "My Portfolio",
       aboutMe:
@@ -195,9 +221,9 @@ const translations = {
       mobileApp: "Mobile Application",
       website: "Website",
       businessCard: "Business Card",
-      priceMobileApp: "From 5000 ₽",
-      priceWebsite: "From 3000 ₽",
-      priceBusinessCard: "From 1000 ₽",
+      priceMobileApp: "From 200 $",
+      priceWebsite: "From 100 $",
+      priceBusinessCard: "From 50 $",
     },
     howIWork: {
       title: "How I Work",
@@ -235,6 +261,26 @@ const translations = {
         "Git",
         "Responsive Design",
         "SEO",
+      ],
+    },
+    testimonials: {
+      title: "Testimonials",
+      list: [
+        {
+          name: "John Doe",
+          feedback:
+            "Amazing experience! Everything was done quickly and with high quality.",
+        },
+        {
+          name: "TechCorp LLC",
+          feedback:
+            "We have been collaborating with Yosef multiple times. Always meets deadlines and offers fresh ideas.",
+        },
+        {
+          name: "Alexander",
+          feedback:
+            "Ordered a landing page, the result exceeded expectations. Will come back again!",
+        },
       ],
     },
     contact: {
@@ -309,9 +355,9 @@ const translations = {
       mobileApp: "אפליקציה ניידת",
       website: "אתר",
       businessCard: "כרטיס ביקור",
-      priceMobileApp: "מתחיל מ-5000 ₽",
-      priceWebsite: "מתחיל מ-3000 ₽",
-      priceBusinessCard: "מתחיל מ-1000 ₽",
+      priceMobileApp: "מתחיל מ-200 $",
+      priceWebsite: "מתחיל מ-100 $",
+      priceBusinessCard: "מתחיל מ-50 $",
     },
     howIWork: {
       title: "איך אני עובד",
@@ -351,6 +397,26 @@ const translations = {
         "SEO",
       ],
     },
+    testimonials: {
+      title: "חוות דעת",
+      list: [
+        {
+          name: "דניאל",
+          feedback:
+            "עבודה מקצועית ומהירה. ממליץ בחום!",
+        },
+        {
+          name: "חברת FutureTech",
+          feedback:
+            "עובדים עם יוסף כבר כמה פרויקטים, תמיד זמין, עומד בלוחות זמנים, ומציע רעיונות מקוריים.",
+        },
+        {
+          name: "אלכסנדר",
+          feedback:
+            "הזמנתי עמוד נחיתה, התוצאה עלתה על הציפיות. אפנה שוב!",
+        },
+      ],
+    },
     contact: {
       contact: "צור קשר",
       yourName: "שמך",
@@ -380,43 +446,25 @@ const translations = {
   },
 };
 
+// =========================================
+//               КОМПОНЕНТ
+// =========================================
 function App() {
-  // Состояние для выбранного языка
+  // Состояние языка
   const [language, setLanguage] = useState("ru");
 
-  // Ref для закрытия выпадающего списка при клике вне
+  // Для выпадающего списка
   const dropdownRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Функция для изменения языка
-  const changeLanguage = (lng) => {
-    setLanguage(lng);
-    // Изменение направления текста для иврита
-    if (lng === "he") {
-      document.body.dir = "rtl";
-    } else {
-      document.body.dir = "ltr";
-    }
-    setDropdownOpen(false); // Закрыть выпадающий список после выбора
-  };
-
-  // Состояния для модального окна и формы
+  // Модальное окно (изображения проектов)
   const [modalImage, setModalImage] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    projectType: language === "he" ? "אתר" : "Сайт",
-    message: "",
-  });
-  const [status, setStatus] = useState("");
-  const [errors, setErrors] = useState({});
 
-  // Закрыть модальное окно
   const closeModal = useCallback(() => {
     setModalImage(null);
     document.body.style.overflow = "auto";
   }, []);
 
-  // Обработчик клавиши Esc
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === "Escape") {
@@ -426,7 +474,6 @@ function App() {
     [closeModal]
   );
 
-  // useEffect для добавления/удаления слушателя событий
   useEffect(() => {
     if (modalImage) {
       window.addEventListener("keydown", handleKeyDown);
@@ -438,27 +485,40 @@ function App() {
     };
   }, [modalImage, handleKeyDown]);
 
-  // Открыть модальное окно
   const openModal = (imageSrc) => {
     setModalImage(imageSrc);
-    document.body.style.overflow = "hidden"; // Отключить прокрутку при открытом модале
+    document.body.style.overflow = "hidden";
   };
 
-  // Обработка изменений в форме
+  // Смена языка
+  const changeLanguage = (lng) => {
+    setLanguage(lng);
+    if (lng === "he") {
+      document.body.dir = "rtl";
+    } else {
+      document.body.dir = "ltr";
+    }
+    setDropdownOpen(false);
+  };
+
+  // Состояние формы
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    projectType: language === "he" ? "אתר" : "Сайт",
+    message: "",
+  });
+  const [status, setStatus] = useState("");
+  const [errors, setErrors] = useState({});
+
+  // Обработка формы
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    // Удалить ошибку при изменении
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  // Валидация формы
+  // Валидация
   const validate = () => {
     const newErrors = {};
     if (!formData.name.trim())
@@ -475,15 +535,19 @@ function App() {
     return newErrors;
   };
 
-  // Функция для отправки сообщения в Telegram
+  // --- Telegram ---
   const sendToTelegram = (message) => {
-    const telegramBotToken = "YOUR_TELEGRAM_BOT_TOKEN"; // Замените на ваш токен бота
+    // Вставляем ваш реальный токен
+    const telegramBotToken =
+      "7024597156:AAGG4sChJgJ8PZQyISPkqbUFZ6KH2zJC1XE";
+    // Чат ID:
     const telegramChatId = "1077514837";
+
     const telegramMessage = encodeURIComponent(message);
     const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${telegramMessage}`;
 
     fetch(telegramUrl)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
         if (!data.ok) {
           console.error("Telegram Error:", data);
@@ -492,10 +556,8 @@ function App() {
       .catch((error) => console.error("Telegram Error:", error));
   };
 
-  // Обработка отправки формы
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formErrors = validate();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
@@ -503,8 +565,6 @@ function App() {
     }
 
     const { name, email, projectType, message } = formData;
-
-    // Формирование сообщения
     const fullMessage =
       language === "he"
         ? `
@@ -530,10 +590,10 @@ function App() {
       Сообщение: ${message}
     `;
 
-    // Отправка сообщения в Telegram
+    // Отправить в Телеграм
     sendToTelegram(fullMessage);
 
-    // Очистка формы и отображение статуса
+    // Очистка полей
     setFormData({
       name: "",
       email: "",
@@ -545,16 +605,16 @@ function App() {
     setErrors({});
   };
 
-  // Функция для плавного прокручивания к контактной секции
+  // Прокрутка
   const scrollToContact = (e) => {
-    e.stopPropagation(); // Останавливаем всплытие события
+    e.stopPropagation();
     const contactSection = document.getElementById("contact-section");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  // Функция для скачивания брифа
+  // Скачивание брифа
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "/Brief_for_Web_or_App_Creation.docx";
@@ -564,10 +624,7 @@ function App() {
     document.body.removeChild(link);
   };
 
-  // Состояние для управления выпадающим списком
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  // Обработчик клика вне выпадающего списка для его закрытия
+  // Закрытие выпадающего списка при клике вне
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -584,8 +641,29 @@ function App() {
     };
   }, [dropdownOpen]);
 
+  // Настройки слайдера (Отзывы)
+  const testimonialsSliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    // мобильная адаптация
+    responsive: [
+      {
+        breakpoint: 480, // при 480px и меньше показываем 1 отзыв
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <Suspense fallback="Loading...">
+      {/* Фон всего приложения */}
       <div
         className="App"
         style={{
@@ -593,16 +671,15 @@ function App() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          // Закрепляем фон за всем окном
           backgroundAttachment: "fixed",
         }}
       >
-        {/* Meta Tags и Google Analytics */}
         <Helmet
           htmlAttributes={{
             lang: language === "he" ? "he" : language === "ru" ? "ru" : "en",
           }}
         >
-          {/* Favicon и иконки */}
           <link
             rel="icon"
             href="/favicon.svg"
@@ -612,7 +689,6 @@ function App() {
           <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
           <link rel="apple-touch-icon" href="/favicon.svg" />
 
-          {/* Основные мета-теги */}
           <title>{translations[language].title}</title>
           <meta
             name="description"
@@ -653,13 +729,13 @@ function App() {
           />
           <meta name="twitter:image" content="/favicon.svg" />
 
-          {/* Географические мета-теги для Праги */}
+          {/* Географические мета-теги */}
           <meta name="geo.region" content="CZ-PR" />
           <meta name="geo.placename" content="Prague" />
           <meta name="geo.position" content="50.0755;14.4378" />
           <meta name="ICBM" content="50.0755,14.4378" />
 
-          {/* Структурированные данные */}
+          {/* JSON-LD */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
@@ -679,28 +755,9 @@ function App() {
               },
             })}
           </script>
-
-          {/* Google Analytics */}
-          {/* Google tag (gtag.js) */}
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-VGNWSHB9TC"
-          ></script>
-          <script>
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-VGNWSHB9TC', {
-                'page_location': window.location.href,
-                'page_path': window.location.pathname
-              });
-            `}
-          </script>
         </Helmet>
 
-        {/* Переключатель языков (без флагов) */}
+        {/* Переключатель языка */}
         <div className="language-switcher" ref={dropdownRef}>
           <button
             className={`language-button ${dropdownOpen ? "active" : ""}`}
@@ -736,7 +793,7 @@ function App() {
         {/* Overlay */}
         <div className="background-overlay"></div>
 
-        {/* Модальное окно */}
+        {/* Модальное окно для картинок */}
         {modalImage &&
           ReactDOM.createPortal(
             <div
@@ -768,11 +825,8 @@ function App() {
 
         {/* Header */}
         <header className="App-header">
-          {/* Оставляем только квадраты и треугольники */}
           <div className="header-decorative decoration-4"></div>
           <div className="header-decorative decoration-5"></div>
-
-          {/* Контент заголовка */}
           <div className="header-content">
             <img
               src={PortfolioIcon}
@@ -783,7 +837,6 @@ function App() {
               {translations[language].header.studioTitle}
             </h1>
             <p className="about-me">{translations[language].header.aboutMe}</p>
-            {/* Кнопка "Связаться со мной" без флага */}
             <button
               className="contact-button-top"
               onClick={(e) => scrollToContact(e)}
@@ -794,11 +847,10 @@ function App() {
           </div>
         </header>
 
-        {/* Projects Section */}
+        {/* Projects (с "псевдо-параллаксом" на CSS) */}
         <section className="projects-section">
           <h2>{translations[language].projects.myProjects}</h2>
           <div className="projects-container">
-            {/* Карточки проектов */}
             {[
               {
                 img: DJBeckerman,
@@ -862,7 +914,7 @@ function App() {
                 title: translations[language].projects.castaweyWebsite,
                 description:
                   translations[language].projects.castaweyWebsiteDescription,
-                link: "https://castawey.netlify.app/", // Ссылка на сайт
+                link: "https://castawey.netlify.app/",
               },
             ].map((project, index) => (
               <div className="project-item" key={index}>
@@ -875,17 +927,7 @@ function App() {
                       <img
                         src={project.img}
                         alt={project.alt}
-                        className={`project-screenshot ${
-                          project.title ===
-                          translations[language].projects.rentCarApplication
-                            ? "rent-car-screenshot"
-                            : ""
-                        } ${
-                          project.title ===
-                          translations[language].projects.visitCardProject
-                            ? "visit-card-screenshot"
-                            : ""
-                        }`}
+                        className="project-screenshot"
                       />
                     </div>
                     <div className="project-back">
@@ -912,7 +954,7 @@ function App() {
           </div>
         </section>
 
-        {/* Pricing Section */}
+        {/* Цены */}
         <section className="pricing-section">
           <h2>{translations[language].pricing.pricing}</h2>
           <div className="pricing-cards">
@@ -940,7 +982,7 @@ function App() {
           </div>
         </section>
 
-        {/* How I Work Section */}
+        {/* Как я работаю */}
         <section className="how-i-work-section">
           <h2>{translations[language].howIWork.title}</h2>
           <div className="steps-container">
@@ -954,7 +996,7 @@ function App() {
           </div>
         </section>
 
-        {/* Skills Section */}
+        {/* Навыки */}
         <section className="skills">
           <h2>{translations[language].skills.skills}</h2>
           <ul>
@@ -964,7 +1006,21 @@ function App() {
           </ul>
         </section>
 
-        {/* Contact Section */}
+        {/* Отзывы */}
+        <section className="testimonials-section">
+          <h2>{translations[language].testimonials.title}</h2>
+          <Slider {...testimonialsSliderSettings}>
+            {translations[language].testimonials.list.map((item, i) => (
+              <div className="testimonial-card" key={i}>
+                <FaQuoteLeft className="quote-icon" />
+                <p className="testimonial-text">{item.feedback}</p>
+                <h4 className="testimonial-name">— {item.name}</h4>
+              </div>
+            ))}
+          </Slider>
+        </section>
+
+        {/* Контакты */}
         <section className="contact" id="contact-section">
           <h2>{translations[language].contact.contact}</h2>
           <form onSubmit={handleSubmit} className="contact-form">
@@ -1059,7 +1115,7 @@ function App() {
           {status && <p className="status-message">{status}</p>}
         </section>
 
-        {/* Новая Footer Section */}
+        {/* Блок футер (бриф) */}
         <div className="footer-section">
           <div className="footer-content">
             <h2>{translations[language].footer.footerSection.header}</h2>
@@ -1071,7 +1127,7 @@ function App() {
           </div>
         </div>
 
-        {/* Существующий Footer */}
+        {/* Основной футер */}
         <footer>
           <p>{translations[language].footer.portfolio}</p>
           <div className="social-icons">
