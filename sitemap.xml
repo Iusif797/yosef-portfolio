@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Главная страница -->
+  <url>
+    <loc>https://www.yosef-portfolio.ru/</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.yosef-portfolio.ru/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.yosef-portfolio.ru/en" />
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.yosef-portfolio.ru/he" />
+  </url>
+  
+  <!-- Английская версия главной страницы -->
+  <url>
+    <loc>https://www.yosef-portfolio.ru/en</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.yosef-portfolio.ru/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.yosef-portfolio.ru/en" />
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.yosef-portfolio.ru/he" />
+  </url>
+  
+  <!-- Ивритовая версия главной страницы -->
+  <url>
+    <loc>https://www.yosef-portfolio.ru/he</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.yosef-portfolio.ru/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.yosef-portfolio.ru/en" />
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.yosef-portfolio.ru/he" />
+  </url>
+  
+  <!-- Пример дополнительной страницы: Проекты -->
+  <url>
+    <loc>https://www.yosef-portfolio.ru/projects</loc>
+    <lastmod>2024-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.yosef-portfolio.ru/projects" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.yosef-portfolio.ru/en/projects" />
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.yosef-portfolio.ru/he/projects" />
+  </url>
+  
+  <!-- Добавьте дополнительные URL аналогично -->
+  
+</urlset>
