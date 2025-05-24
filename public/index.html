@@ -1,68 +1,155 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WBBZGGTS');</script>
-    <!-- End Google Tag Manager -->
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WBBZGGTS');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
 
-    <!-- Описание сайта с упоминанием Праги -->
-    <meta name="description" content="Портфолио веб-разработчика Юсифа Мамедова из Праги. Разработка современных веб-сайтов и приложений с использованием React, JavaScript, HTML, CSS. Услуги веб-разработки в Праге." />
+  <!-- Основные мета-теги -->
+  <meta name="description"
+    content="Профессиональная веб-разработка в Чехии и Европе. Создание современных сайтов, мобильных приложений и бизнес-решений. Русскоязычный веб-разработчик в Праге." />
+  <meta name="keywords"
+    content="веб-разработка Прага, русский веб-разработчик Чехия, создание сайтов Европа, разработка приложений Прага, веб-дизайн Чехия, программист Прага, IT услуги Чехия, русскоязычный разработчик Европа" />
+  <meta name="author" content="Юсиф Мамедов" />
 
-    <!-- Ключевые слова для SEO оптимизации в Праге -->
-    <meta name="keywords" content="веб-разработчик в Праге, разработка сайтов Прага, Юсиф Мамедов, веб-разработка, React, JavaScript, HTML, CSS, создание сайтов Прага, веб-приложения, мобильные приложения" />
+  <!-- Геолокация -->
+  <meta name="geo.region" content="CZ-PR" />
+  <meta name="geo.placename" content="Prague" />
+  <meta name="geo.position" content="50.0755;14.4378" />
+  <meta name="ICBM" content="50.0755,14.4378" />
 
-    <!-- Open Graph мета-теги для улучшения SEO и социальных сетей -->
-    <meta property="og:title" content="Веб-разработчик в Праге | Юсиф Мамедов" />
-    <meta property="og:description" content="Разработка современных веб-сайтов и приложений в Праге с использованием React, JavaScript, HTML, CSS. Профессиональные услуги веб-разработки в Праге." />
-    <meta property="og:image" content="%PUBLIC_URL%/favicon2.png" />
-    <meta property="og:locale" content="ru_CZ" />
+  <!-- Языковые версии -->
+  <link rel="alternate" hreflang="ru" href="https://www.yosef-portfolio.ru/" />
+  <link rel="alternate" hreflang="en" href="https://www.yosef-portfolio.ru/en/" />
+  <link rel="alternate" hreflang="he" href="https://www.yosef-portfolio.ru/he/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.yosef-portfolio.ru/" />
 
-    <!-- Структурированные данные Schema.org -->
-    <script type="application/ld+json">
+  <!-- Open Graph -->
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:locale:alternate" content="he_IL" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Веб-разработка в Праге | Юсиф Мамедов" />
+  <meta property="og:description"
+    content="Профессиональная веб-разработка в Чехии. Создание современных сайтов и приложений. Русскоязычный разработчик в Праге." />
+  <meta property="og:url" content="https://www.yosef-portfolio.ru/" />
+  <meta property="og:site_name" content="Портфолио Юсифа Мамедова" />
+  <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Веб-разработка в Праге | Юсиф Мамедов" />
+  <meta name="twitter:description"
+    content="Профессиональная веб-разработка в Чехии. Создание современных сайтов и приложений. Русскоязычный разработчик в Праге." />
+  <meta name="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
+
+  <!-- Дополнительные мета-теги -->
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="google" content="notranslate" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <!-- Мета-тег для верификации Google -->
+  <meta name="google-site-verification" content="Eb9MsULZK-O7D0MA8bdfs7Rdjm0jPwZtrD4lmHyPoks" />
+  <meta name="google-site-verification" content="googleaa6daa15c4dd3a21.html" />
+
+  <!-- Иконки для Apple и манифест -->
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- Заголовок страницы с упоминанием Праги -->
+  <title>Веб-разработка в Праге | Юсиф Мамедов | Создание сайтов в Чехии</title>
+
+  <!-- Структурированные данные Schema.org -->
+  <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
-      "@type": "Person",
-      "name": "Юсиф Мамедов",
-      "jobTitle": "Веб-разработчик",
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Веб-разработка Юсиф Мамедов",
+      "image": "%PUBLIC_URL%/og-image.jpg",
+      "description": "Профессиональная веб-разработка в Чехии и Европе. Создание современных сайтов, мобильных приложений и бизнес-решений.",
+      "@id": "https://www.yosef-portfolio.ru/",
+      "url": "https://www.yosef-portfolio.ru/",
+      "telephone": "+420XXXXXXXXX",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Прага",
+        "streetAddress": "Prague",
+        "addressLocality": "Prague",
+        "addressRegion": "Prague",
+        "postalCode": "110 00",
         "addressCountry": "CZ"
       },
-      "url": "https://www.yosef-portfolio.ru/",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.0755,
+        "longitude": 14.4378
+      },
+      "areaServed": ["CZ", "EU"],
+      "priceRange": "$$",
       "sameAs": [
-        "https://t.me/beckerman979",
-        "https://www.linkedin.com/in/iusifmamedov/",
-        "https://github.com/Iusif797"
+        "https://github.com/yosef-mamedov",
+        "https://www.linkedin.com/in/yosef-mamedov",
+        "https://t.me/yosef_mamedov"
       ]
     }
     </script>
 
-    <!-- Мета-тег для верификации Google -->
-    <meta name="google-site-verification" content="Eb9MsULZK-O7D0MA8bdfs7Rdjm0jPwZtrD4lmHyPoks" />
-    <meta name="google-site-verification" content="googleaa6daa15c4dd3a21.html" />
-
-    <!-- Иконки для Apple и манифест -->
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon2.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-    <!-- Заголовок страницы с упоминанием Праги -->
-    <title>Веб-разработчик в Праге | Юсиф Мамедов</title>
+  <!-- Дополнительная разметка для веб-разработчика -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Юсиф Мамедов",
+      "jobTitle": "Веб-разработчик",
+      "description": "Профессиональный веб-разработчик в Праге, специализирующийся на создании современных веб-сайтов и приложений",
+      "image": "%PUBLIC_URL%/profile-image.jpg",
+      "url": "https://www.yosef-portfolio.ru/",
+      "sameAs": [
+        "https://github.com/yosef-mamedov",
+        "https://www.linkedin.com/in/yosef-mamedov",
+        "https://t.me/yosef_mamedov"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance Web Developer"
+      },
+      "knowsLanguage": ["ru", "en", "he", "cs"],
+      "knowsAbout": [
+        "Web Development",
+        "React",
+        "JavaScript",
+        "Node.js",
+        "UI/UX Design",
+        "Responsive Design",
+        "SEO Optimization"
+      ]
+    }
+    </script>
 </head>
+
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBBZGGTS"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <noscript>Вам нужно включить JavaScript, чтобы запустить это приложение.</noscript>
-    <div id="root"></div>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBBZGGTS" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <noscript>Вам нужно включить JavaScript, чтобы запустить это приложение.</noscript>
+  <div id="root"></div>
 </body>
+
 </html>

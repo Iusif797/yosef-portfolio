@@ -39,6 +39,9 @@ import RentCar from "./assets/rent-car.png";
 import VisitCard from "./assets/visit-card.png";
 import PortfolioIcon from "./assets/portfolio-icon.png";
 import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png";
+import CafeProject from "../src/assets/cafe-project.png";
+import BaceryProject from "../src/assets/bacery-project.png";
+import TeonaLending from "../src/assets/teona-lending.png";
 
 // Переводы
 const translations = {
@@ -81,6 +84,15 @@ const translations = {
       castaweyWebsite: "Сайт Castawey",
       castaweyWebsiteDescription:
         "Сайт Castawey.netlify.app представляет собой современную платформу для демонстрации услуг компании Castawey. Включает портфолио, контактную информацию и интерактивные элементы для взаимодействия с пользователями.",
+      cafeProject: "Кафе-проект",
+      cafeProjectDescription:
+        "Современный сайт для уютного кафе с интерактивным меню, системой бронирования столиков и стильным дизайном в скандинавском стиле.",
+      baceryProject: "Пекарня-проект",
+      baceryProjectDescription:
+        "Инновационный веб-сайт пекарни с каталогом продукции, онлайн-заказами и красивыми анимациями выпечки.",
+      teonaProject: "Проект Теона",
+      teonaProjectDescription:
+        "Элегантный лендинг для бренда косметики с плавными анимациями, каталогом продукции и системой онлайн-консультаций.",
     },
     pricing: {
       pricing: "Цены",
@@ -180,7 +192,7 @@ const translations = {
     title: "Yosef Mamedov's Portfolio - Web Developer",
     description: "Description of your portfolio in English.",
     keywords: "web development, portfolio, Yosef Mamedov",
-    author: "Yosef Mamедov",
+    author: "Yosef Mamеdov",
     header: {
       studioTitle: "My Portfolio",
       aboutMe:
@@ -215,6 +227,15 @@ const translations = {
       castaweyWebsite: "Castawey Website",
       castaweyWebsiteDescription:
         "The Castawey.netlify.app website is a modern platform for showcasing Castawey company's services. It includes a portfolio, contact information, and interactive elements for user engagement.",
+      cafeProject: "Cafe Project",
+      cafeProjectDescription:
+        "A modern website for a cozy cafe featuring an interactive menu, table reservation system, and stylish Scandinavian design.",
+      baceryProject: "Bakery Project",
+      baceryProjectDescription:
+        "An innovative bakery website with product catalog, online ordering, and beautiful pastry animations.",
+      teonaProject: "Teona Project",
+      teonaProjectDescription:
+        "An elegant landing page for a cosmetics brand with smooth animations, product catalog, and online consultation system.",
     },
     pricing: {
       pricing: "Pricing",
@@ -349,6 +370,15 @@ const translations = {
       castaweyWebsite: "אתר Castawey",
       castaweyWebsiteDescription:
         "אתר Castawey.netlify.app הוא פלטפורמה מודרנית להצגת שירותי חברת Castawey. כולל פורטפוליו, מידע ליצירת קשר ואלמנטים אינטראקטיביים לאינטראקציה עם המשתמשים.",
+      cafeProject: "פרויקט בית קפה",
+      cafeProjectDescription:
+        "אתר מודרני לבית קפה אינטימי עם תפריט אינטראקטיבי, מערכת הזמנת שולחנות ועיצוב סקנדינבי מסוגנן.",
+      baceryProject: "פרויקט מאפייה",
+      baceryProjectDescription:
+        "אתר חדשני למאפייה עם קטלוג מוצרים, הזמנות אונליין ואנימציות יפות של מאפים.",
+      teonaProject: "פרויקט תאונה",
+      teonaProjectDescription:
+        "דף נחיתה אלגנטי למותג קוסמטיקה עם אנימציות חלקות, קטלוג מוצרים ומערכת ייעוץ אונליין.",
     },
     pricing: {
       pricing: "מחירים",
@@ -402,8 +432,7 @@ const translations = {
       list: [
         {
           name: "דניאל",
-          feedback:
-            "עבודה מקצועית ומהירה. ממליץ בחום!",
+          feedback: "עבודה מקצועית ומהירה. ממליץ בחום!",
         },
         {
           name: "חברת FutureTech",
@@ -412,8 +441,7 @@ const translations = {
         },
         {
           name: "אלכסנדר",
-          feedback:
-            "הזמנתי עמוד נחיתה, התוצאה עלתה על הציפיות. אפנה שוב!",
+          feedback: "הזמנתי עמוד נחיתה, התוצאה עלתה על הציפיות. אפנה שוב!",
         },
       ],
     },
@@ -538,8 +566,7 @@ function App() {
   // --- Telegram ---
   const sendToTelegram = (message) => {
     // Вставляем ваш реальный токен
-    const telegramBotToken =
-      "7024597156:AAGG4sChJgJ8PZQyISPkqbUFZ6KH2zJC1XE";
+    const telegramBotToken = "7024597156:AAGG4sChJgJ8PZQyISPkqbUFZ6KH2zJC1XE";
     // Чат ID:
     const telegramChatId = "1077514837";
 
@@ -915,6 +942,27 @@ function App() {
                 description:
                   translations[language].projects.castaweyWebsiteDescription,
                 link: "https://castawey.netlify.app/",
+              },
+              {
+                img: CafeProject,
+                alt: "Cafe Project",
+                title: translations[language].projects.cafeProject,
+                description:
+                  translations[language].projects.cafeProjectDescription,
+              },
+              {
+                img: BaceryProject,
+                alt: "Bakery Project",
+                title: translations[language].projects.baceryProject,
+                description:
+                  translations[language].projects.baceryProjectDescription,
+              },
+              {
+                img: TeonaLending,
+                alt: "Teona Project",
+                title: translations[language].projects.teonaProject,
+                description:
+                  translations[language].projects.teonaProjectDescription,
               },
             ].map((project, index) => (
               <div className="project-item" key={index}>
