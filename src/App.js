@@ -46,19 +46,6 @@ import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png";
 import CafeProject from "./assets/cafe-project.png";
 import BaceryProject from "./assets/bacery-project.png";
 import TeonaLending from "./assets/teona-lending.png";
-import DJBeckerman from "./assets/DJ-beckerman.png";
-import G3 from "./assets/G-3.jpg";
-import BusinessCard from "./assets/business-card.png";
-import BusinessCard2 from "./assets/business-card2.png";
-import BusinessCard3 from "./assets/business-card3.png";
-import BusinessCard7 from "./assets/business-card7.png";
-import RentCar from "./assets/rent-car.png";
-import VisitCard from "./assets/visit-card.png";
-import PortfolioIcon from "./assets/portfolio-icon.png";
-import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png";
-import CafeProject from "./assets/cafe-project.png";
-import BaceryProject from "./assets/bacery-project.png";
-import TeonaLending from "./assets/teona-lending.png";
 
 // Переводы
 const translations = {
