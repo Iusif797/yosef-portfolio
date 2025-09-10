@@ -19,6 +19,11 @@ import {
   FaTimes,
   FaLightbulb,
   FaQuoteLeft,
+  FaRocket,
+  FaCode,
+  FaPalette,
+  FaSearch,
+  FaCheckCircle,
 } from "react-icons/fa";
 import ReactDOM from "react-dom";
 
@@ -690,17 +695,11 @@ function App() {
 
   return (
     <Suspense fallback="Loading...">
-      {/* Фон всего приложения */}
+      {/* Анимированный фон */}
+      <div className="animated-background"></div>
+      
       <div
         className="App"
-        style={{
-          backgroundImage: `url(${BestBackground})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          // Закрепляем фон за всем окном
-          backgroundAttachment: "fixed",
-        }}
       >
         <Helmet
           htmlAttributes={{
@@ -852,8 +851,13 @@ function App() {
 
         {/* Header */}
         <header className="App-header">
-          <div className="header-decorative decoration-4"></div>
-          <div className="header-decorative decoration-5"></div>
+          {/* Плавающие декоративные элементы */}
+          <div className="floating-shapes">
+            <div className="shape"></div>
+            <div className="shape"></div>
+            <div className="shape"></div>
+          </div>
+          
           <div className="header-content">
             <img
               src={PortfolioIcon}
@@ -874,9 +878,9 @@ function App() {
           </div>
         </header>
 
-        {/* Projects (с "псевдо-параллаксом" на CSS) */}
-        <section className="projects-section">
-          <h2>{translations[language].projects.myProjects}</h2>
+        {/* Projects */}
+        <section className="projects-section section">
+          <h2 className="section-title">{translations[language].projects.myProjects}</h2>
           <div className="projects-container">
             {[
               {
@@ -979,6 +983,7 @@ function App() {
                       />
                     </div>
                     <div className="project-back">
+                      <h3>{project.title}</h3>
                       <p>{project.description}</p>
                       {project.link && (
                         <a
@@ -1003,8 +1008,8 @@ function App() {
         </section>
 
         {/* Цены */}
-        <section className="pricing-section">
-          <h2>{translations[language].pricing.pricing}</h2>
+        <section className="pricing-section section">
+          <h2 className="section-title">{translations[language].pricing.pricing}</h2>
           <div className="pricing-cards">
             <div className="pricing-card">
               <FaMobileAlt className="pricing-icon" />
@@ -1031,22 +1036,26 @@ function App() {
         </section>
 
         {/* Как я работаю */}
-        <section className="how-i-work-section">
-          <h2>{translations[language].howIWork.title}</h2>
+        <section className="how-i-work-section section">
+          <h2 className="section-title">{translations[language].howIWork.title}</h2>
           <div className="steps-container">
-            {translations[language].howIWork.steps.map((step, index) => (
+            {translations[language].howIWork.steps.map((step, index) => {
+              const icons = [FaSearch, FaPalette, FaCode, FaCheckCircle, FaRocket];
+              const IconComponent = icons[index] || FaLightbulb;
+              return (
               <div className="step-card" key={index}>
-                <FaLightbulb className="step-icon" />
+                <IconComponent className="step-icon" />
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
               </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
         {/* Навыки */}
-        <section className="skills">
-          <h2>{translations[language].skills.skills}</h2>
+        <section className="skills section">
+          <h2 className="section-title">{translations[language].skills.skills}</h2>
           <ul>
             {translations[language].skills.list.map((skill, index) => (
               <li key={index}>{skill}</li>
@@ -1055,8 +1064,8 @@ function App() {
         </section>
 
         {/* Отзывы */}
-        <section className="testimonials-section">
-          <h2>{translations[language].testimonials.title}</h2>
+        <section className="testimonials-section section">
+          <h2 className="section-title">{translations[language].testimonials.title}</h2>
           <Slider {...testimonialsSliderSettings}>
             {translations[language].testimonials.list.map((item, i) => (
               <div className="testimonial-card" key={i}>
@@ -1069,8 +1078,8 @@ function App() {
         </section>
 
         {/* Контакты */}
-        <section className="contact" id="contact-section">
-          <h2>{translations[language].contact.contact}</h2>
+        <section className="contact section" id="contact-section">
+          <h2 className="section-title">{translations[language].contact.contact}</h2>
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="form-group">
               <input
