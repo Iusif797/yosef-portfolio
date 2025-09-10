@@ -148,6 +148,11 @@ body[dir="rtl"] {
   box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
 }
 
+.language-flag {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
 .language-code {
   font-size: 0.9rem;
   font-weight: 600;
@@ -194,6 +199,9 @@ body[dir="rtl"] {
   transition: var(--transition);
   font-family: var(--font-secondary);
   text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .language-option-button:hover {
@@ -1273,6 +1281,7 @@ body[dir="rtl"] .language-dropdown {
 
 body[dir="rtl"] .language-option-button {
   text-align: right;
+  flex-direction: row-reverse;
 }
 
 body[dir="rtl"] .contact-button-top .arrow,
@@ -1281,6 +1290,10 @@ body[dir="rtl"] .footer-button .arrow {
   margin-right: 0.75rem;
 }
 
+body[dir="rtl"] .language-flag {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
 /* Дополнительные эффекты наведения */
 .project-item:hover {
   z-index: 10;

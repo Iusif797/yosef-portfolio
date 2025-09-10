@@ -868,6 +868,7 @@ function App() {
             aria-haspopup="listbox"
             aria-expanded={dropdownOpen}
           >
+            <span className="language-flag">{translations[language].flag}</span>
             <span className="language-code">
               {translations[language].languageName}
             </span>
@@ -882,8 +883,9 @@ function App() {
                     role="option"
                     aria-selected={language === lng}
                   >
+                    <span className="language-flag">{translations[lng].flag}</span>
                     <span className="language-option-code">
-                      {lng.toUpperCase()} - {translations[lng].languageName}
+                      {translations[lng].languageName}
                     </span>
                   </button>
                 </li>
