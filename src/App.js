@@ -692,14 +692,89 @@ function App() {
     ],
   };
 
+  // Массив проектов
+  const projectsData = [
+    {
+      img: DJBeckerman,
+      alt: "DJ Beckerman Website",
+      title: translations[language].projects.djBeckermanWebsite,
+      description: translations[language].projects.djBeckermanWebsiteDescription,
+    },
+    {
+      img: G3,
+      alt: "G-3 Project",
+      title: translations[language].projects.g3Project,
+      description: translations[language].projects.g3ProjectDescription,
+    },
+    {
+      img: BusinessCard,
+      alt: "Business Card 1",
+      title: translations[language].projects.businessCard1,
+      description: translations[language].projects.businessCard1Description,
+    },
+    {
+      img: BusinessCard2,
+      alt: "Business Card 2",
+      title: translations[language].projects.businessCard2,
+      description: translations[language].projects.businessCard2Description,
+    },
+    {
+      img: BusinessCard3,
+      alt: "Business Card 3",
+      title: translations[language].projects.businessCard3,
+      description: translations[language].projects.businessCard3Description,
+    },
+    {
+      img: BusinessCard7,
+      alt: "Business Card 7",
+      title: translations[language].projects.businessCard7,
+      description: translations[language].projects.businessCard7Description,
+    },
+    {
+      img: RentCar,
+      alt: "Rent Car Application",
+      title: translations[language].projects.rentCarApplication,
+      description: translations[language].projects.rentCarApplicationDescription,
+    },
+    {
+      img: VisitCard,
+      alt: "Visit Card Project",
+      title: translations[language].projects.visitCardProject,
+      description: translations[language].projects.visitCardProjectDescription,
+    },
+    {
+      img: MacbookAirCastawey,
+      alt: "Castawey Website",
+      title: translations[language].projects.castaweyWebsite,
+      description: translations[language].projects.castaweyWebsiteDescription,
+      link: "https://castawey.netlify.app/",
+    },
+    {
+      img: CafeProject,
+      alt: "Cafe Project",
+      title: translations[language].projects.cafeProject,
+      description: translations[language].projects.cafeProjectDescription,
+    },
+    {
+      img: BaceryProject,
+      alt: "Bakery Project",
+      title: translations[language].projects.baceryProject,
+      description: translations[language].projects.baceryProjectDescription,
+    },
+    {
+      img: TeonaLending,
+      alt: "Teona Project",
+      title: translations[language].projects.teonaProject,
+      description: translations[language].projects.teonaProjectDescription,
+    },
+  ];
+
   return (
     <Suspense fallback="Loading...">
       {/* Анимированный фон */}
       <div className="animated-background"></div>
       
-      <div
-        className="App"
-      >
+      <div className="App">
         <Helmet
           htmlAttributes={{
             lang: language === "he" ? "he" : language === "ru" ? "ru" : "en",
@@ -881,97 +956,9 @@ function App() {
         <section className="projects-section section">
           <h2 className="section-title">{translations[language].projects.myProjects}</h2>
           <div className="projects-container">
-            {[
-              {
-                img: DJBeckerman,
-                alt: "DJ Beckerman Website",
-                title: translations[language].projects.djBeckermanWebsite,
-                description:
-                  translations[language].projects.djBeckermanWebsiteDescription,
-              },
-              {
-                img: G3,
-                alt: "G-3 Project",
-                title: translations[language].projects.g3Project,
-                description:
-                  translations[language].projects.g3ProjectDescription,
-              },
-              {
-                img: BusinessCard,
-                alt: "Business Card 1",
-                title: translations[language].projects.businessCard1,
-                description:
-                  translations[language].projects.businessCard1Description,
-              },
-              {
-                img: BusinessCard2,
-                alt: "Business Card 2",
-                title: translations[language].projects.businessCard2,
-                description:
-                  translations[language].projects.businessCard2Description,
-              },
-              {
-                img: BusinessCard3,
-                alt: "Business Card 3",
-                title: translations[language].projects.businessCard3,
-                description:
-                  translations[language].projects.businessCard3Description,
-              },
-              {
-                img: BusinessCard7,
-                alt: "Business Card 7",
-                title: translations[language].projects.businessCard7,
-                description:
-                  translations[language].projects.businessCard7Description,
-              },
-              {
-                img: RentCar,
-                alt: "Rent Car Application",
-                title: translations[language].projects.rentCarApplication,
-                description:
-                  translations[language].projects.rentCarApplicationDescription,
-              },
-              {
-                img: VisitCard,
-                alt: "Visit Card Project",
-                title: translations[language].projects.visitCardProject,
-                description:
-                  translations[language].projects.visitCardProjectDescription,
-              },
-              {
-                img: MacbookAirCastawey,
-                alt: "Castawey Website",
-                title: translations[language].projects.castaweyWebsite,
-                description:
-                  translations[language].projects.castaweyWebsiteDescription,
-                link: "https://castawey.netlify.app/",
-              },
-              {
-                img: CafeProject,
-                alt: "Cafe Project",
-                title: translations[language].projects.cafeProject,
-                description:
-                  translations[language].projects.cafeProjectDescription,
-              },
-              {
-                img: BaceryProject,
-                alt: "Bakery Project",
-                title: translations[language].projects.baceryProject,
-                description:
-                  translations[language].projects.baceryProjectDescription,
-              },
-              {
-                img: TeonaLending,
-                alt: "Teona Project",
-                title: translations[language].projects.teonaProject,
-                description:
-                  translations[language].projects.teonaProjectDescription,
-              },
-            ].map((project, index) => (
+            {projectsData.map((project, index) => (
               <div className="project-item" key={index}>
-                <div
-                  className="floating-container"
-                >
+                <div className="floating-container">
                   <div className="project-inner">
                     <div className="project-front">
                       <img
