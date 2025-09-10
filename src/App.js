@@ -35,8 +35,19 @@ import "slick-carousel/slick/slick-theme.css";
 // Импорт локальной иконки портфолио
 import PortfolioIcon from "./assets/portfolio-icon.png";
 
-// Базовый URL для изображений с GitHub
-const GITHUB_IMAGES_BASE = "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets";
+// Импорт всех изображений проектов
+import DJBeckermanImg from "./assets/DJ-beckerman.png";
+import G3ProjectImg from "./assets/G-3.jpg";
+import BusinessCard1Img from "./assets/business-card.png";
+import BusinessCard2Img from "./assets/business-card2.png";
+import BusinessCard3Img from "./assets/business-card3.png";
+import BusinessCard7Img from "./assets/business-card7.png";
+import RentCarImg from "./assets/rent-car.png";
+import VisitCardImg from "./assets/visit-card.png";
+import CastaweyImg from "./assets/Macbook-Air-castawey.netlify.app.png";
+import CafeProjectImg from "./assets/cafe-project.png";
+import BakeryProjectImg from "./assets/bacery-project.png";
+import TeonaProjectImg from "./assets/teona-lending.png";
 
 // Переводы
 const translations = {
@@ -686,74 +697,74 @@ function App() {
   // Массив проектов
   const projectsData = [
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/00ff88?text=DJ+Beckerman",
+      img: DJBeckermanImg,
       alt: "DJ Beckerman Website",
       title: translations[language].projects.djBeckermanWebsite,
       description: translations[language].projects.djBeckermanWebsiteDescription,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/ff0080?text=G-3+Project",
+      img: G3ProjectImg,
       alt: "G-3 Project",
       title: translations[language].projects.g3Project,
       description: translations[language].projects.g3ProjectDescription,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/0080ff?text=Business+Card+1",
+      img: BusinessCard1Img,
       alt: "Business Card 1",
       title: translations[language].projects.businessCard1,
       description: translations[language].projects.businessCard1Description,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/00ff88?text=Business+Card+2",
+      img: BusinessCard2Img,
       alt: "Business Card 2",
       title: translations[language].projects.businessCard2,
       description: translations[language].projects.businessCard2Description,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/ff0080?text=Business+Card+3",
+      img: BusinessCard3Img,
       alt: "Business Card 3",
       title: translations[language].projects.businessCard3,
       description: translations[language].projects.businessCard3Description,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/0080ff?text=Business+Card+7",
+      img: BusinessCard7Img,
       alt: "Business Card 7",
       title: translations[language].projects.businessCard7,
       description: translations[language].projects.businessCard7Description,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/00ff88?text=Rent+Car+App",
+      img: RentCarImg,
       alt: "Rent Car Application",
       title: translations[language].projects.rentCarApplication,
       description: translations[language].projects.rentCarApplicationDescription,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/ff0080?text=Visit+Card",
+      img: VisitCardImg,
       alt: "Visit Card Project",
       title: translations[language].projects.visitCardProject,
       description: translations[language].projects.visitCardProjectDescription,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/0080ff?text=Castawey+Website",
+      img: CastaweyImg,
       alt: "Castawey Website",
       title: translations[language].projects.castaweyWebsite,
       description: translations[language].projects.castaweyWebsiteDescription,
       link: "https://castawey.netlify.app/",
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/00ff88?text=Cafe+Project",
+      img: CafeProjectImg,
       alt: "Cafe Project",
       title: translations[language].projects.cafeProject,
       description: translations[language].projects.cafeProjectDescription,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/ff0080?text=Bakery+Project",
+      img: BakeryProjectImg,
       alt: "Bakery Project",
       title: translations[language].projects.baceryProject,
       description: translations[language].projects.baceryProjectDescription,
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/0080ff?text=Teona+Project",
+      img: TeonaProjectImg,
       alt: "Teona Project",
       title: translations[language].projects.teonaProject,
       description: translations[language].projects.teonaProjectDescription,
@@ -977,13 +988,6 @@ function App() {
                           className="project-link"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {language === "he"
-                            ? "בקר באתר"
-                            : language === "en"
-                            ? "Visit Website"
-                            : "Посетить сайт"}
-                        </a>
-                      )}
                     </div>
                   </div>
                 </div>
