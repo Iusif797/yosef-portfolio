@@ -33,7 +33,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Импорт локальной иконки портфолио
-import PortfolioIcon from "./assets/portfolio-icon.png";
+import PortfolioIcon from "./assets/my-portfolio-icon.png";
 
 // Импорт всех изображений проектов
 import DJBeckermanImg from "./assets/DJ-beckerman.png";
