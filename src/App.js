@@ -32,21 +32,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Импорт изображений проектов
-import DJBeckerman from "./assets/DJ-beckerman.png";
-import G3 from "./assets/G-3.jpg";
-import BusinessCard from "./assets/business-card.png";
-import BusinessCard2 from "./assets/business-card2.png";
-import BusinessCard3 from "./assets/business-card3.png";
-import BusinessCard7 from "./assets/business-card7.png";
-import RentCar from "./assets/rent-car.png";
-import VisitCard from "./assets/visit-card.png";
-import PortfolioIcon from "./assets/portfolio-icon.png";
-import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png";
-import CafeProject from "./assets/cafe-project.png";
-import BaceryProject from "./assets/bacery-project.png";
-import TeonaLending from "./assets/teona-lending.png";
+// Базовый URL для изображений с GitHub
+const GITHUB_IMAGES_BASE = "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets";
 
+// Импорт локальной иконки портфолио
+import PortfolioIcon from "./assets/portfolio-icon.png";
 // Переводы
 const translations = {
   ru: {
@@ -695,74 +685,74 @@ function App() {
   // Массив проектов
   const projectsData = [
     {
-      img: DJBeckerman,
+      img: `${GITHUB_IMAGES_BASE}/DJ-beckerman.png`,
       alt: "DJ Beckerman Website",
       title: translations[language].projects.djBeckermanWebsite,
       description: translations[language].projects.djBeckermanWebsiteDescription,
     },
     {
-      img: G3,
+      img: `${GITHUB_IMAGES_BASE}/G-3.jpg`,
       alt: "G-3 Project",
       title: translations[language].projects.g3Project,
       description: translations[language].projects.g3ProjectDescription,
     },
     {
-      img: BusinessCard,
+      img: `${GITHUB_IMAGES_BASE}/business-card.png`,
       alt: "Business Card 1",
       title: translations[language].projects.businessCard1,
       description: translations[language].projects.businessCard1Description,
     },
     {
-      img: BusinessCard2,
+      img: `${GITHUB_IMAGES_BASE}/business-card2.png`,
       alt: "Business Card 2",
       title: translations[language].projects.businessCard2,
       description: translations[language].projects.businessCard2Description,
     },
     {
-      img: BusinessCard3,
+      img: `${GITHUB_IMAGES_BASE}/business-card3.png`,
       alt: "Business Card 3",
       title: translations[language].projects.businessCard3,
       description: translations[language].projects.businessCard3Description,
     },
     {
-      img: BusinessCard7,
+      img: `${GITHUB_IMAGES_BASE}/business-card7.png`,
       alt: "Business Card 7",
       title: translations[language].projects.businessCard7,
       description: translations[language].projects.businessCard7Description,
     },
     {
-      img: RentCar,
+      img: `${GITHUB_IMAGES_BASE}/rent-car.png`,
       alt: "Rent Car Application",
       title: translations[language].projects.rentCarApplication,
       description: translations[language].projects.rentCarApplicationDescription,
     },
     {
-      img: VisitCard,
+      img: `${GITHUB_IMAGES_BASE}/visit-card.png`,
       alt: "Visit Card Project",
       title: translations[language].projects.visitCardProject,
       description: translations[language].projects.visitCardProjectDescription,
     },
     {
-      img: MacbookAirCastawey,
+      img: `${GITHUB_IMAGES_BASE}/Macbook-Air-castawey.netlify.app.png`,
       alt: "Castawey Website",
       title: translations[language].projects.castaweyWebsite,
       description: translations[language].projects.castaweyWebsiteDescription,
       link: "https://castawey.netlify.app/",
     },
     {
-      img: CafeProject,
+      img: `${GITHUB_IMAGES_BASE}/cafe-project.png`,
       alt: "Cafe Project",
       title: translations[language].projects.cafeProject,
       description: translations[language].projects.cafeProjectDescription,
     },
     {
-      img: BaceryProject,
+      img: `${GITHUB_IMAGES_BASE}/bacery-project.png`,
       alt: "Bakery Project",
       title: translations[language].projects.baceryProject,
       description: translations[language].projects.baceryProjectDescription,
     },
     {
-      img: TeonaLending,
+      img: `${GITHUB_IMAGES_BASE}/teona-lending.png`,
       alt: "Teona Project",
       title: translations[language].projects.teonaProject,
       description: translations[language].projects.teonaProjectDescription,
