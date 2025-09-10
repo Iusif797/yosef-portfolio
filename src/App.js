@@ -44,9 +44,9 @@ import RentCar from "./assets/rent-car.png";
 import VisitCard from "./assets/visit-card.png";
 import PortfolioIcon from "./assets/portfolio-icon.png";
 import MacbookAirCastawey from "./assets/Macbook-Air-castawey.netlify.app.png";
-import CafeProject from "../src/assets/cafe-project.png";
-import BaceryProject from "../src/assets/bacery-project.png";
-import TeonaLending from "../src/assets/teona-lending.png";
+import CafeProject from "./assets/cafe-project.png";
+import BaceryProject from "./assets/bacery-project.png";
+import TeonaLending from "./assets/teona-lending.png";
 
 // Переводы
 const translations = {
