@@ -32,11 +32,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// Импорт локальной иконки портфолио
+import PortfolioIcon from "./assets/portfolio-icon.png";
+
 // Базовый URL для изображений с GitHub
 const GITHUB_IMAGES_BASE = "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets";
 
-// Импорт локальной иконки портфолио
-import PortfolioIcon from "./assets/portfolio-icon.png";
 // Переводы
 const translations = {
   ru: {
