@@ -686,74 +686,74 @@ function App() {
   // Массив проектов
   const projectsData = [
     {
-      img: `${GITHUB_IMAGES_BASE}/DJ-beckerman.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/DJ-beckerman.png",
       alt: "DJ Beckerman Website",
       title: translations[language].projects.djBeckermanWebsite,
       description: translations[language].projects.djBeckermanWebsiteDescription,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/G-3.jpg`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/G-3.jpg",
       alt: "G-3 Project",
       title: translations[language].projects.g3Project,
       description: translations[language].projects.g3ProjectDescription,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/business-card.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/business-card.png",
       alt: "Business Card 1",
       title: translations[language].projects.businessCard1,
       description: translations[language].projects.businessCard1Description,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/business-card2.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/business-card2.png",
       alt: "Business Card 2",
       title: translations[language].projects.businessCard2,
       description: translations[language].projects.businessCard2Description,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/business-card3.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/business-card3.png",
       alt: "Business Card 3",
       title: translations[language].projects.businessCard3,
       description: translations[language].projects.businessCard3Description,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/business-card7.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/business-card7.png",
       alt: "Business Card 7",
       title: translations[language].projects.businessCard7,
       description: translations[language].projects.businessCard7Description,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/rent-car.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/rent-car.png",
       alt: "Rent Car Application",
       title: translations[language].projects.rentCarApplication,
       description: translations[language].projects.rentCarApplicationDescription,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/visit-card.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/visit-card.png",
       alt: "Visit Card Project",
       title: translations[language].projects.visitCardProject,
       description: translations[language].projects.visitCardProjectDescription,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/Macbook-Air-castawey.netlify.app.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/Macbook-Air-castawey.netlify.app.png",
       alt: "Castawey Website",
       title: translations[language].projects.castaweyWebsite,
       description: translations[language].projects.castaweyWebsiteDescription,
       link: "https://castawey.netlify.app/",
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/cafe-project.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/cafe-project.png",
       alt: "Cafe Project",
       title: translations[language].projects.cafeProject,
       description: translations[language].projects.cafeProjectDescription,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/bacery-project.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/bacery-project.png",
       alt: "Bakery Project",
       title: translations[language].projects.baceryProject,
       description: translations[language].projects.baceryProjectDescription,
     },
     {
-      img: `${GITHUB_IMAGES_BASE}/teona-lending.png`,
+      img: "https://raw.githubusercontent.com/Iusif797/yosef-portfolio/main/src/assets/teona-lending.png",
       alt: "Teona Project",
       title: translations[language].projects.teonaProject,
       description: translations[language].projects.teonaProjectDescription,
@@ -957,6 +957,13 @@ function App() {
                         alt={project.alt}
                         className="project-screenshot"
                         onClick={() => openModal(project.img)}
+                        onError={(e) => {
+                          console.error('Image failed to load:', project.img);
+                          e.target.style.display = 'none';
+                        }}
+                        onLoad={() => {
+                          console.log('Image loaded successfully:', project.img);
+                        }}
                       />
                     </div>
                     <div className="project-back">
