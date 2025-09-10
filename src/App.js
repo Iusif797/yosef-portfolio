@@ -972,7 +972,6 @@ function App() {
               <div className="project-item" key={index}>
                 <div
                   className="floating-container"
-                  onClick={() => openModal(project.img)}
                 >
                   <div className="project-inner">
                     <div className="project-front">
@@ -980,6 +979,7 @@ function App() {
                         src={project.img}
                         alt={project.alt}
                         className="project-screenshot"
+                        onClick={() => openModal(project.img)}
                       />
                     </div>
                     <div className="project-back">
@@ -991,6 +991,7 @@ function App() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="project-link"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           {language === "he"
                             ? "בקר באתר"
