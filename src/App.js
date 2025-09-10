@@ -32,8 +32,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Импорт изображений (no parallax-bg.jpg!)
-import BestBackground from "./assets/best-background.jpg";
+// Импорт изображений проектов
 import DJBeckerman from "./assets/DJ-beckerman.png";
 import G3 from "./assets/G-3.jpg";
 import BusinessCard from "./assets/business-card.png";
