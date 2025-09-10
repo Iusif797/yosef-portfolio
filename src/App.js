@@ -988,6 +988,9 @@ function App() {
                           className="project-link"
                           onClick={(e) => e.stopPropagation()}
                         >
+                          Посетить сайт
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
