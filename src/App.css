@@ -441,7 +441,8 @@ body[dir="rtl"] {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotateY(0deg);
 }
 
 .project-item:hover .project-inner {
@@ -466,11 +467,23 @@ body[dir="rtl"] {
 }
 
 .project-front {
+  transform: rotateY(0deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--card-background);
   overflow: hidden;
+}
+
+.project-back {
+  transform: rotateY(180deg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--glass-background);
+  backdrop-filter: blur(20px);
 }
 
 .project-screenshot {
@@ -486,17 +499,6 @@ body[dir="rtl"] {
   transform: scale(1.1);
 }
 
-.project-back {
-  transform: rotateY(180deg);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: var(--glass-background);
-  backdrop-filter: blur(20px);
-}
 
 .project-back h3 {
   font-size: 1.5rem;
