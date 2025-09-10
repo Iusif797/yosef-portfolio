@@ -969,11 +969,16 @@ function App() {
                         className="project-screenshot"
                         onClick={() => openModal(project.img)}
                         onError={(e) => {
-                          console.error('Image failed to load:', project.img);
-                          e.target.style.display = 'none';
+                          console.error('❌ Image failed to load:', project.img);
+                          console.error('Error details:', e);
+                          e.target.style.backgroundColor = '#ff0080';
+                          e.target.style.display = 'flex';
+                          e.target.style.alignItems = 'center';
+                          e.target.style.justifyContent = 'center';
+                          e.target.innerHTML = `<div style="color: white; text-align: center; padding: 20px;">❌<br/>Image not found<br/>${project.title}</div>`;
                         }}
                         onLoad={() => {
-                          console.log('Image loaded successfully:', project.img);
+                          console.log('✅ Image loaded successfully:', project.img);
                         }}
                       />
                     </div>
