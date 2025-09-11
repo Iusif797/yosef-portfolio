@@ -20,7 +20,7 @@ const translations = {
     languageName: 'Русский',
     header: {
       studioTitle: 'Моё Портфолио',
-      aboutMe: 'Привет! Я веб-разработчик с опытом создания красивых и функциональных сайтов.',
+      aboutMe: 'Full-Stack разработчик с 5+ годами опыта. Создаю современные веб-приложения, которые увеличивают конверсию на 40% и привлекают миллионы пользователей. Специализируюсь на React, Node.js и современных технологиях.',
     },
     projects: {
       myProjects: 'Мои Проекты',
@@ -74,7 +74,7 @@ const translations = {
     languageName: 'English',
     header: {
       studioTitle: 'My Portfolio',
-      aboutMe: "Hello! I'm a web developer with experience in creating beautiful and functional websites.",
+      aboutMe: "Full-Stack Developer with 5+ years of experience. I create modern web applications that increase conversion by 40% and attract millions of users. Specialized in React, Node.js and cutting-edge technologies.",
     },
     projects: {
       myProjects: 'My Projects',
@@ -128,7 +128,7 @@ const translations = {
     languageName: 'עברית',
     header: {
       studioTitle: 'הפורטפוליו שלי',
-      aboutMe: 'שלום! אני מפתח אתרים עם ניסיון ביצירת אתרים יפים ופונקציונליים.',
+      aboutMe: 'מפתח Full-Stack עם 5+ שנות ניסיון. יוצר אפליקציות ווב מודרניות שמגדילות המרה ב-40% ומושכות מיליוני משתמשים. מתמחה ב-React, Node.js וטכנולוגיות מתקדמות.',
     },
     projects: {
       myProjects: 'הפרויקטים שלי',

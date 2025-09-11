@@ -16,19 +16,19 @@ const ProjectsSection = ({ translations, language, onImageClick }) => {
       description: translations[language].projects.g3ProjectDescription,
     },
     {
-      image: 'https://images.unsplash.com/photo-1586717791821-3bd1f9e58e8c?w=600&h=400&fit=crop&auto=format&q=80',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7bf7042?w=600&h=400&fit=crop&auto=format&q=80',
       alt: 'Business Card 1',
       title: translations[language].projects.businessCard1,
       description: translations[language].projects.businessCard1Description,
     },
     {
-      image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop&auto=format&q=80',
+      image: 'https://images.unsplash.com/photo-1586717791821-3bd1f9e58e8c?w=600&h=400&fit=crop&auto=format&q=80',
       alt: 'Business Card 2',
       title: translations[language].projects.businessCard2,
       description: translations[language].projects.businessCard2Description,
     },
     {
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7bf7042?w=600&h=400&fit=crop&auto=format&q=80',
+      image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop&auto=format&q=80',
       alt: 'Business Card 3',
       title: translations[language].projects.businessCard3,
       description: translations[language].projects.businessCard3Description,
