@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 
 const ContactForm = ({ translations, language }) => {
   const [formData, setFormData] = useState({
@@ -74,73 +75,124 @@ const ContactForm = ({ translations, language }) => {
   return (
     <section className="contact-section" id="contact-section">
       <div className="container">
-        <h2 className="section-title">{translations[language].contact.contact}</h2>
-        <form onSubmit={handleSubmit} className="contact-form">
-          <div className="form-row">
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                placeholder={translations[language].contact.yourName}
-                className={`form-input ${errors.name ? 'error' : ''}`}
-                value={formData.name}
-                onChange={handleChange}
-              />
-              {errors.name && <span className="error-message">{errors.name}</span>}
-              }
+        <div className="contact-wrapper">
+          <div className="contact-info">
+            <h2 className="contact-title">{translations[language].contact.contact}</h2>
+            <p className="contact-subtitle">
+              {language === 'ru' ? 'Готов воплотить ваши идеи в жизнь' : 
+               language === 'en' ? 'Ready to bring your ideas to life' : 
+               'מוכן להביא את הרעיונות שלכם לחיים'}
+            </p>
+            
+            <div className="contact-details">
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <FaEnvelope />
+                </div>
+                <div className="contact-text">
+                  <span className="contact-label">Email</span>
+                  <a href="mailto:usifmamedov5@gmail.com" className="contact-value">
+                    usifmamedov5@gmail.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <FaPhone />
+                </div>
+                <div className="contact-text">
+                  <span className="contact-label">
+                    {language === 'ru' ? 'Телефон' : language === 'en' ? 'Phone' : 'טלפון'}
+                  </span>
+                  <a href="tel:+420773975235" className="contact-value">
+                    +420 773 975 235
+                  </a>
+                </div>
+              </div>
+              
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <FaMapMarkerAlt />
+                </div>
+                <div className="contact-text">
+                  <span className="contact-label">
+                    {language === 'ru' ? 'Локация' : language === 'en' ? 'Location' : 'מיקום'}
+                  </span>
+                  <span className="contact-value">
+                    {language === 'ru' ? 'Прага, Чехия' : language === 'en' ? 'Prague, Czech Republic' : 'פראג, צ\'כיה'}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                placeholder={translations[language].contact.yourEmail}
-                className={`form-input ${errors.email ? 'error' : ''}`}
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {errors.email && <span className="error-message">{errors.email}</span>}
-              }
+          </div>
+
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="form-grid">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder={translations[language].contact.yourName}
+                  className={`form-input ${errors.name ? 'error' : ''}`}
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                {errors.name && <span className="error-message">{errors.name}</span>}
+              </div>
+              
+              <div className="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder={translations[language].contact.yourEmail}
+                  className={`form-input ${errors.email ? 'error' : ''}`}
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                {errors.email && <span className="error-message">{errors.email}</span>}
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <select
-              name="projectType"
-              className="form-select"
-              value={formData.projectType}
-              onChange={handleChange}
-            >
-              <option value={language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт'}>
-                {translations[language].pricing.website}
-              </option>
-              <option value={language === 'he' ? 'אפליקציה ניידת' : language === 'en' ? 'Mobile Application' : 'Мобильное приложение'}>
-                {translations[language].pricing.mobileApp}
-              </option>
-              <option value={language === 'he' ? 'כרטיס ביקור' : language === 'en' ? 'Business Card' : 'Бизнес-визитка'}>
-                {translations[language].pricing.businessCard}
-              </option>
-            </select>
-          </div>
-          <div className="form-group">
-            <textarea
-              name="message"
-              placeholder={translations[language].contact.message}
-              className={`form-textarea ${errors.message ? 'error' : ''}`}
-              value={formData.message}
-              onChange={handleChange}
-              rows="5"
-            />
-            {errors.message && <span className="error-message">{errors.message}</span>}
-            }
-          </div>
-          <button type="submit" className="submit-button">
-            {translations[language].contact.send}
-            <svg className="submit-arrow" viewBox="0 0 24 24" fill="none">
-              <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </form>
+            
+            <div className="form-group">
+              <select
+                name="projectType"
+                className="form-select"
+                value={formData.projectType}
+                onChange={handleChange}
+              >
+                <option value={language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт'}>
+                  {translations[language].pricing.website}
+                </option>
+                <option value={language === 'he' ? 'אפליקציה ניידת' : language === 'en' ? 'Mobile Application' : 'Мобильное приложение'}>
+                  {translations[language].pricing.mobileApp}
+                </option>
+                <option value={language === 'he' ? 'כרטיס ביקור' : language === 'en' ? 'Business Card' : 'Бизнес-визитка'}>
+                  {translations[language].pricing.businessCard}
+                </option>
+              </select>
+            </div>
+            
+            <div className="form-group">
+              <textarea
+                name="message"
+                placeholder={translations[language].contact.message}
+                className={`form-textarea ${errors.message ? 'error' : ''}`}
+                value={formData.message}
+                onChange={handleChange}
+                rows="5"
+              />
+              {errors.message && <span className="error-message">{errors.message}</span>}
+            </div>
+            
+            <button type="submit" className="submit-button">
+              <FaPaperPlane />
+              {translations[language].contact.send}
+            </button>
+          </form>
+        </div>
+        
         {status && <div className="status-message">{status}</div>}
-        }
       </div>
     </section>
   );

@@ -138,27 +138,19 @@ body[dir="rtl"] {
 }
 
 .language-flag {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.5rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.language-flag img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 2px;
 }
 
 .language-code {
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+.language-name {
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .dropdown-arrow {
@@ -181,10 +173,10 @@ body[dir="rtl"] {
   border: 2px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-premium);
-  list-style: none;
   padding: 0.75rem 0;
-  min-width: 140px;
+  min-width: 180px;
   animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 @keyframes slideDown {
@@ -236,9 +228,12 @@ body[dir="rtl"] {
   transform: translateX(4px);
 }
 
-.language-option-code {
-  font-size: 0.875rem;
-  letter-spacing: 0.5px;
+.language-option-button .language-flag {
+  font-size: 1.2rem;
+}
+
+.language-option-button .language-name {
+  font-size: 0.9rem;
 }
 
 /* Премиум Header */
@@ -685,8 +680,7 @@ body[dir="rtl"] {
 /* Премиум цены */
 .pricing-section {
   padding: 10rem 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(30px);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
   position: relative;
 }
 
@@ -702,155 +696,367 @@ body[dir="rtl"] {
   pointer-events: none;
 }
 
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+.pricing-header {
+  text-align: center;
+  margin-bottom: 6rem;
   position: relative;
   z-index: 1;
 }
 
-.pricing-card {
-  background: rgba(24, 24, 27, 0.6);
-  backdrop-filter: blur(20px);
-  border: 2px solid var(--card-border);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
+.pricing-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
   position: relative;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(30px);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  box-shadow: var(--shadow);
   overflow: hidden;
-  height: 320px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 320px;
-  max-height: 320px;
+  min-height: 500px;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(251, 191, 36, 0.05));
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.pricing-card:hover::before {
+  opacity: 1;
 }
 
 .pricing-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-12px) scale(1.02);
   border-color: var(--accent);
-  box-shadow: 0 16px 48px rgba(99, 102, 241, 0.2);
+  box-shadow: var(--shadow-premium);
 }
 
 .pricing-card.popular {
   border-color: var(--gold);
-  background: rgba(24, 24, 27, 0.8);
-  border-width: 3px;
+  border-width: 2px;
+  transform: scale(1.05);
 }
 
 .pricing-card.popular:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(251, 191, 36, 0.3);
+  transform: translateY(-12px) scale(1.07);
+  box-shadow: var(--shadow-gold);
 }
 
 .popular-badge {
   position: absolute;
-  top: -12px;
+  top: -15px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--gold);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
   color: var(--primary);
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.4);
+  box-shadow: var(--shadow-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pricing-header-card {
+  margin-bottom: 2rem;
 }
 
 .pricing-icon {
-  font-size: 3rem;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  height: 60px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--accent);
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  color: white;
+  box-shadow: var(--shadow);
 }
 
 .pricing-card.popular .pricing-icon {
-  color: var(--gold);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
 }
 
 .pricing-title {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-family: var(--font-secondary);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .pricing-price {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 900;
   color: var(--accent);
   font-family: var(--font-secondary);
-  margin-top: auto;
+  margin-bottom: 2rem;
 }
 
 .pricing-card.popular .pricing-price {
   color: var(--gold);
 }
 
-/* Адаптивность для pricing */
-@media (max-width: 1024px) {
-  .pricing-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-grow: 1;
 }
 
-@media (max-width: 768px) {
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .pricing-card {
-    height: 280px;
-    min-height: 280px;
-    max-height: 280px;
-    padding: 2rem 1.5rem;
-  }
-  
-  .pricing-icon {
-    font-size: 2.5rem;
-    height: 50px;
-  }
-  
-  .pricing-title {
-    font-size: 1.2rem;
-    height: 50px;
-  }
-  
-  .pricing-price {
-    font-size: 1.8rem;
-  }
+.pricing-feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.feature-check {
+  color: var(--accent);
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.pricing-card.popular .feature-check {
+  color: var(--gold);
+}
+
+.pricing-button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition);
+}
+
+.pricing-button:hover::before {
+  left: 100%;
+}
+
+.pricing-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.pricing-card.popular .pricing-button {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+}
+
+.pricing-card.popular .pricing-button:hover {
+  box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+}
+
+/* Проекты */
+.projects-section {
+  padding: 10rem 0;
+  position: relative;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.projects-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 /* Премиум контакты */
 .contact-section {
   padding: 10rem 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  position: relative;
 }
 
-.contact-form {
-  max-width: 700px;
-  margin: 0 auto;
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.contact-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  font-family: var(--font-secondary);
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.contact-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.contact-details {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.form-row {
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(30px);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.contact-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-accent);
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-value {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact-value:hover {
+  color: var(--accent-light);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(30px);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-premium);
+}
+
+.form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -922,18 +1128,19 @@ body[dir="rtl"] {
   color: white;
   border: none;
   padding: 1.5rem 3rem;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   font-size: 1.2rem;
   font-weight: 700;
   font-family: var(--font-secondary);
   cursor: pointer;
   transition: var(--transition);
-  margin-top: 2rem;
+  margin-top: 1rem;
   box-shadow: var(--shadow-premium);
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .submit-button::before {
@@ -956,19 +1163,9 @@ body[dir="rtl"] {
   box-shadow: 0 40px 80px -12px rgba(99, 102, 241, 0.6);
 }
 
-.submit-arrow {
-  width: 24px;
-  height: 24px;
-  transition: var(--transition);
-}
-
-.submit-button:hover .submit-arrow {
-  transform: translateX(6px) rotate(45deg);
-}
-
 .status-message {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
   padding: 1.5rem;
   background: rgba(34, 197, 94, 0.1);
   border: 2px solid rgba(34, 197, 94, 0.3);
@@ -977,6 +1174,8 @@ body[dir="rtl"] {
   font-weight: 600;
   font-size: 1.1rem;
   box-shadow: var(--shadow);
+  grid-column: 1 / -1;
+}
 }
 
 /* Премиум модальное окно */
@@ -1071,6 +1270,16 @@ body[dir="rtl"] {
     right: 1rem;
   }
   
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1081,9 +1290,17 @@ body[dir="rtl"] {
     gap: 2rem;
   }
   
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .pricing-card {
+    min-height: 450px;
+    padding: 2.5rem 2rem;
+  }
+  
+  .pricing-card.popular {
+    transform: none;
+  }
+  
+  .pricing-card.popular:hover {
+    transform: translateY(-12px) scale(1.02);
   }
   
   .modal-close {
@@ -1136,11 +1353,30 @@ body[dir="rtl"] {
   }
   
   .pricing-card {
+    min-height: 400px;
     padding: 2rem 1.5rem;
   }
   
   .header-content {
     padding: 1.5rem;
+  }
+  
+  .contact-form {
+    padding: 2rem;
+  }
+  
+  .contact-details {
+    gap: 1.5rem;
+  }
+  
+  .contact-item {
+    padding: 1.25rem;
+  }
+  
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 }
 

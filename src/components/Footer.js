@@ -99,11 +99,11 @@ const Footer = ({ translations, language }) => {
                 <div className="contact-item">
                   <FaMapMarkerAlt className="contact-icon" />
                   <span>{t.location}</span>
-                </div>
+                        <a href="mailto:usifmamedov5@gmail.com">usifmamedov5@gmail.com</a>
                 <div className="contact-item">
                   <FaEnvelope className="contact-icon" />
                   <span>{t.email}</span>
-                </div>
+                        <a href="tel:+420773975235">+420 773 975 235</a>
                 <div className="contact-item">
                   <FaPhone className="contact-icon" />
                   <span>{t.phone}</span>
