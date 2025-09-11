@@ -5,10 +5,10 @@ const ProjectCard = ({ project, onImageClick }) => {
     <div className="project-card">
       <div className="project-image-container">
         <img
-          src={`https://images.unsplash.com/photo-${project.unsplashId}?w=600&h=400&fit=crop&auto=format`}
+          src={project.image}
           alt={project.alt}
           className="project-image"
-          onClick={() => onImageClick(`https://images.unsplash.com/photo-${project.unsplashId}?w=1200&h=800&fit=crop&auto=format`)}
+          onClick={() => onImageClick(project.image)}
           loading="lazy"
         />
         <div className="project-overlay">

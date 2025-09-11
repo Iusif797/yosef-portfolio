@@ -26,7 +26,11 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
   };
 
   const getFlag = (lng) => {
-    const flags = { ru: '🇷🇺', en: '🇺🇸', he: '🇮🇱' };
+    const flags = { 
+      ru: '🇷🇺', 
+      en: '🇺🇸', 
+      he: '🇮🇱' 
+    };
     return flags[lng] || '🌐';
   };
 
@@ -41,6 +45,9 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
         <span className="language-code">
           {translations[language].languageName}
         </span>
+        <svg className="dropdown-arrow" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </button>
       {dropdownOpen && (
         <ul className="language-dropdown">

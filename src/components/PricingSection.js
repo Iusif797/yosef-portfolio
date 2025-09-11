@@ -31,7 +31,6 @@ const PricingSection = ({ translations, language }) => {
             return (
               <div key={index} className={`pricing-card ${item.popular ? 'popular' : ''}`}>
                 {item.popular && <div className="popular-badge">Популярно</div>}
-                }
                 <div className="pricing-icon">
                   <IconComponent />
                 </div>
