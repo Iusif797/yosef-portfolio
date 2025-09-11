@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { RU, US, IL } from 'react-flag-kit';
+import { FlagIcon } from 'react-flag-kit';
 
 const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -27,12 +27,13 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
   };
 
   const getFlag = (lng) => {
-    const flagComponents = { 
-      ru: <RU size={20} />,
-      en: <US size={20} />, 
-      he: <IL size={20} />
+    const flagCodes = { 
+      ru: 'RU',
+      en: 'US', 
+      he: 'IL'
     };
-    return flagComponents[lng] || <span>🌐</span>;
+    const code = flagCodes[lng];
+    return code ? <FlagIcon code={code} size={20} /> : <span>🌐</span>;
   };
 
   return (
