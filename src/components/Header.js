@@ -5,7 +5,7 @@ const Header = ({ translations, language, scrollToContact }) => {
     <header className="header">
       <div className="header-background">
         <img 
-          src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1920&h=1080&fit=crop&auto=format&q=80" 
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1920&h=1080&fit=crop&auto=format&q=80" 
           alt="Portfolio Background" 
           className="header-bg-image"
         />
