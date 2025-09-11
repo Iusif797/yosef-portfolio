@@ -1,21 +1,21 @@
 import React from 'react';
-import { FaMobileAlt, FaLaptopCode, FaIdBadge } from 'react-icons/fa';
+import { DevicePhoneMobileIcon, ComputerDesktopIcon, IdentificationIcon } from '@heroicons/react/24/outline';
 
 const PricingSection = ({ translations, language }) => {
   const pricingData = [
     {
-      icon: FaLaptopCode,
+      icon: ComputerDesktopIcon,
       title: translations[language].pricing.website,
       price: translations[language].pricing.priceWebsite,
       popular: true,
     },
     {
-      icon: FaMobileAlt,
+      icon: DevicePhoneMobileIcon,
       title: translations[language].pricing.mobileApp,
       price: translations[language].pricing.priceMobileApp,
     },
     {
-      icon: FaIdBadge,
+      icon: IdentificationIcon,
       title: translations[language].pricing.businessCard,
       price: translations[language].pricing.priceBusinessCard,
     },
