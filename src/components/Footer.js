@@ -12,8 +12,8 @@ const Footer = ({ translations, language }) => {
       contactTitle: 'Контакты',
       followTitle: 'Социальные сети',
       location: 'Прага, Чехия',
-      email: 'yosef.mamedov@example.com',
-      phone: '+420 XXX XXX XXX',
+      email: 'usifmamedov5@gmail.com',
+      phone: '+420 773 975 235',
       rights: 'Все права защищены',
       services: [
         'Веб-разработка',
@@ -29,8 +29,8 @@ const Footer = ({ translations, language }) => {
       contactTitle: 'Contact',
       followTitle: 'Social Media',
       location: 'Prague, Czech Republic',
-      email: 'yosef.mamedov@example.com',
-      phone: '+420 XXX XXX XXX',
+      email: 'usifmamedov5@gmail.com',
+      phone: '+420 773 975 235',
       rights: 'All rights reserved',
       services: [
         'Web Development',
@@ -46,8 +46,8 @@ const Footer = ({ translations, language }) => {
       contactTitle: 'יצירת קשר',
       followTitle: 'רשתות חברתיות',
       location: 'פראג, צ\'כיה',
-      email: 'yosef.mamedov@example.com',
-      phone: '+420 XXX XXX XXX',
+      email: 'usifmamedov5@gmail.com',
+      phone: '+420 773 975 235',
       rights: 'כל הזכויות שמורות',
       services: [
         'פיתוח אתרים',
@@ -65,7 +65,6 @@ const Footer = ({ translations, language }) => {
       <div className="footer-content">
         <div className="container">
           <div className="footer-grid">
-            {/* About Section */}
             <div className="footer-section">
               <h3 className="footer-title">{t.aboutTitle}</h3>
               <p className="footer-text">{t.aboutText}</p>
@@ -82,7 +81,6 @@ const Footer = ({ translations, language }) => {
               </div>
             </div>
 
-            {/* Services Section */}
             <div className="footer-section">
               <h3 className="footer-title">{t.servicesTitle}</h3>
               <ul className="footer-list">
@@ -92,21 +90,20 @@ const Footer = ({ translations, language }) => {
               </ul>
             </div>
 
-            {/* Contact Section */}
             <div className="footer-section">
               <h3 className="footer-title">{t.contactTitle}</h3>
               <div className="footer-contact">
                 <div className="contact-item">
                   <FaMapMarkerAlt className="contact-icon" />
                   <span>{t.location}</span>
-                        <a href="mailto:usifmamedov5@gmail.com">usifmamedov5@gmail.com</a>
+                </div>
                 <div className="contact-item">
                   <FaEnvelope className="contact-icon" />
-                  <span>{t.email}</span>
-                        <a href="tel:+420773975235">+420 773 975 235</a>
+                  <a href="mailto:usifmamedov5@gmail.com">{t.email}</a>
+                </div>
                 <div className="contact-item">
                   <FaPhone className="contact-icon" />
-                  <span>{t.phone}</span>
+                  <a href="tel:+420773975235">{t.phone}</a>
                 </div>
               </div>
             </div>

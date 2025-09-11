@@ -1176,7 +1176,6 @@ body[dir="rtl"] {
   box-shadow: var(--shadow);
   grid-column: 1 / -1;
 }
-}
 
 /* Премиум модальное окно */
 .modal {
