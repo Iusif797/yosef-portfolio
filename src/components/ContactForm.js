@@ -87,7 +87,6 @@ const ContactForm = ({ translations, language }) => {
                 onChange={handleChange}
               />
               {errors.name && <span className="error-message">{errors.name}</span>}
-              }
             </div>
             <div className="form-group">
               <input
@@ -99,7 +98,6 @@ const ContactForm = ({ translations, language }) => {
                 onChange={handleChange}
               />
               {errors.email && <span className="error-message">{errors.email}</span>}
-              }
             </div>
           </div>
           <div className="form-group">
@@ -130,7 +128,6 @@ const ContactForm = ({ translations, language }) => {
               rows="5"
             />
             {errors.message && <span className="error-message">{errors.message}</span>}
-            }
           </div>
           <button type="submit" className="submit-button">
             {translations[language].contact.send}
@@ -140,7 +137,6 @@ const ContactForm = ({ translations, language }) => {
           </button>
         </form>
         {status && <div className="status-message">{status}</div>}
-        }
       </div>
     </section>
   );

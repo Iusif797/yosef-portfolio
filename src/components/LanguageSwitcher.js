@@ -28,7 +28,7 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
 
   const getFlag = (lng) => {
     const flagCodes = { 
-      ru: 'RU',
+      ru: 'BY', // Используем флаг Беларуси как более понятный для русского языка
       en: 'US', 
       he: 'IL'
     };
