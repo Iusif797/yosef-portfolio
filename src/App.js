@@ -4,11 +4,13 @@ import './App.css';
 
 // Компоненты
 import LanguageSwitcher from './components/LanguageSwitcher';
+import MobileMenu from './components/MobileMenu';
 import Header from './components/Header';
 import ProjectsSection from './components/ProjectsSection';
 import PricingSection from './components/PricingSection';
 import ContactForm from './components/ContactForm';
 import Modal from './components/Modal';
+import Footer from './components/Footer';
 
 // Переводы
 const translations = {
@@ -243,6 +245,12 @@ function App() {
           translations={translations}
         />
 
+        <MobileMenu
+          translations={translations}
+          language={language}
+          scrollToContact={scrollToContact}
+        />
+
         <Header
           translations={translations}
           language={language}
@@ -250,17 +258,24 @@ function App() {
         />
 
         <ProjectsSection
+          id="projects-section"
           translations={translations}
           language={language}
           onImageClick={openModal}
         />
 
         <PricingSection
+          id="pricing-section"
           translations={translations}
           language={language}
         />
 
         <ContactForm
+          translations={translations}
+          language={language}
+        />
+
+        <Footer
           translations={translations}
           language={language}
         />

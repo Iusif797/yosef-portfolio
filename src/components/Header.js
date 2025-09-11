@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = ({ translations, language, scrollToContact }) => {
   return (
-    <header className="header">
+    <header className="header" id="header">
       <div className="header-background">
         <img 
           src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&auto=format&q=90" 

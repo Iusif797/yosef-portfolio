@@ -22,7 +22,7 @@ const PricingSection = ({ translations, language }) => {
   ];
 
   return (
-    <section className="pricing-section">
+    <section className="pricing-section" id="pricing-section">
       <div className="container">
         <h2 className="section-title">{translations[language].pricing.pricing}</h2>
         <div className="pricing-grid">

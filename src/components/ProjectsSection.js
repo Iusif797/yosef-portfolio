@@ -61,7 +61,7 @@ const ProjectsSection = ({ translations, language, onImageClick }) => {
   ];
 
   return (
-    <section className="projects-section">
+    <section className="projects-section" id="projects-section">
       <div className="container">
         <h2 className="section-title">{translations[language].projects.myProjects}</h2>
         <div className="projects-grid">
