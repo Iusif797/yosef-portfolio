@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { RU, US, IL } from 'react-flag-kit';
 
 const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -26,12 +27,12 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
   };
 
   const getFlag = (lng) => {
-    const flags = { 
-      ru: '🇷🇺',
-      en: '🇺🇸', 
-      he: '🇮🇱'
+    const flagComponents = { 
+      ru: <RU size={20} />,
+      en: <US size={20} />, 
+      he: <IL size={20} />
     };
-    return flags[lng] || '🌐';
+    return flagComponents[lng] || <span>🌐</span>;
   };
 
   return (
@@ -41,7 +42,7 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
         onClick={() => setDropdownOpen(prev => !prev)}
         aria-label="Select Language"
       >
-        <span className="language-flag">{getFlag(language)}</span>
+        <div className="language-flag">{getFlag(language)}</div>
         <span className="language-code">
           {language.toUpperCase()}
         </span>
@@ -57,7 +58,7 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
                 className="language-option-button"
                 onClick={() => handleLanguageChange(lng)}
               >
-                <span className="language-flag">{getFlag(lng)}</span>
+                <div className="language-flag">{getFlag(lng)}</div>
                 <span className="language-option-code">
                   {lng.toUpperCase()}
                 </span>
