@@ -84,77 +84,40 @@ const ContactForm = ({ translations, language }) => {
         </div>
 
         <div className="contact-content">
-          {/* Контактная информация */}
+          {/* Минималистичные контакты */}
           <div className="contact-info">
-            <div className="contact-cards-grid">
-              <div className="contact-card">
-                <div className="contact-icon-wrapper">
-                  <div className="contact-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                      <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                  </div>
+            <div className="contact-list">
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
                 </div>
-                <div className="contact-info-text">
-                  <h3 className="contact-label">
-                    {language === 'ru' ? 'Локация' : language === 'en' ? 'Location' : 'מיקום'}
-                  </h3>
-                  <p className="contact-value">
-                    {language === 'ru' ? 'Прага, Чехия' : language === 'en' ? 'Prague, Czech Republic' : 'פראג, צ\'כיה'}
-                  </p>
-                </div>
+                <span className="contact-text">
+                  {language === 'ru' ? 'Прага, Чехия' : language === 'en' ? 'Prague, Czech Republic' : 'פראג, צ\'כיה'}
+                </span>
               </div>
 
-              <div className="contact-card">
-                <div className="contact-icon-wrapper">
-                  <div className="contact-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                  </div>
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
                 </div>
-                <div className="contact-info-text">
-                  <h3 className="contact-label">Email</h3>
-                  <a href="mailto:usifmamedov5@gmail.com" className="contact-value contact-link">
-                    usifmamedov5@gmail.com
-                  </a>
-                </div>
+                <a href="mailto:usifmamedov5@gmail.com" className="contact-text contact-link">
+                  usifmamedov5@gmail.com
+                </a>
               </div>
 
-              <div className="contact-card">
-                <div className="contact-icon-wrapper">
-                  <div className="contact-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                    </svg>
-                  </div>
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
                 </div>
-                <div className="contact-info-text">
-                  <h3 className="contact-label">
-                    {language === 'ru' ? 'Телефон' : language === 'en' ? 'Phone' : 'טלפון'}
-                  </h3>
-                  <a href="tel:+420773975235" className="contact-value contact-link">
-                    +420 773 975 235
-                  </a>
-                </div>
-              </div>
-
-              <div className="contact-card">
-                <div className="contact-icon-wrapper">
-                  <div className="contact-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="contact-info-text">
-                  <h3 className="contact-label">Telegram</h3>
-                  <a href="https://t.me/beckerman979" target="_blank" rel="noopener noreferrer" className="contact-value contact-link">
-                    @beckerman979
-                  </a>
-                </div>
+                <a href="tel:+420773975235" className="contact-text contact-link">
+                  +420 773 975 235
+                </a>
               </div>
             </div>
           </div>
@@ -225,7 +188,7 @@ const ContactForm = ({ translations, language }) => {
                       {language === 'ru' ? 'Мобильное приложение' : language === 'en' ? 'Mobile Application' : 'אפליקציה ניידת'}
                     </option>
                     <option value={language === 'he' ? 'כרטיס ביקור' : language === 'en' ? 'Business Card' : 'Бизнес-визитка'}>
-                      {language === 'ru' ? 'Бизнес-визитка' : language === 'en' ? 'Business Card' : 'כרטיס ביקור'}
+                      {language === 'ru' ? 'Бизнес-визитка' : language === 'en' ? 'Business Card' : 'כרטיس ביקור'}
                     </option>
                   </select>
                 </div>
