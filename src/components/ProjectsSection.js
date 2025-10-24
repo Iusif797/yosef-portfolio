@@ -1,10 +1,10 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
-import djWebsite from '../assets/dj_website.png';
-import eShop from '../assets/e-shop.png';
-import teonaPsychology from '../assets/teona_psychology.png';
-import vineProject from '../assets/vine_project.png';
-import israeldelcargoVisitCard from '../assets/israeldelcargo_v.png';
+import djWebsite from '../assets/DJ-beckerman.png';
+import eShop from '../assets/image.png';
+import teonaPsychology from '../assets/teona-lending.png';
+import vineProject from '../assets/cafe-project.png';
+import israeldelcargoVisitCard from '../assets/visit-card.png';
 
 const ProjectsSection = ({ translations, language, onImageClick }) => {
   const projectsData = [

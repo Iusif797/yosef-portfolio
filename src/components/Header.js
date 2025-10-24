@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkedinPortfolio from '../assets/Linkedin_Portfolio.png';
+import LinkedinPortfolio from '../assets/photo_2024-10-06_15-45-42.jpg';
 
 const Header = ({ translations, language, scrollToContact }) => {
   return (
