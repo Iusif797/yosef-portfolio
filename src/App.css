@@ -138,8 +138,13 @@ body[dir="rtl"] {
 }
 
 .language-flag {
-  font-size: 1.5rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  width: 24px;
+  height: 18px;
+  display: inline-block;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 
 .language-code {
@@ -229,7 +234,8 @@ body[dir="rtl"] {
 }
 
 .language-option-button .language-flag {
-  font-size: 1.2rem;
+  width: 22px;
+  height: 16px;
 }
 
 .language-option-button .language-name {
@@ -355,8 +361,8 @@ body[dir="rtl"] {
 }
 
 .icon-circle {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--gold));
   display: flex;
@@ -364,9 +370,9 @@ body[dir="rtl"] {
   justify-content: center;
   margin: 0 auto;
   box-shadow: var(--shadow-premium);
-  animation: pulse 4s ease-in-out infinite;
   position: relative;
   overflow: hidden;
+  transition: all 0.4s ease;
 }
 
 .icon-glow {
@@ -376,19 +382,19 @@ body[dir="rtl"] {
   width: 200%;
   height: 200%;
   background: conic-gradient(from 0deg, transparent, var(--accent-light), transparent);
-  animation: rotate 3s linear infinite;
-  opacity: 0.7;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes pulse {
-  0%, 100% { 
-    transform: scale(1);
-    box-shadow: var(--shadow-premium);
-  }
-  50% { 
-    transform: scale(1.05);
-    box-shadow: var(--shadow-premium), 0 0 50px rgba(99, 102, 241, 0.5);
-  }
+.icon-circle:hover .icon-glow {
+  opacity: 0.3;
+}
+
+.icon-circle:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    var(--shadow-premium), 
+    0 20px 60px rgba(99, 102, 241, 0.4);
 }
 
 @keyframes rotate {
@@ -404,6 +410,42 @@ body[dir="rtl"] {
   position: relative;
   z-index: 2;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.icon-image-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 50%;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 5px 15px rgba(99, 102, 241, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.icon-circle:hover .icon-image {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 15px 60px rgba(99, 102, 241, 0.5),
+    0 10px 30px rgba(99, 102, 241, 0.4),
+    inset 0 2px 15px rgba(255, 255, 255, 0.15);
 }
 
 .header-title {
@@ -680,7 +722,8 @@ body[dir="rtl"] {
 /* Премиум цены */
 .pricing-section {
   padding: 10rem 0;
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  background: linear-gradient(to bottom, rgba(12, 18, 32, 0.7), rgba(12, 18, 32, 0.9));
+  backdrop-filter: blur(15px);
   position: relative;
 }
 
@@ -911,6 +954,8 @@ body[dir="rtl"] {
 .projects-section {
   padding: 10rem 0;
   position: relative;
+  background: linear-gradient(to bottom, rgba(12, 18, 32, 0.7), rgba(12, 18, 32, 0.9));
+  backdrop-filter: blur(15px);
 }
 
 .projects-header {
@@ -931,7 +976,8 @@ body[dir="rtl"] {
 /* Премиум контакты */
 .contact-section {
   padding: 10rem 0;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background: linear-gradient(to bottom, rgba(12, 18, 32, 0.7), rgba(12, 18, 32, 0.9));
+  backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
 }
@@ -1454,12 +1500,20 @@ body[dir="rtl"] {
   }
   
   .icon-circle {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
   
   .icon-text {
     font-size: 2.5rem;
+  }
+  
+  .icon-image-wrapper {
+    padding: 7px;
+  }
+  
+  .icon-image {
+    border-width: 3px;
   }
 }
 
@@ -1488,6 +1542,19 @@ body[dir="rtl"] {
   .pricing-card {
     min-height: 400px;
     padding: 2rem 1.5rem;
+  }
+  
+  .icon-circle {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .icon-image-wrapper {
+    padding: 6px;
+  }
+  
+  .icon-image {
+    border-width: 2px;
   }
   
   .header-content {
@@ -1738,25 +1805,49 @@ body[dir="rtl"] .language-option-button:hover {
 .footer-contact {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  color: var(--text-secondary);
+  gap: 1.25rem;
   transition: var(--transition);
 }
 
-.contact-item:hover {
+.contact-item:hover .contact-icon {
+  color: var(--accent-light);
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-accent);
+}
+
+.contact-item:hover .contact-text {
   color: var(--accent-light);
 }
 
 .contact-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.contact-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: var(--transition);
 }
 
 .footer-bottom {
@@ -1799,6 +1890,29 @@ body[dir="rtl"] .language-option-button:hover {
     justify-content: center;
   }
   
+  .footer-contact {
+    align-items: center;
+  }
+  
+  .contact-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-list {
+    align-items: center;
+  }
+  
   .footer-bottom-content {
     flex-direction: column;
     gap: 1rem;
@@ -1828,5 +1942,25 @@ body[dir="rtl"] .language-option-button:hover {
   
   .footer-grid {
     gap: 2rem;
+  }
+  
+  .social-link,
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+  
+  .contact-item {
+    max-width: 300px;
+    gap: 1rem;
+  }
+  
+  .contact-text {
+    font-size: 0.9rem;
+  }
+  
+  .footer-title {
+    font-size: 1.25rem;
   }
 }
