@@ -56,13 +56,9 @@ const Footer = ({ translations = {}, language = 'ru' }) => {
         </div>
       </div>
 
-      {/* Нижняя часть футера */}
       <footer>
         <div className="footer-bottom-content">
-          <p>{translations && language && translations[language] && translations[language].footer
-            ? translations[language].footer.portfolio
-            : '© 2025 Юсиф Мамедов. Все права защищены'}</p>
-          <p className="made-with-love">Made with ❤️ in Prague</p>
+          <p>© 2025 Юсиф Мамедов. Все права защищены</p>
         </div>
         <div className="social-icons">
           <a href="https://t.me/beckerman979" target="_blank" rel="noopener noreferrer">

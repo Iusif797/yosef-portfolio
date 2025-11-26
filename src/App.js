@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import './App.css';
 
 // Компоненты
+import LoadingSpinner from './components/LoadingSpinner';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileMenu from './components/MobileMenu';
 import Header from './components/Header';
@@ -179,8 +180,9 @@ const translations = {
 };
 
 function App() {
-  const [language, setLanguage] = useState('ru');
+  const [language, setLanguage] = useState('en');
   const [modalImage, setModalImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const changeLanguage = (lng) => {
     setLanguage(lng);
@@ -205,6 +207,7 @@ function App() {
 
   return (
     <Suspense fallback="Loading...">
+      {isLoading && <LoadingSpinner onLoadingComplete={() => setIsLoading(false)} />}
       <div className="App">
         <Helmet
           htmlAttributes={{

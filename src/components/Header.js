@@ -1,5 +1,4 @@
 import React from 'react';
-import LinkedinPortfolio from '../assets/photo_2024-10-06_15-45-42.jpg';
 
 const Header = ({ translations, language, scrollToContact }) => {
   return (
@@ -24,13 +23,7 @@ const Header = ({ translations, language, scrollToContact }) => {
         <div className="header-icon">
           <div className="icon-circle">
             <div className="icon-glow"></div>
-            <div className="icon-image-wrapper">
-              <img
-                src={LinkedinPortfolio}
-                alt="Yosef Mamedov"
-                className="icon-image"
-              />
-            </div>
+            <span className="icon-text">YM</span>
           </div>
         </div>
         <h1 className="header-title">
