@@ -5,7 +5,7 @@ import castawayProject from "../assets/Macbook-Air-castawey.netlify.app.png";
 import teonaLending from "../assets/teona-lending.png";
 import visitCard from "../assets/visit-card.png";
 import filipProject from "../assets/filip_project.png";
-import getvisagoProject from "../assets/getvisago_project.png";
+import getvisagoProject from "../assets/Macbook-Air-www.getvisago.com.png";
 
 const ProjectsSection = ({ translations, language, onImageClick }) => {
   const projectsData = [
