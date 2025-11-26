@@ -6,9 +6,27 @@ import teonaLending from "../assets/teona-lending.png";
 import visitCard from "../assets/visit-card.png";
 import filipProject from "../assets/Macbook-Air-filipvekslerpage.netlify.app.png";
 import getvisagoProject from "../assets/Macbook-Air-www.getvisago.com.png";
+import indonesiaProject from "../assets/Macbook-Air-indonesia-project.netlify.app.png";
 
 const ProjectsSection = ({ translations, language, onImageClick }) => {
   const projectsData = [
+    {
+      image: indonesiaProject,
+      alt: "Indonesia Project",
+      title:
+        language === "ru"
+          ? "Travel Indonesia"
+          : language === "en"
+          ? "Travel Indonesia"
+          : "מסע לאינדונזיה",
+      description:
+        language === "ru"
+          ? "Современный туристический портал с гидом по Индонезии и бронированием туров"
+          : language === "en"
+          ? "Modern travel portal with Indonesia guide and tour booking"
+          : "פורטל תיירות מודרני עם מדריך לאינדונזיה והזמנת סיורים",
+      link: "https://indonesia-project.netlify.app/",
+    },
     {
       image: cafeProject,
       alt: "Cafe Project",
