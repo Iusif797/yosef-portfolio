@@ -1,4 +1,5 @@
 import React from 'react';
+import BannerImage from '../assets/NewBannerPortfolio.png';
 
 const Header = ({ translations, language, scrollToContact }) => {
   return (

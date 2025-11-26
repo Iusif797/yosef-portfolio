@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Suspense } from 'react';
+import React, { useState, useCallback, Suspense, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import './App.css';
 
@@ -7,6 +7,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileMenu from './components/MobileMenu';
 import Header from './components/Header';
+import AboutSection from './components/AboutSection';
 import ProjectsSection from './components/ProjectsSection';
 import PricingSection from './components/PricingSection';
 import ContactForm from './components/ContactForm';
@@ -184,6 +185,28 @@ function App() {
   const [modalImage, setModalImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Scroll Reveal Animation Logic
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); // Only animate once
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.reveal, .reveal-children');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [isLoading, language]); // Re-run when loading finishes or language changes
+
   const changeLanguage = (lng) => {
     setLanguage(lng);
     document.body.dir = lng === 'he' ? 'rtl' : 'ltr';
@@ -260,23 +283,36 @@ function App() {
           scrollToContact={scrollToContact}
         />
 
-        <ProjectsSection
-          id="projects-section"
-          translations={translations}
-          language={language}
-          onImageClick={openModal}
-        />
+        <div className="reveal">
+          <AboutSection
+            translations={translations}
+            language={language}
+          />
+        </div>
 
-        <PricingSection
-          id="pricing-section"
-          translations={translations}
-          language={language}
-        />
+        <div className="reveal">
+          <ProjectsSection
+            id="projects-section"
+            translations={translations}
+            language={language}
+            onImageClick={openModal}
+          />
+        </div>
 
-        <ContactForm
-          translations={translations}
-          language={language}
-        />
+        <div className="reveal">
+          <PricingSection
+            id="pricing-section"
+            translations={translations}
+            language={language}
+          />
+        </div>
+
+        <div className="reveal">
+          <ContactForm
+            translations={translations}
+            language={language}
+          />
+        </div>
 
         <Footer
           translations={translations}
