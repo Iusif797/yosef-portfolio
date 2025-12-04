@@ -1,35 +1,103 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
+import getvisagoProject from "../assets/Macbook-Air-www.getvisago.com.png";
+import mindviaProject from "../assets/Macbook-Air-www.psymindvia.com.png";
+import indonesiaProject from "../assets/Macbook-Air-indonesia-project.netlify.app.png";
+import filipProject from "../assets/Macbook-Air-filipvekslerpage.netlify.app.png";
+import latteCafeProject from "../assets/Macbook-Air-cafe-nine-zeta.vercel.app.png";
 import cafeProject from "../assets/cafe-project.png";
 import castawayProject from "../assets/Macbook-Air-castawey.netlify.app.png";
-import teonaLending from "../assets/teona-lending.png";
-import visitCard from "../assets/visit-card.png";
-import filipProject from "../assets/Macbook-Air-filipvekslerpage.netlify.app.png";
-import getvisagoProject from "../assets/Macbook-Air-www.getvisago.com.png";
-import indonesiaProject from "../assets/Macbook-Air-indonesia-project.netlify.app.png";
 
 const ProjectsSection = ({ translations, language, onImageClick }) => {
   const projectsData = [
     {
-      image: indonesiaProject,
-      alt: "Indonesia Project",
+      image: getvisagoProject,
+      alt: "GetVisago Platform",
       title:
         language === "ru"
-          ? "Travel Indonesia"
+          ? "GetVisago Платформа"
           : language === "en"
-          ? "Travel Indonesia"
-          : "מסע לאינדונזיה",
+          ? "GetVisago Platform"
+          : "פלטפורמת GetVisago",
       description:
         language === "ru"
-          ? "Современный туристический портал с гидом по Индонезии и бронированием туров"
+          ? "Комплексная визовая платформа с автоматизацией процесса получения eVisa"
           : language === "en"
-          ? "Modern travel portal with Indonesia guide and tour booking"
-          : "פורטל תיירות מודרני עם מדריך לאינדונזיה והזמנת סיורים",
+          ? "Comprehensive visa platform with automated eVisa application process"
+          : "פלטפורמת ויזה מקיפה עם תהליך בקשת eVisa אוטומטי",
+      link: "https://www.getvisago.com/",
+    },
+    {
+      image: mindviaProject,
+      alt: "MindVia Psychology School",
+      title:
+        language === "ru"
+          ? "MindVia Школа Психологии"
+          : language === "en"
+          ? "MindVia Psychology School"
+          : "בית ספר לפסיכולוגיה MindVia",
+      description:
+        language === "ru"
+          ? "Школа психологии с курсами, консультациями и пространством для саморазвития"
+          : language === "en"
+          ? "Psychology school with courses, consultations and personal growth space"
+          : "בית ספר לפסיכולוגיה עם קורסים, ייעוץ ומרחב לצמיחה אישית",
+      link: "https://www.psymindvia.com/",
+    },
+    {
+      image: indonesiaProject,
+      alt: "Indonesia Travel Project",
+      title:
+        language === "ru"
+          ? "Discover Indonesia"
+          : language === "en"
+          ? "Discover Indonesia"
+          : "גלה את אינדונזיה",
+      description:
+        language === "ru"
+          ? "Туристический портал для исследования красот Индонезии"
+          : language === "en"
+          ? "Travel portal to explore the natural beauty of Indonesia"
+          : "פורטל תיירות לחקור את יופי הטבע של אינדונזיה",
       link: "https://indonesia-project.netlify.app/",
     },
     {
+      image: filipProject,
+      alt: "Filip Veksler Portfolio",
+      title:
+        language === "ru"
+          ? "Filip Veksler"
+          : language === "en"
+          ? "Filip Veksler"
+          : "Filip Veksler",
+      description:
+        language === "ru"
+          ? "Персональный сайт учёного, преподавателя и консультанта"
+          : language === "en"
+          ? "Personal website of a scientist, educator and consultant"
+          : "אתר אישי של מדען, מחנך ויועץ",
+      link: "https://filipvekslerpage.netlify.app/",
+    },
+    {
+      image: latteCafeProject,
+      alt: "Latte Cafe",
+      title:
+        language === "ru"
+          ? "Latte Cafe"
+          : language === "en"
+          ? "Latte Cafe"
+          : "Latte Cafe",
+      description:
+        language === "ru"
+          ? "Элегантный сайт кафе со специальным кофе и простой едой"
+          : language === "en"
+          ? "Elegant cafe website with specialty coffee and simple food"
+          : "אתר בית קפה אלגנטי עם קפה מיוחד ואוכל פשוט",
+      link: "https://cafe-nine-zeta.vercel.app/",
+    },
+    {
       image: cafeProject,
-      alt: "Cafe Project",
+      alt: "Premium Cafe Project",
       title:
         language === "ru"
           ? "Премиум Кафе"
@@ -58,224 +126,6 @@ const ProjectsSection = ({ translations, language, onImageClick }) => {
           : language === "en"
           ? "Innovative web platform with interactive interface and modern technologies"
           : "פלטפורמת אינטרנט חדשנית עם ממשק אינטראקטיבי וטכנולוגיות מודרניות",
-      link: "https://castawey.netlify.app/",
-    },
-    {
-      image: teonaLending,
-      alt: "Teona Landing",
-      title:
-        language === "ru"
-          ? "Teona Лендинг"
-          : language === "en"
-          ? "Teona Landing"
-          : "דף נחיתה Teona",
-      description:
-        language === "ru"
-          ? "Стильный лендинг с премиум дизайном, анимациями и высокой конверсией"
-          : language === "en"
-          ? "Stylish landing page with premium design, animations and high conversion"
-          : "דף נחיתה מעוצב עם עיצוב פרימיום, אנימציות והמרה גבוהה",
-    },
-    {
-      image: visitCard,
-      alt: "Digital Visit Card",
-      title:
-        language === "ru"
-          ? "Цифровая Визитка Pro"
-          : language === "en"
-          ? "Digital Visit Card Pro"
-          : "כרטיס ביקור דיגיטלי Pro",
-      description:
-        language === "ru"
-          ? "Интерактивная цифровая визитка нового поколения с NFC и QR-кодом"
-          : language === "en"
-          ? "Next-generation interactive digital business card with NFC and QR code"
-          : "כרטיס ביקור דיגיטלי אינטראקטיבי מהדור הבא עם NFC וקוד QR",
-    },
-    {
-      image: filipProject,
-      alt: "Filip Project",
-      title:
-        language === "ru"
-          ? "Filip Проект"
-          : language === "en"
-          ? "Filip Project"
-          : "פרויקט Filip",
-      description:
-        language === "ru"
-          ? "Современный веб-проект с уникальным дизайном и передовыми решениями"
-          : language === "en"
-          ? "Modern web project with unique design and cutting-edge solutions"
-          : "פרויקט אינטרנט מודרני עם עיצוב ייחודי ופתרונות מתקדמים",
-    },
-    {
-      image: getvisagoProject,
-      alt: "GetVisago Platform",
-      title:
-        language === "ru"
-          ? "GetVisago Платформа"
-          : language === "en"
-          ? "GetVisago Platform"
-          : "פלטפורמת GetVisago",
-      description:
-        language === "ru"
-          ? "Комплексная платформа для визовых услуг с автоматизацией процессов"
-          : language === "en"
-          ? "Comprehensive visa services platform with process automation"
-          : "פלטפורמה מקיפה לשירותי ויזה עם אוטומציה של תהליכים",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "E-Commerce Platform",
-      title:
-        language === "ru"
-          ? "E-Commerce Платформа"
-          : language === "en"
-          ? "E-Commerce Platform"
-          : "פלטפורמת מסחר אלקטרוני",
-      description:
-        language === "ru"
-          ? "Современная платформа интернет-магазина с системой платежей и управлением товарами"
-          : language === "en"
-          ? "Modern e-commerce platform with payment system and inventory management"
-          : "פלטפורמת מסחר אלקטרוני מודרנית עם מערכת תשלומים וניהול מלאי",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "FinTech Dashboard",
-      title:
-        language === "ru"
-          ? "FinTech Дашборд"
-          : language === "en"
-          ? "FinTech Dashboard"
-          : "דשבורד פינטק",
-      description:
-        language === "ru"
-          ? "Аналитическая панель для финансовых данных с интерактивными графиками и отчетами"
-          : language === "en"
-          ? "Financial data analytics dashboard with interactive charts and reports"
-          : "דשבורד אנליטיקה לנתונים פיננסיים עם גרפים אינטראקטיביים ודוחות",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Corporate Website",
-      title:
-        language === "ru"
-          ? "Корпоративный Сайт"
-          : language === "en"
-          ? "Corporate Website"
-          : "אתר תאגידי",
-      description:
-        language === "ru"
-          ? "Элегантный корпоративный сайт с современным дизайном и CMS системой"
-          : language === "en"
-          ? "Elegant corporate website with modern design and CMS system"
-          : "אתר תאגידי אלגנטי עם עיצוב מודרני ומערכת CMS",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Food Delivery App",
-      title:
-        language === "ru"
-          ? "Приложение Доставки Еды"
-          : language === "en"
-          ? "Food Delivery App"
-          : "אפליקציית משלוחי אוכל",
-      description:
-        language === "ru"
-          ? "Мобильное приложение для заказа еды с геолокацией и отслеживанием заказов"
-          : language === "en"
-          ? "Mobile food ordering app with geolocation and order tracking"
-          : "אפליקציה ניידת להזמנת אוכל עם גיאולוקיישן ומעקב הזמנות",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Digital Business Card",
-      title:
-        language === "ru"
-          ? "Цифровая Визитка"
-          : language === "en"
-          ? "Digital Business Card"
-          : "כרטיס ביקור דיגיטלי",
-      description:
-        language === "ru"
-          ? "Интерактивная цифровая визитка с анимациями и интеграцией социальных сетей"
-          : language === "en"
-          ? "Interactive digital business card with animations and social media integration"
-          : "כרטיס ביקור דיגיטלי אינטראקטיבי עם אנימציות ואינטגרציה לרשתות חברתיות",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Car Rental Platform",
-      title:
-        language === "ru"
-          ? "Платформа Аренды Авто"
-          : language === "en"
-          ? "Car Rental Platform"
-          : "פלטפורמת השכרת רכבים",
-      description:
-        language === "ru"
-          ? "Полнофункциональная платформа аренды автомобилей с бронированием и оплатой"
-          : language === "en"
-          ? "Full-featured car rental platform with booking and payment system"
-          : "פלטפורמת השכרת רכבים מלאה עם מערכת הזמנות ותשלומים",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Restaurant Website",
-      title:
-        language === "ru"
-          ? "Сайт Ресторана"
-          : language === "en"
-          ? "Restaurant Website"
-          : "אתר מסעדה",
-      description:
-        language === "ru"
-          ? "Стильный сайт ресторана с онлайн-меню, бронированием столиков и галереей"
-          : language === "en"
-          ? "Stylish restaurant website with online menu, table booking and gallery"
-          : "אתר מסעדה מסוגנן עם תפריט אונליין, הזמנת שולחנות וגלריה",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Bakery Online Store",
-      title:
-        language === "ru"
-          ? "Интернет-магазин Пекарни"
-          : language === "en"
-          ? "Bakery Online Store"
-          : "חנות אונליין למאפייה",
-      description:
-        language === "ru"
-          ? "Онлайн-магазин пекарни с каталогом продукции и системой предзаказов"
-          : language === "en"
-          ? "Bakery online store with product catalog and pre-order system"
-          : "חנות אונליין למאפייה עם קטלוג מוצרים ומערכת הזמנות מראש",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&auto=format&q=90",
-      alt: "Creative Agency Portfolio",
-      title:
-        language === "ru"
-          ? "Портфолио Креативного Агентства"
-          : language === "en"
-          ? "Creative Agency Portfolio"
-          : "פורטפוליו סוכנות יצירתית",
-      description:
-        language === "ru"
-          ? "Портфолио креативного агентства с интерактивными элементами и анимациями"
-          : language === "en"
-          ? "Creative agency portfolio with interactive elements and animations"
-          : "פורטפוליו סוכנות יצירתית עם אלמנטים אינטראקטיביים ואנימציות",
       link: "https://castawey.netlify.app/",
     },
   ];

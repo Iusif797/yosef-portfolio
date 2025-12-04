@@ -54,7 +54,7 @@ const LanguageSwitcher = ({ language, changeLanguage, translations }) => {
   const getLanguageInfo = (lng) => {
     const languages = {
       ru: { flag: <FlagRU />, name: 'Русский', code: 'RU' },
-      en: { flag: <FlagUS />, name: 'English', code: 'US' },
+      en: { flag: <FlagUS />, name: 'English', code: 'EN' },
       he: { flag: <FlagIL />, name: 'עברית', code: 'IL' }
     };
     return languages[lng];
