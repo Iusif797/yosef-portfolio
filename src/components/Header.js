@@ -1,4 +1,4 @@
-import portraitImage from '../assets/Linkedin_Portfolio.png';
+import portraitImage from '../assets/Linkedin_Portfolio.webp';
 
 const Header = ({ translations, language, scrollToContact }) => {
   return (

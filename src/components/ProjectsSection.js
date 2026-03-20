@@ -1,14 +1,14 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
-import getvisagoProject from "../assets/Macbook-Air-www.getvisago.com.png";
-import mindviaProject from "../assets/Macbook-Air-www.psymindvia.com.png";
-import indonesiaProject from "../assets/Macbook-Air-indonesia-project.netlify.app.png";
-import filipProject from "../assets/Macbook-Air-filipvekslerpage.netlify.app.png";
-import latteCafeProject from "../assets/Macbook-Air-cafe-nine-zeta.vercel.app.png";
-import castawayProject from "../assets/Macbook-Air-castawey.netlify.app.png";
-import uklidProject from "../assets/Uklid Project.png";
-import dubaiRealtyProject from "../assets/Macbook-Air-dubai-appartmentsproject.netlify.app.png";
-import luxeShopProject from "../assets/Macbook-Air-luxe-shop-theta.vercel.app.png";
+import getvisagoProject from "../assets/Macbook-Air-www.getvisago.com.webp";
+import mindviaProject from "../assets/Macbook-Air-www.psymindvia.com.webp";
+import indonesiaProject from "../assets/Macbook-Air-indonesia-project.netlify.app.webp";
+import filipProject from "../assets/Macbook-Air-filipvekslerpage.netlify.app.webp";
+import latteCafeProject from "../assets/Macbook-Air-cafe-nine-zeta.vercel.app.webp";
+import castawayProject from "../assets/Macbook-Air-castawey.netlify.app.webp";
+import uklidProject from "../assets/Uklid Project.webp";
+import dubaiRealtyProject from "../assets/Macbook-Air-dubai-appartmentsproject.netlify.app.webp";
+import luxeShopProject from "../assets/Macbook-Air-luxe-shop-theta.vercel.app.webp";
 
 const ProjectsSection = ({ translations, language, onImageClick }) => {
   const projectsData = [
