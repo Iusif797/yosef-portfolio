@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const TILT_RANGE = 8;
 const springConfig = { stiffness: 260, damping: 22, mass: 0.6 };
@@ -16,19 +16,6 @@ const ProjectCard = ({ project, onImageClick, language }) => {
     useTransform(pointerX, [0, 1], [-TILT_RANGE, TILT_RANGE]),
     springConfig
   );
-
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"]
-  });
-
-  const scaleValue = useTransform(scrollYProgress, [0, 0.25, 0.8, 1], [0.88, 1, 1, 0.94]);
-  const opacityValue = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
-  const yValue = useTransform(scrollYProgress, [0, 0.25], [80, 0]);
-
-  const scale = useSpring(scaleValue, { stiffness: 100, damping: 20 });
-  const opacity = useSpring(opacityValue, { stiffness: 100, damping: 20 });
-  const y = useSpring(yValue, { stiffness: 100, damping: 20 });
 
   const getLinkText = () => {
     if (language === 'en') return 'Visit Website';
@@ -52,7 +39,10 @@ const ProjectCard = ({ project, onImageClick, language }) => {
     <motion.div
       ref={cardRef}
       className="project-card"
-      style={{ rotateX, rotateY, scale, opacity, y, transformPerspective: 1000 }}
+      style={{ rotateX, rotateY, transformPerspective: 1000 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetTilt}
     >

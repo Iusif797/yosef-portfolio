@@ -245,7 +245,11 @@ function App() {
   // Scroll Reveal Animation Logic
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.1,
+      // threshold 0 = fire as soon as any part enters the viewport.
+      // A fixed fraction (e.g. 0.1) is unreachable for very tall sections
+      // (the 1-column projects grid on mobile is ~9000px tall, so 10% of it
+      // is taller than the screen and the section would never reveal).
+      threshold: 0,
       rootMargin: '0px 0px -50px 0px'
     };
 

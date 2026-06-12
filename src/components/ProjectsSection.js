@@ -39,16 +39,6 @@ const PROJECTS = [
     },
   },
   {
-    slug: "getvisago",
-    name: "GetVisago",
-    link: "https://www.getvisago.com",
-    desc: {
-      ru: "Визовая платформа с автоматизацией процесса получения eVisa.",
-      en: "Visa platform with an automated eVisa application flow.",
-      he: "פלטפורמת ויזה עם תהליך eVisa אוטומטי.",
-    },
-  },
-  {
     slug: "luxe-shop",
     name: "LUXE",
     link: "https://luxe-shop-theta.vercel.app",
