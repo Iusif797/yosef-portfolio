@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-const ContactForm = ({ translations, language }) => {
+const ContactForm = ({ translations, language, onOpenPrivacy }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     projectType: language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт',
     message: '',
   });
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(''); // 'sending' | 'success' | 'error' | ''
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -28,29 +28,46 @@ const ContactForm = ({ translations, language }) => {
     return newErrors;
   };
 
-  const sendToTelegram = (message) => {
+  const getStatusText = () => {
+    if (status === 'sending') {
+      return language === 'ru' ? 'Отправка...' : language === 'en' ? 'Sending...' : 'שולח...';
+    }
+    if (status === 'success') {
+      return translations[language].contact.statusSuccess;
+    }
+    if (status === 'error') {
+      return language === 'ru'
+        ? 'Ошибка отправки. Попробуйте ещё раз или напишите на email.'
+        : language === 'en'
+        ? 'Failed to send. Please try again or email directly.'
+        : 'שליחה נכשלה. נסה שוב או שלח אימייל ישירות.';
+    }
+    return '';
+  };
+
+  const sendToTelegram = async (message) => {
     const telegramBotToken = '7024597156:AAGG4sChJgJ8PZQyISPkqbUFZ6KH2zJC1XE';
     const telegramChatId = '1077514837';
     const telegramMessage = encodeURIComponent(message);
     const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${telegramMessage}`;
 
-    fetch(telegramUrl)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.ok) {
-          console.error('Telegram Error:', data);
-        }
-      })
-      .catch(error => console.error('Telegram Error:', error));
+    const res = await fetch(telegramUrl);
+    const data = await res.json();
+    if (!data.ok) {
+      throw new Error('Telegram API error');
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validate();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
+
+    setStatus('sending');
+    setErrors({});
 
     const { name, email, projectType, message } = formData;
     const fullMessage = language === 'he'
@@ -59,16 +76,18 @@ const ContactForm = ({ translations, language }) => {
       ? `New request from portfolio:\nName: ${name}\nEmail: ${email}\nProject Type: ${projectType}\nMessage: ${message}`
       : `Новая заявка с портфолио:\nИмя: ${name}\nEmail: ${email}\nТип проекта: ${projectType}\nСообщение: ${message}`;
 
-    sendToTelegram(fullMessage);
-
-    setFormData({
-      name: '',
-      email: '',
-      projectType: language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт',
-      message: '',
-    });
-    setStatus(translations[language].contact.statusSuccess);
-    setErrors({});
+    try {
+      await sendToTelegram(fullMessage);
+      setFormData({
+        name: '',
+        email: '',
+        projectType: language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт',
+        message: '',
+      });
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -188,7 +207,7 @@ const ContactForm = ({ translations, language }) => {
                       {language === 'ru' ? 'Мобильное приложение' : language === 'en' ? 'Mobile Application' : 'אפליקציה ניידת'}
                     </option>
                     <option value={language === 'he' ? 'כרטיס ביקור' : language === 'en' ? 'Business Card' : 'Бизнес-визитка'}>
-                      {language === 'ru' ? 'Бизнес-визитка' : language === 'en' ? 'Business Card' : 'כרטיس ביקור'}
+                      {language === 'ru' ? 'Бизнес-визитка' : language === 'en' ? 'Business Card' : 'כרטיס ביקור'}
                     </option>
                   </select>
                 </div>
@@ -208,15 +227,39 @@ const ContactForm = ({ translations, language }) => {
                   {errors.message && <span className="error-message">{errors.message}</span>}
                 </div>
                 
-                <button type="submit" className="submit-button">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                  </svg>
-                  {translations[language].contact.send}
+                <p className="contact-form-privacy-note">
+                  {translations[language].legal.formPrivacyBefore}{' '}
+                  <button type="button" className="privacy-inline-link" onClick={onOpenPrivacy}>
+                    {translations[language].legal.privacyPolicy}
+                  </button>
+                  {translations[language].legal.formPrivacyAfter}
+                </p>
+
+                <button
+                  type="submit"
+                  className="submit-button"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ animation: 'spin 1s linear infinite' }}>
+                      <path d="M21 12a9 9 0 11-6.219-8.56"/>
+                    </svg>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                    </svg>
+                  )}
+                  {status === 'sending'
+                    ? (language === 'ru' ? 'Отправка...' : language === 'en' ? 'Sending...' : 'שולח...')
+                    : translations[language].contact.send}
                 </button>
 
-                {status && <div className="status-message">{status}</div>}
+                {status && status !== 'sending' && (
+                  <div className={`status-message ${status === 'error' ? 'status-error' : 'status-success'}`}>
+                    {getStatusText()}
+                  </div>
+                )}
               </form>
             </div>
           </div>

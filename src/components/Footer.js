@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaTelegram, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
 
-const Footer = ({ translations, language }) => {
+const Footer = ({ translations, language, onPrivacyClick, onCookieSettingsClick }) => {
   const currentYear = new Date().getFullYear();
   const rightsText = language === 'ru' 
     ? 'Все права защищены' 
@@ -81,6 +81,18 @@ const Footer = ({ translations, language }) => {
               </ul>
             </div>
           </div>
+        </div>
+
+        <div className="footer-legal-links">
+          <button type="button" className="footer-legal-link" onClick={onPrivacyClick}>
+            {translations[language].legal.footerPrivacy}
+          </button>
+          <span className="footer-legal-sep" aria-hidden="true">
+            ·
+          </span>
+          <button type="button" className="footer-legal-link" onClick={onCookieSettingsClick}>
+            {translations[language].legal.footerCookies}
+          </button>
         </div>
 
         <div className="footer-bottom">

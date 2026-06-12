@@ -3,16 +3,22 @@ import { Helmet } from 'react-helmet';
 import './App.css';
 
 // Компоненты
+import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileMenu from './components/MobileMenu';
 import Header from './components/Header';
+import ScrollVideoBackground from './components/ScrollVideoBackground';
 import AboutSection from './components/AboutSection';
 import ProjectsSection from './components/ProjectsSection';
 import PricingSection from './components/PricingSection';
 import ContactForm from './components/ContactForm';
 import Modal from './components/Modal';
 import Footer from './components/Footer';
+import CookieBanner from './components/CookieBanner';
+import PrivacyPolicyModal from './components/PrivacyPolicyModal';
+import { getStoredConsent, clearConsent } from './consent/consentStorage';
+import { injectGtm } from './consent/gtmLoader';
 
 // Переводы
 const translations = {
@@ -69,6 +75,20 @@ const translations = {
       messageRequired: 'Пожалуйста, введите сообщение.',
       statusSuccess: 'Сообщение успешно отправлено!',
     },
+    legal: {
+      bannerAria: 'Уведомление о файлах cookie',
+      bannerText:
+        'Мы используем необходимые cookie для работы сайта и при согласии — Google Tag Manager для аналитики. «Принять все» включает аналитику; «Только необходимые» оставляет только минимум, без аналитики.',
+      acceptAll: 'Принять все',
+      rejectOptional: 'Только необходимые',
+      privacyPolicy: 'Политика конфиденциальности',
+      privacyTitle: 'Политика конфиденциальности',
+      closeModal: 'Закрыть',
+      footerPrivacy: 'Конфиденциальность',
+      footerCookies: 'Настройки cookie',
+      formPrivacyBefore: 'Отправляя форму, вы соглашаетесь на обработку персональных данных в соответствии с',
+      formPrivacyAfter: '.',
+    },
   },
   en: {
     title: "Yosef Mamedov's Portfolio - Web Developer",
@@ -122,6 +142,20 @@ const translations = {
       emailInvalid: 'Please enter a valid Email.',
       messageRequired: 'Please enter a message.',
       statusSuccess: 'Message sent successfully!',
+    },
+    legal: {
+      bannerAria: 'Cookie notice',
+      bannerText:
+        'We use essential cookies for the site to work and, if you agree, Google Tag Manager for analytics. “Accept all” enables analytics; “Essential only” keeps only necessary cookies without analytics.',
+      acceptAll: 'Accept all',
+      rejectOptional: 'Essential only',
+      privacyPolicy: 'Privacy Policy',
+      privacyTitle: 'Privacy Policy',
+      closeModal: 'Close',
+      footerPrivacy: 'Privacy',
+      footerCookies: 'Cookie settings',
+      formPrivacyBefore: 'By submitting this form, you agree to the processing of your personal data as described in the',
+      formPrivacyAfter: '.',
     },
   },
   he: {
@@ -177,6 +211,20 @@ const translations = {
       messageRequired: 'אנא הכנס הודעה.',
       statusSuccess: 'ההודעה נשלחה בהצלחה!',
     },
+    legal: {
+      bannerAria: 'הודעת עוגיות',
+      bannerText:
+        'אנו משתמשים בעוגיות הכרחיות לפעילות האתר ובהסכמתכם ב-Google Tag Manager לאנליטיקה. "קבל הכל" מפעיל אנליטיקה; "הכרחי בלבד" משאיר רק את המינימום ללא אנליטיקה.',
+      acceptAll: 'קבל הכל',
+      rejectOptional: 'הכרחי בלבד',
+      privacyPolicy: 'מדיניות פרטיות',
+      privacyTitle: 'מדיניות פרטיות',
+      closeModal: 'סגור',
+      footerPrivacy: 'פרטיות',
+      footerCookies: 'הגדרות עוגיות',
+      formPrivacyBefore: 'בשליחת הטופס אתם מסכימים לעיבוד הנתונים האישיים בהתאם ל',
+      formPrivacyAfter: '.',
+    },
   },
 };
 
@@ -184,6 +232,15 @@ function App() {
   const [language, setLanguage] = useState('en');
   const [modalImage, setModalImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCookieBanner, setShowCookieBanner] = useState(() => getStoredConsent() === null);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+
+  useEffect(() => {
+    const stored = getStoredConsent();
+    if (stored?.analytics) {
+      injectGtm();
+    }
+  }, []);
 
   // Scroll Reveal Animation Logic
   useEffect(() => {
@@ -228,10 +285,20 @@ function App() {
     }
   }, []);
 
+  const openPrivacy = useCallback(() => setPrivacyOpen(true), []);
+  const closePrivacy = useCallback(() => setPrivacyOpen(false), []);
+
+  const handleCookieSettings = useCallback(() => {
+    clearConsent();
+    window.location.reload();
+  }, []);
+
   return (
+    <ErrorBoundary>
     <Suspense fallback="Loading...">
       {isLoading && <LoadingSpinner onLoadingComplete={() => setIsLoading(false)} />}
       <div className="App">
+        <ScrollVideoBackground />
         <Helmet
           htmlAttributes={{
             lang: language === 'he' ? 'he' : language === 'ru' ? 'ru' : 'en',
@@ -311,12 +378,30 @@ function App() {
           <ContactForm
             translations={translations}
             language={language}
+            onOpenPrivacy={openPrivacy}
           />
         </div>
 
         <Footer
           translations={translations}
           language={language}
+          onPrivacyClick={openPrivacy}
+          onCookieSettingsClick={handleCookieSettings}
+        />
+
+        <CookieBanner
+          visible={showCookieBanner}
+          onDismiss={() => setShowCookieBanner(false)}
+          onOpenPrivacy={openPrivacy}
+          texts={translations[language].legal}
+        />
+
+        <PrivacyPolicyModal
+          language={language}
+          isOpen={privacyOpen}
+          onClose={closePrivacy}
+          title={translations[language].legal.privacyTitle}
+          closeLabel={translations[language].legal.closeModal}
         />
 
         <Modal
@@ -325,6 +410,7 @@ function App() {
         />
       </div>
     </Suspense>
+    </ErrorBoundary>
   );
 }
 

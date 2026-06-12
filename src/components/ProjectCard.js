@@ -1,14 +1,61 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
+
+const TILT_RANGE = 8;
+const springConfig = { stiffness: 260, damping: 22, mass: 0.6 };
 
 const ProjectCard = ({ project, onImageClick, language }) => {
+  const cardRef = useRef(null);
+  const pointerX = useMotionValue(0.5);
+  const pointerY = useMotionValue(0.5);
+  const rotateX = useSpring(
+    useTransform(pointerY, [0, 1], [TILT_RANGE, -TILT_RANGE]),
+    springConfig
+  );
+  const rotateY = useSpring(
+    useTransform(pointerX, [0, 1], [-TILT_RANGE, TILT_RANGE]),
+    springConfig
+  );
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const scaleValue = useTransform(scrollYProgress, [0, 0.25, 0.8, 1], [0.88, 1, 1, 0.94]);
+  const opacityValue = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
+  const yValue = useTransform(scrollYProgress, [0, 0.25], [80, 0]);
+
+  const scale = useSpring(scaleValue, { stiffness: 100, damping: 20 });
+  const opacity = useSpring(opacityValue, { stiffness: 100, damping: 20 });
+  const y = useSpring(yValue, { stiffness: 100, damping: 20 });
+
   const getLinkText = () => {
     if (language === 'en') return 'Visit Website';
     if (language === 'he') return 'בקר באתר';
     return 'Посетить сайт';
   };
 
+  const handlePointerMove = (event) => {
+    const bounds = cardRef.current?.getBoundingClientRect();
+    if (!bounds) return;
+    pointerX.set((event.clientX - bounds.left) / bounds.width);
+    pointerY.set((event.clientY - bounds.top) / bounds.height);
+  };
+
+  const resetTilt = () => {
+    pointerX.set(0.5);
+    pointerY.set(0.5);
+  };
+
   return (
-    <div className="project-card">
+    <motion.div
+      ref={cardRef}
+      className="project-card"
+      style={{ rotateX, rotateY, scale, opacity, y, transformPerspective: 1000 }}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetTilt}
+    >
       <div className="project-image-container">
         <img
           src={project.image}
@@ -17,28 +64,26 @@ const ProjectCard = ({ project, onImageClick, language }) => {
           onClick={() => onImageClick(project.image)}
           loading="lazy"
         />
-        <div className="project-overlay">
-          <div className="project-info">
-            <h3 className="project-title">{project.title}</h3>
-            <p className="project-description">{project.description}</p>
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {getLinkText()}
-                <svg className="link-arrow" viewBox="0 0 24 24" fill="none">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            )}
-          </div>
-        </div>
       </div>
-    </div>
+      <div className="project-info">
+        <h3 className="project-title">{project.title}</h3>
+        <p className="project-description">{project.description}</p>
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {getLinkText()}
+            <svg className="link-arrow" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </motion.div>
   );
 };
 
