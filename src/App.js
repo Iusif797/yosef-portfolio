@@ -10,8 +10,10 @@ import MobileMenu from './components/MobileMenu';
 import Header from './components/Header';
 import ScrollVideoBackground from './components/ScrollVideoBackground';
 import AboutSection from './components/AboutSection';
+import ProcessSection from './components/ProcessSection';
 import ProjectsSection from './components/ProjectsSection';
 import PricingSection from './components/PricingSection';
+import FAQSection from './components/FAQSection';
 import ContactForm from './components/ContactForm';
 import Modal from './components/Modal';
 import Footer from './components/Footer';
@@ -339,7 +341,6 @@ function App() {
         <LanguageSwitcher
           language={language}
           changeLanguage={changeLanguage}
-          translations={translations}
         />
 
         <MobileMenu
@@ -362,6 +363,10 @@ function App() {
         </div>
 
         <div className="reveal">
+          <ProcessSection language={language} />
+        </div>
+
+        <div className="reveal">
           <ProjectsSection
             id="projects-section"
             translations={translations}
@@ -376,6 +381,10 @@ function App() {
             translations={translations}
             language={language}
           />
+        </div>
+
+        <div className="reveal">
+          <FAQSection language={language} />
         </div>
 
         <div className="reveal">

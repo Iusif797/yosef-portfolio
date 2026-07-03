@@ -54,6 +54,18 @@ const MobileMenu = ({ translations, language, scrollToContact }) => {
           </button>
           <button 
             className="mobile-menu-item"
+            onClick={() => scrollToSection('about-section')}
+          >
+            {language === 'ru' ? 'Обо мне' : language === 'en' ? 'About' : 'אודות'}
+          </button>
+          <button 
+            className="mobile-menu-item"
+            onClick={() => scrollToSection('process-section')}
+          >
+            {language === 'ru' ? 'Процесс' : language === 'en' ? 'Process' : 'תהליך'}
+          </button>
+          <button 
+            className="mobile-menu-item"
             onClick={() => scrollToSection('projects-section')}
           >
             {translations[language].projects.myProjects}
@@ -63,6 +75,12 @@ const MobileMenu = ({ translations, language, scrollToContact }) => {
             onClick={() => scrollToSection('pricing-section')}
           >
             {translations[language].pricing.pricing}
+          </button>
+          <button 
+            className="mobile-menu-item"
+            onClick={() => scrollToSection('faq-section')}
+          >
+            {language === 'ru' ? 'FAQ' : language === 'en' ? 'FAQ' : 'שאלות'}
           </button>
           <button 
             className="mobile-menu-item"

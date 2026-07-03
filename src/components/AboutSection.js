@@ -1,5 +1,5 @@
 import React from 'react';
-import BannerImage from '../assets/NewBannerPortfolio.webp';
+import BannerImage from '../assets/about-tech-visual.webp';
 
 const AboutSection = ({ translations, language }) => {
   const content = {

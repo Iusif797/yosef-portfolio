@@ -7,11 +7,27 @@ const gridVariants = {
   visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
 
+const PROJECT_TYPES = {
+  platform: { ru: "Платформа", en: "Platform", he: "פלטפורמה" },
+  landing: { ru: "Лендинг", en: "Landing", he: "עמוד נחיתה" },
+  brand: { ru: "Бренд-сайт", en: "Brand site", he: "אתר מותג" },
+  shop: { ru: "E-commerce", en: "E-commerce", he: "מסחר" },
+  service: { ru: "Сервисный сайт", en: "Service site", he: "אתר שירות" },
+  education: { ru: "Образование", en: "Education", he: "חינוך" },
+  app: { ru: "Веб-приложение", en: "Web app", he: "אפליקציית ווב" },
+  realty: { ru: "Недвижимость", en: "Real estate", he: "נדל\"ן" },
+  travel: { ru: "Travel", en: "Travel", he: "תיירות" },
+  personal: { ru: "Персональный сайт", en: "Personal site", he: "אתר אישי" },
+  music: { ru: "Music promo", en: "Music promo", he: "קידום מוזיקה" },
+};
+
 const PROJECTS = [
   {
     slug: "prague-carsharing",
     name: "Prague Carsharing",
     link: "https://prague-carsharing-website.usifmamedov5.workers.dev",
+    type: PROJECT_TYPES.platform,
+    tags: ["React", "Maps", "Booking"],
     desc: {
       ru: "Платформа поминутной аренды авто в Праге с картой и бронированием.",
       en: "Per-minute car-sharing platform in Prague with live map and booking.",
@@ -22,6 +38,8 @@ const PROJECTS = [
     slug: "dodge-challenger",
     name: "Dodge Challenger",
     link: "https://dodge-challenger-lending.vercel.app/",
+    type: PROJECT_TYPES.landing,
+    tags: ["Motion", "Landing", "Brand"],
     desc: {
       ru: "Кинематографичный лендинг мускул-кара с динамичными анимациями.",
       en: "Cinematic muscle-car landing page with dynamic motion.",
@@ -32,6 +50,8 @@ const PROJECTS = [
     slug: "neran",
     name: "Neran",
     link: "https://neran.io/",
+    type: PROJECT_TYPES.brand,
+    tags: ["Product", "Luxury UI", "Responsive"],
     desc: {
       ru: "Современный продуктовый сайт бренда с чистой типографикой.",
       en: "Modern product brand site with clean editorial typography.",
@@ -42,6 +62,8 @@ const PROJECTS = [
     slug: "luxe-shop",
     name: "LUXE",
     link: "https://luxe-shop-theta.vercel.app",
+    type: PROJECT_TYPES.shop,
+    tags: ["Catalog", "E-commerce", "Minimal UI"],
     desc: {
       ru: "E-commerce премиальной моды: каталог и минималистичный UI.",
       en: "Premium fashion e-commerce with a refined minimalist UI.",
@@ -52,6 +74,8 @@ const PROJECTS = [
     slug: "wine",
     name: "Wine House",
     link: "https://wine-iusif-project.vercel.app",
+    type: PROJECT_TYPES.brand,
+    tags: ["Catalog", "Editorial", "Atmosphere"],
     desc: {
       ru: "Атмосферный сайт винного бренда с дегустациями и каталогом.",
       en: "Atmospheric winery site with tastings and catalog.",
@@ -62,6 +86,8 @@ const PROJECTS = [
     slug: "mindvia",
     name: "MindVia",
     link: "https://www.psymindvia.com",
+    type: PROJECT_TYPES.education,
+    tags: ["Courses", "Consulting", "Content"],
     desc: {
       ru: "Школа психологии с курсами, консультациями и блогом.",
       en: "Psychology school with courses, consultations and blog.",
@@ -72,6 +98,8 @@ const PROJECTS = [
     slug: "cleaningtwg-cz",
     name: "Cleaning TWG",
     link: "https://cleaningtwg.cz",
+    type: PROJECT_TYPES.service,
+    tags: ["Booking", "Local SEO", "Service"],
     desc: {
       ru: "Профессиональный клининг в Праге с онлайн-заказом.",
       en: "Professional cleaning service in Prague with online booking.",
@@ -79,19 +107,11 @@ const PROJECTS = [
     },
   },
   {
-    slug: "cleaningtwg-netlify",
-    name: "Cleaning TWG — Web",
-    link: "https://cleaningtwg.netlify.app",
-    desc: {
-      ru: "Альтернативная сборка сайта клининговой компании.",
-      en: "Alternative build of the cleaning company website.",
-      he: "גרסה חלופית של אתר חברת הניקיון.",
-    },
-  },
-  {
     slug: "web-studio",
     name: "Web Studio",
     link: "https://web-studio-contacts.netlify.app",
+    type: PROJECT_TYPES.personal,
+    tags: ["Portfolio", "Contacts", "Lead Form"],
     desc: {
       ru: "Сайт веб-студии: услуги, портфолио и форма контакта.",
       en: "Web studio site: services, portfolio and contact flow.",
@@ -102,6 +122,8 @@ const PROJECTS = [
     slug: "cafe",
     name: "Latte Cafe",
     link: "https://cafe-nine-zeta.vercel.app",
+    type: PROJECT_TYPES.brand,
+    tags: ["Menu", "Cafe", "Landing"],
     desc: {
       ru: "Элегантный сайт кофейни со спешелти-кофе и меню.",
       en: "Elegant cafe website with specialty coffee and menu.",
@@ -112,6 +134,8 @@ const PROJECTS = [
     slug: "bakery",
     name: "Bakery",
     link: "https://bakeryiusifdeveloping.netlify.app",
+    type: PROJECT_TYPES.service,
+    tags: ["Catalog", "Orders", "Local"],
     desc: {
       ru: "Тёплый сайт пекарни с витриной выпечки и заказом.",
       en: "Warm bakery site with a product showcase and ordering.",
@@ -122,6 +146,8 @@ const PROJECTS = [
     slug: "dubai-realty",
     name: "Dubai Realty",
     link: "https://dubai-appartmentsproject.netlify.app",
+    type: PROJECT_TYPES.realty,
+    tags: ["Listings", "Luxury", "Lead Form"],
     desc: {
       ru: "Премиальная недвижимость Дубая: каталог и консультации.",
       en: "Premium Dubai real estate: listings and consultations.",
@@ -132,6 +158,8 @@ const PROJECTS = [
     slug: "indonesia",
     name: "Discover Indonesia",
     link: "https://indonesia-project.netlify.app",
+    type: PROJECT_TYPES.travel,
+    tags: ["Travel", "Gallery", "Storytelling"],
     desc: {
       ru: "Тревел-портал для путешествий по Индонезии.",
       en: "Travel portal to explore the beauty of Indonesia.",
@@ -142,6 +170,8 @@ const PROJECTS = [
     slug: "filip-veksler",
     name: "Filip Veksler",
     link: "https://filipvekslerpage.netlify.app",
+    type: PROJECT_TYPES.personal,
+    tags: ["Personal Brand", "Consulting", "Landing"],
     desc: {
       ru: "Персональный сайт учёного, преподавателя и консультанта.",
       en: "Personal site of a scientist, educator and consultant.",
@@ -149,19 +179,11 @@ const PROJECTS = [
     },
   },
   {
-    slug: "dj-beckerman",
-    name: "DJ Beckerman",
-    link: "https://dj-beckerman.netlify.app",
-    desc: {
-      ru: "Сайт диджея: афиша, миксы и бронирование выступлений.",
-      en: "DJ website: events, mixes and performance booking.",
-      he: "אתר די-ג'יי: אירועים, מיקסים והזמנות.",
-    },
-  },
-  {
     slug: "iskatel",
     name: "Iskatel School",
     link: "https://www.iskatel.school/",
+    type: PROJECT_TYPES.education,
+    tags: ["Courses", "Community", "Schedule"],
     desc: {
       ru: "Образовательная платформа школы «Искатель» с курсами, расписанием и программами обучения.",
       en: "Educational platform of the 'Iskatel' school with courses, schedules, and learning programs.",
@@ -172,6 +194,8 @@ const PROJECTS = [
     slug: "chabad-shifts",
     name: "Chabad Shifts",
     link: "https://chabad-shifts.netlify.app",
+    type: PROJECT_TYPES.app,
+    tags: ["Dashboard", "Auth", "Scheduling"],
     desc: {
       ru: "Приложение учёта смен и расписания для команды.",
       en: "Shift and schedule management app for teams.",
@@ -180,44 +204,44 @@ const PROJECTS = [
   },
   {
     slug: "djbeckerman-2",
-    name: "DJ Beckerman — Live",
+    name: "DJ Beckerman",
     link: "https://djbeckerman.vercel.app/",
+    type: PROJECT_TYPES.music,
+    tags: ["Events", "Audio", "Booking"],
     desc: {
-      ru: "Промо-сайт диджея с акцентом на живые выступления.",
-      en: "DJ promo site focused on live performances.",
-      he: "אתר פרומו לדי-ג'יי בדגש על הופעות חיות.",
-    },
-  },
-  {
-    slug: "homework",
-    name: "Mini App",
-    link: "https://iusif797.github.io/Homework_04.10.2025/",
-    desc: {
-      ru: "Учебный мини-проект на чистом JavaScript.",
-      en: "Educational mini-project built with vanilla JavaScript.",
-      he: "מיני-פרויקט לימודי ב-JavaScript.",
+      ru: "Сайт диджея: афиша, миксы и бронирование выступлений.",
+      en: "DJ website: events, mixes and performance booking.",
+      he: "אתר די-ג'יי: אירועים, מיקסים והזמנות.",
     },
   },
 ];
 
 const localized = (field, language) => field[language] ?? field.en;
 
+const getDomain = (link) => {
+  try {
+    return new URL(link).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+};
+
 const ProjectsSection = ({ translations, language, onImageClick }) => {
   const subtitle =
     language === "ru"
-      ? "Избранные работы, демонстрирующие мой опыт и навыки"
+      ? "Избранные работы с аккуратной подачей, живыми ссылками и деталями интерфейса"
       : language === "he"
-        ? "עבודות נבחרות המציגות את הניסיון והכישורים שלי"
-        : "Selected works showcasing my experience and skills";
+        ? "עבודות נבחרות עם קישורים חיים, פרטי ממשק והגשה נקייה"
+        : "Selected work with live links, polished interfaces and production details";
 
   return (
     <section className="projects-section" id="projects-section">
       <div className="container">
-        <div className="projects-header">
+        <div className="section-head">
           <h2 className="section-title">
             {translations[language].projects.myProjects}
           </h2>
-          <p className="projects-subtitle">{subtitle}</p>
+          <p className="section-subtitle">{subtitle}</p>
         </div>
         <motion.div
           className="projects-grid"
@@ -231,8 +255,12 @@ const ProjectsSection = ({ translations, language, onImageClick }) => {
               key={project.slug}
               project={{
                 image: `/projects/${project.slug}.png`,
+                preview: `/projects/previews/${project.slug}.webp`,
                 alt: project.name,
                 title: project.name,
+                type: localized(project.type, language),
+                tags: project.tags,
+                domain: getDomain(project.link),
                 description: localized(project.desc, language),
                 link: project.link,
               }}

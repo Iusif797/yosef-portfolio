@@ -11,10 +11,29 @@ const ScrollVideoBackground = () => {
   const scrollProgressRef = useRef(0);
   const readyRef = useRef(false);
   const [hasError, setHasError] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
 
-  const canScrub = !prefersReducedMotion;
+  const canScrub = !prefersReducedMotion && !isMobileViewport;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const mediaQuery = window.matchMedia('(max-width: 768px), (pointer: coarse)');
+    const updateViewportMode = () => {
+      setIsMobileViewport(mediaQuery.matches);
+    };
+
+    updateViewportMode();
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', updateViewportMode);
+      return () => mediaQuery.removeEventListener('change', updateViewportMode);
+    }
+
+    mediaQuery.addListener(updateViewportMode);
+    return () => mediaQuery.removeListener(updateViewportMode);
+  }, []);
 
   useEffect(() => {
     scrollProgressRef.current = scrollYProgress.get();
@@ -28,8 +47,7 @@ const ScrollVideoBackground = () => {
     const video = videoRef.current;
     if (!video || !canScrub || hasError) return undefined;
 
-    const isMobile = typeof window !== 'undefined' && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const scrubSmoothing = isMobile ? 0.08 : 0.15;
+    const scrubSmoothing = 0.15;
 
     const markReady = () => {
       if (readyRef.current) return;
