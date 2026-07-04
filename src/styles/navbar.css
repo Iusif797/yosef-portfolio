@@ -113,6 +113,38 @@
 }
 
 @media (max-width: 768px) {
+  .site-nav {
+    padding: 0;
+    pointer-events: none;
+    background: transparent;
+    border-bottom: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .site-nav.is-scrolled {
+    background: transparent;
+    border-bottom: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .site-nav__inner {
+    display: block;
+    padding: 0;
+  }
+
+  .site-nav__brand {
+    display: none;
+  }
+
+  .site-nav__actions {
+    display: block;
+    pointer-events: auto;
+  }
+
   .site-nav__cta {
     display: none;
   }

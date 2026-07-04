@@ -4,14 +4,19 @@ import { FaTimes } from 'react-icons/fa';
 
 const Modal = ({ imageSrc, imageAlt, closeLabel, onClose }) => {
   useEffect(() => {
+    if (!imageSrc) return undefined;
+
     const handleKeyDown = (e) => { if (e.key === 'Escape') onClose(); };
+    const prevOverflow = document.body.style.overflow;
+
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = prevOverflow;
     };
-  }, [onClose]);
+  }, [imageSrc, onClose]);
 
   if (!imageSrc) return null;
 
