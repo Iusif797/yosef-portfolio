@@ -1,92 +1,49 @@
 import React, { useState, useEffect } from 'react';
 
-const MobileMenu = ({ translations, language, scrollToContact }) => {
+const NAV_ITEMS = [
+  { id: 'header', key: 'home' },
+  { id: 'about-section', key: 'about' },
+  { id: 'process-section', key: 'process' },
+  { id: 'projects-section', key: 'projects' },
+  { id: 'tech-section', key: 'tech' },
+  { id: 'pricing-section', key: 'pricing' },
+  { id: 'testimonials-section', key: 'reviews' },
+  { id: 'faq-section', key: 'faq' },
+];
+
+const MobileMenu = ({ t, scrollToContact }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
   }, [isOpen]);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    }
-  };
-
-  const handleContactClick = (e) => {
-    scrollToContact(e);
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);
   };
 
   return (
     <>
-      <button 
-        className={`mobile-menu-button ${isOpen ? 'active' : ''}`}
-        onClick={toggleMenu}
-        aria-label="Toggle Menu"
+      <button
+        type="button"
+        className={`mobile-menu-button${isOpen ? ' active' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isOpen}
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span /><span /><span />
       </button>
-
-      <div className={`mobile-menu-overlay ${isOpen ? 'active' : ''}`}>
-        <nav className="mobile-menu-nav">
-          <button 
-            className="mobile-menu-item"
-            onClick={() => scrollToSection('header')}
-          >
-            {language === 'ru' ? 'Главная' : language === 'en' ? 'Home' : 'בית'}
-          </button>
-          <button 
-            className="mobile-menu-item"
-            onClick={() => scrollToSection('about-section')}
-          >
-            {language === 'ru' ? 'Обо мне' : language === 'en' ? 'About' : 'אודות'}
-          </button>
-          <button 
-            className="mobile-menu-item"
-            onClick={() => scrollToSection('process-section')}
-          >
-            {language === 'ru' ? 'Процесс' : language === 'en' ? 'Process' : 'תהליך'}
-          </button>
-          <button 
-            className="mobile-menu-item"
-            onClick={() => scrollToSection('projects-section')}
-          >
-            {translations[language].projects.myProjects}
-          </button>
-          <button 
-            className="mobile-menu-item"
-            onClick={() => scrollToSection('pricing-section')}
-          >
-            {translations[language].pricing.pricing}
-          </button>
-          <button 
-            className="mobile-menu-item"
-            onClick={() => scrollToSection('faq-section')}
-          >
-            {language === 'ru' ? 'FAQ' : language === 'en' ? 'FAQ' : 'שאלות'}
-          </button>
-          <button 
-            className="mobile-menu-item"
-            onClick={handleContactClick}
-          >
-            {translations[language].contact.contact}
+      <div className={`mobile-menu-overlay${isOpen ? ' active' : ''}`} role="dialog" aria-modal="true" aria-hidden={!isOpen}>
+        <nav className="mobile-menu-nav" aria-label="Mobile navigation">
+          {NAV_ITEMS.map(({ id, key }) => (
+            <button key={id} type="button" className="mobile-menu-item" onClick={() => scrollToSection(id)}>
+              {t.nav[key]}
+            </button>
+          ))}
+          <button type="button" className="mobile-menu-item mobile-menu-item--cta" onClick={(e) => { scrollToContact(e); setIsOpen(false); }}>
+            {t.nav.cta}
           </button>
         </nav>
       </div>

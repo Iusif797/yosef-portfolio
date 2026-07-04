@@ -1,5 +1,85 @@
 /* Импорт шрифтов */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import './styles/navbar.css';
+@import './styles/techstack.css';
+@import './styles/testimonials.css';
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10001;
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.projects-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.projects-filter {
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.projects-filter:hover,
+.projects-filter:focus-visible {
+  color: var(--text-primary);
+  border-color: rgba(124, 108, 255, 0.4);
+}
+
+.projects-filter.is-active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-color: transparent;
+  color: #fff;
+}
+
+.footer-list-item--row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.footer-list-item--row svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.footer-list-item--row a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-list-item--row a:hover {
+  color: var(--accent-light);
+}
+
+.mobile-menu-item--cta {
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff !important;
+  border-radius: var(--radius);
+}
+
 
 /* Loading Spinner */
 .loading-overlay {
@@ -226,7 +306,7 @@ body[dir="rtl"] {
   top: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 1003;
   display: inline-flex;
   gap: 2px;
   padding: 4px;
@@ -2917,6 +2997,10 @@ body {
 .faq-section {
   padding: 8rem 0;
   position: relative;
+  z-index: 1;
+  background: rgba(10, 13, 22, 0.35);
+  backdrop-filter: blur(12px) saturate(125%);
+  -webkit-backdrop-filter: blur(12px) saturate(125%);
 }
 
 .process-grid {

@@ -1,87 +1,51 @@
 import React from 'react';
 import { FaDesktop, FaMobile, FaIdCard, FaCheck, FaStar } from 'react-icons/fa';
 
-const PricingSection = ({ translations, language }) => {
-  const pricingData = [
-    {
-      icon: FaDesktop,
-      title: translations[language].pricing.website,
-      price: translations[language].pricing.priceWebsite,
-      popular: true,
-      features: [
-        language === 'ru' ? 'Адаптивный дизайн' : language === 'en' ? 'Responsive Design' : 'עיצוב רספונסיבי',
-        language === 'ru' ? 'SEO оптимизация' : language === 'en' ? 'SEO Optimization' : 'אופטימיזציה לקידום',
-        language === 'ru' ? 'Быстрая загрузка' : language === 'en' ? 'Fast Loading' : 'טעינה מהירה',
-        language === 'ru' ? 'Современный дизайн' : language === 'en' ? 'Modern Design' : 'עיצוב מודרני'
-      ]
-    },
-    {
-      icon: FaMobile,
-      title: translations[language].pricing.mobileApp,
-      price: translations[language].pricing.priceMobileApp,
-      features: [
-        language === 'ru' ? 'iOS & Android' : language === 'en' ? 'iOS & Android' : 'iOS ו-Android',
-        language === 'ru' ? 'Нативная производительность' : language === 'en' ? 'Native Performance' : 'ביצועים נטיביים',
-        language === 'ru' ? 'Push уведомления' : language === 'en' ? 'Push Notifications' : 'התראות דחיפה',
-        language === 'ru' ? 'Интеграция с API' : language === 'en' ? 'API Integration' : 'אינטגרציה עם API'
-      ]
-    },
-    {
-      icon: FaIdCard,
-      title: translations[language].pricing.businessCard,
-      price: translations[language].pricing.priceBusinessCard,
-      features: [
-        language === 'ru' ? 'Уникальный дизайн' : language === 'en' ? 'Unique Design' : 'עיצוב ייחודי',
-        language === 'ru' ? 'Контактная информация' : language === 'en' ? 'Contact Information' : 'פרטי יצירת קשר',
-        language === 'ru' ? 'QR код' : language === 'en' ? 'QR Code' : 'קוד QR',
-        language === 'ru' ? 'Социальные сети' : language === 'en' ? 'Social Media' : 'רשתות חברתיות'
-      ]
-    }
+const PricingSection = ({ t, onOrder }) => {
+  const plans = [
+    { icon: FaDesktop, title: t.pricing.website, price: t.pricing.priceWebsite, popular: true, type: 'website', features: t.pricing.features.website },
+    { icon: FaMobile, title: t.pricing.mobileApp, price: t.pricing.priceMobileApp, type: 'mobile', features: t.pricing.features.mobile },
+    { icon: FaIdCard, title: t.pricing.businessCard, price: t.pricing.priceBusinessCard, type: 'card', features: t.pricing.features.card },
   ];
 
   return (
     <section className="pricing-section" id="pricing-section">
       <div className="container">
         <div className="pricing-header">
-          <h2 className="section-title">{translations[language].pricing.pricing}</h2>
-          <p className="pricing-subtitle">
-            {language === 'ru' ? 'Выберите подходящий план для вашего проекта' : 
-             language === 'en' ? 'Choose the perfect plan for your project' : 
-             'בחרו את התוכנית המושלמת לפרויקט שלכם'}
-          </p>
+          <h2 className="section-title">{t.pricing.pricing}</h2>
+          <p className="pricing-subtitle">{t.pricing.subtitle}</p>
         </div>
-        
         <div className="pricing-grid">
-          {pricingData.map((item, index) => {
+          {plans.map((item) => {
             const IconComponent = item.icon;
             return (
-              <div key={index} className={`pricing-card ${item.popular ? 'popular' : ''}`}>
+              <div key={item.type} className={`pricing-card${item.popular ? ' popular' : ''}`}>
                 {item.popular && (
                   <div className="popular-badge">
-                    <FaStar />
-                    {language === 'ru' ? 'Популярно' : language === 'en' ? 'Popular' : 'פופולרי'}
+                    <FaStar aria-hidden="true" />
+                    {t.pricing.popular}
                   </div>
                 )}
-                
                 <div className="pricing-header-card">
-                  <div className="pricing-icon">
-                    <IconComponent />
-                  </div>
+                  <div className="pricing-icon"><IconComponent aria-hidden="true" /></div>
                   <h3 className="pricing-title">{item.title}</h3>
                   <div className="pricing-price">{item.price}</div>
                 </div>
-                
                 <div className="pricing-features">
-                  {item.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="pricing-feature">
-                      <FaCheck className="feature-check" />
+                  {item.features.map((feature) => (
+                    <div key={feature} className="pricing-feature">
+                      <FaCheck className="feature-check" aria-hidden="true" />
                       <span>{feature}</span>
                     </div>
                   ))}
                 </div>
-                
-                <button className="pricing-button">
-                  {language === 'ru' ? 'Заказать' : language === 'en' ? 'Order Now' : 'הזמן עכשיו'}
+                <button
+                  type="button"
+                  className="pricing-button"
+                  aria-label={`${t.pricing.order}: ${item.title}`}
+                  onClick={() => onOrder(item.type)}
+                >
+                  {t.pricing.order}
                 </button>
               </div>
             );

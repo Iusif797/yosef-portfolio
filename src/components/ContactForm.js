@@ -1,89 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ContactForm = ({ translations, language, onOpenPrivacy }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    projectType: language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт',
-    message: '',
-  });
-  const [status, setStatus] = useState(''); // 'sending' | 'success' | 'error' | ''
+const ContactForm = ({ t, language, onOpenPrivacy, presetType }) => {
+  const [typeKey, setTypeKey] = useState('website');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('');
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (presetType) setTypeKey(presetType);
+  }, [presetType]);
+
+  const projectType = t.contact.types[typeKey] || t.contact.types.website;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({ ...prevData, [name]: value }));
-    setErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
+    if (name === 'projectType') {
+      const key = Object.keys(t.contact.types).find((k) => t.contact.types[k] === value) || 'website';
+      setTypeKey(key);
+      return;
+    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const validate = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = translations[language].contact.nameRequired;
-    if (!formData.email.trim()) {
-      newErrors.email = translations[language].contact.emailRequired;
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
-      newErrors.email = translations[language].contact.emailInvalid;
-    }
-    if (!formData.message.trim()) newErrors.message = translations[language].contact.messageRequired;
-    return newErrors;
-  };
-
-  const getStatusText = () => {
-    if (status === 'sending') {
-      return language === 'ru' ? 'Отправка...' : language === 'en' ? 'Sending...' : 'שולח...';
-    }
-    if (status === 'success') {
-      return translations[language].contact.statusSuccess;
-    }
-    if (status === 'error') {
-      return language === 'ru'
-        ? 'Ошибка отправки. Попробуйте ещё раз или напишите на email.'
-        : language === 'en'
-        ? 'Failed to send. Please try again or email directly.'
-        : 'שליחה נכשלה. נסה שוב או שלח אימייל ישירות.';
-    }
-    return '';
-  };
-
-  const sendToTelegram = async (message) => {
-    const telegramBotToken = '7024597156:AAGG4sChJgJ8PZQyISPkqbUFZ6KH2zJC1XE';
-    const telegramChatId = '1077514837';
-    const telegramMessage = encodeURIComponent(message);
-    const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${telegramMessage}`;
-
-    const res = await fetch(telegramUrl);
-    const data = await res.json();
-    if (!data.ok) {
-      throw new Error('Telegram API error');
-    }
+    const next = {};
+    if (!formData.name.trim()) next.name = t.contact.nameRequired;
+    if (!formData.email.trim()) next.email = t.contact.emailRequired;
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) next.email = t.contact.emailInvalid;
+    if (!formData.message.trim()) next.message = t.contact.messageRequired;
+    return next;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validate();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-      return;
-    }
-
+    if (Object.keys(formErrors).length) { setErrors(formErrors); return; }
     setStatus('sending');
     setErrors({});
-
-    const { name, email, projectType, message } = formData;
-    const fullMessage = language === 'he'
-      ? `בקשה חדשה מהפורטפוליו:\nשם: ${name}\nאימייל: ${email}\nסוג הפרויקט: ${projectType}\nהודעה: ${message}`
-      : language === 'en'
-      ? `New request from portfolio:\nName: ${name}\nEmail: ${email}\nProject Type: ${projectType}\nMessage: ${message}`
-      : `Новая заявка с портфолио:\nИмя: ${name}\nEmail: ${email}\nТип проекта: ${projectType}\nСообщение: ${message}`;
-
     try {
-      await sendToTelegram(fullMessage);
-      setFormData({
-        name: '',
-        email: '',
-        projectType: language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт',
-        message: '',
+      const endpoint = process.env.REACT_APP_CONTACT_API || '/api/contact';
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, projectType, language }),
       });
+      if (!res.ok) throw new Error('fail');
+      setFormData({ name: '', email: '', message: '' });
+      setTypeKey('website');
       setStatus('success');
     } catch {
       setStatus('error');
@@ -94,172 +58,74 @@ const ContactForm = ({ translations, language, onOpenPrivacy }) => {
     <section className="contact-section" id="contact-section">
       <div className="container">
         <div className="contact-header">
-          <h2 className="contact-title">{translations[language].contact.contact}</h2>
-          <p className="contact-subtitle">
-            {language === 'ru' ? 'Готов воплотить ваши идеи в жизнь. Свяжитесь со мной любым удобным способом.' : 
-             language === 'en' ? 'Ready to bring your ideas to life. Contact me in any convenient way.' : 
-             'מוכן להביא את הרעיונות שלכם לחיים. צרו קשר בכל דרך נוחה.'}
-          </p>
+          <h2 className="contact-title">{t.contact.contact}</h2>
+          <p className="contact-subtitle">{t.contact.subtitle}</p>
         </div>
-
         <div className="contact-content">
-          {/* Минималистичные контакты */}
           <div className="contact-info">
             <div className="contact-list">
               <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                  </svg>
+                <div className="contact-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
                 </div>
-                <span className="contact-text">
-                  {language === 'ru' ? 'Прага, Чехия' : language === 'en' ? 'Prague, Czech Republic' : 'פראג, צ\'כיה'}
-                </span>
+                <span className="contact-text">{t.contact.location}</span>
               </div>
-
               <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                  </svg>
+                <div className="contact-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
                 </div>
-                <a href="mailto:usifmamedov5@gmail.com" className="contact-text contact-link">
-                  usifmamedov5@gmail.com
-                </a>
+                <a href="mailto:usifmamedov5@gmail.com" className="contact-text contact-link">usifmamedov5@gmail.com</a>
               </div>
-
               <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                  </svg>
+                <div className="contact-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>
                 </div>
-                <a href="tel:+420773975235" className="contact-text contact-link">
-                  +420 773 975 235
-                </a>
+                <a href="tel:+420773975235" className="contact-text contact-link">+420 773 975 235</a>
               </div>
             </div>
           </div>
-
-          {/* Форма обратной связи */}
           <div className="contact-form-wrapper">
             <div className="contact-form-container">
               <div className="form-header">
-                <h3 className="form-title">
-                  {language === 'ru' ? 'Отправить сообщение' : 
-                   language === 'en' ? 'Send Message' : 
-                   'שלח הודעה'}
-                </h3>
-                <p className="form-subtitle">
-                  {language === 'ru' ? 'Расскажите о своем проекте' : 
-                   language === 'en' ? 'Tell me about your project' : 
-                   'ספר לי על הפרויקט שלך'}
-                </p>
+                <h3 className="form-title">{t.contact.formTitle}</h3>
+                <p className="form-subtitle">{t.contact.formSubtitle}</p>
               </div>
-
-              <form onSubmit={handleSubmit} className="contact-form">
+              <form onSubmit={handleSubmit} className="contact-form" noValidate>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label">
-                      {translations[language].contact.yourName}
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder={translations[language].contact.yourName}
-                      className={`form-input ${errors.name ? 'error' : ''}`}
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                    {errors.name && <span className="error-message">{errors.name}</span>}
+                    <label className="form-label" htmlFor="contact-name">{t.contact.yourName}</label>
+                    <input id="contact-name" type="text" name="name" className={`form-input${errors.name ? ' error' : ''}`} value={formData.name} onChange={handleChange} />
+                    {errors.name && <span className="error-message" role="alert">{errors.name}</span>}
                   </div>
-                  
                   <div className="form-group">
-                    <label className="form-label">
-                      {translations[language].contact.yourEmail}
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder={translations[language].contact.yourEmail}
-                      className={`form-input ${errors.email ? 'error' : ''}`}
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                    {errors.email && <span className="error-message">{errors.email}</span>}
+                    <label className="form-label" htmlFor="contact-email">{t.contact.yourEmail}</label>
+                    <input id="contact-email" type="email" name="email" className={`form-input${errors.email ? ' error' : ''}`} value={formData.email} onChange={handleChange} />
+                    {errors.email && <span className="error-message" role="alert">{errors.email}</span>}
                   </div>
                 </div>
-                
                 <div className="form-group">
-                  <label className="form-label">
-                    {language === 'ru' ? 'Тип проекта' : language === 'en' ? 'Project Type' : 'סוג פרויקט'}
-                  </label>
-                  <select
-                    name="projectType"
-                    className="form-select"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                  >
-                    <option value={language === 'he' ? 'אתר' : language === 'en' ? 'Website' : 'Сайт'}>
-                      {language === 'ru' ? 'Сайт' : language === 'en' ? 'Website' : 'אתר'}
-                    </option>
-                    <option value={language === 'he' ? 'אפליקציה ניידת' : language === 'en' ? 'Mobile Application' : 'Мобильное приложение'}>
-                      {language === 'ru' ? 'Мобильное приложение' : language === 'en' ? 'Mobile Application' : 'אפליקציה ניידת'}
-                    </option>
-                    <option value={language === 'he' ? 'כרטיס ביקור' : language === 'en' ? 'Business Card' : 'Бизнес-визитка'}>
-                      {language === 'ru' ? 'Бизнес-визитка' : language === 'en' ? 'Business Card' : 'כרטיס ביקור'}
-                    </option>
+                  <label className="form-label" htmlFor="contact-type">{t.contact.projectType}</label>
+                  <select id="contact-type" name="projectType" className="form-select" value={projectType} onChange={handleChange}>
+                    <option value={t.contact.types.website}>{t.contact.types.website}</option>
+                    <option value={t.contact.types.mobile}>{t.contact.types.mobile}</option>
+                    <option value={t.contact.types.card}>{t.contact.types.card}</option>
                   </select>
                 </div>
-                
                 <div className="form-group">
-                  <label className="form-label">
-                    {translations[language].contact.message}
-                  </label>
-                  <textarea
-                    name="message"
-                    placeholder={translations[language].contact.message}
-                    className={`form-textarea ${errors.message ? 'error' : ''}`}
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="5"
-                  />
-                  {errors.message && <span className="error-message">{errors.message}</span>}
+                  <label className="form-label" htmlFor="contact-message">{t.contact.message}</label>
+                  <textarea id="contact-message" name="message" className={`form-textarea${errors.message ? ' error' : ''}`} value={formData.message} onChange={handleChange} rows="5" />
+                  {errors.message && <span className="error-message" role="alert">{errors.message}</span>}
                 </div>
-                
                 <p className="contact-form-privacy-note">
-                  {translations[language].legal.formPrivacyBefore}{' '}
-                  <button type="button" className="privacy-inline-link" onClick={onOpenPrivacy}>
-                    {translations[language].legal.privacyPolicy}
-                  </button>
-                  {translations[language].legal.formPrivacyAfter}
+                  {t.legal.formPrivacyBefore}{' '}
+                  <button type="button" className="privacy-inline-link" onClick={onOpenPrivacy}>{t.legal.privacyPolicy}</button>
+                  {t.legal.formPrivacyAfter}
                 </p>
-
-                <button
-                  type="submit"
-                  className="submit-button"
-                  disabled={status === 'sending'}
-                >
-                  {status === 'sending' ? (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ animation: 'spin 1s linear infinite' }}>
-                      <path d="M21 12a9 9 0 11-6.219-8.56"/>
-                    </svg>
-                  ) : (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <line x1="22" y1="2" x2="11" y2="13"/>
-                      <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                    </svg>
-                  )}
-                  {status === 'sending'
-                    ? (language === 'ru' ? 'Отправка...' : language === 'en' ? 'Sending...' : 'שולח...')
-                    : translations[language].contact.send}
+                <button type="submit" className="submit-button" disabled={status === 'sending'}>
+                  {status === 'sending' ? t.contact.sending : t.contact.send}
                 </button>
-
-                {status && status !== 'sending' && (
-                  <div className={`status-message ${status === 'error' ? 'status-error' : 'status-success'}`}>
-                    {getStatusText()}
-                  </div>
-                )}
+                {status === 'success' && <div className="status-message status-success" role="status">{t.contact.statusSuccess}</div>}
+                {status === 'error' && <div className="status-message status-error" role="alert">{t.contact.statusError}</div>}
               </form>
             </div>
           </div>

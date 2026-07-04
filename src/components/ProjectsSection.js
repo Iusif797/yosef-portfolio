@@ -1,271 +1,74 @@
-import React from "react";
-import { motion } from "framer-motion";
-import ProjectCard from "./ProjectCard";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import ProjectCard from './ProjectCard';
+import { PROJECTS, PROJECT_TYPES, getDomain, localized } from '../data/projects';
+import { getPublicAsset } from '../utils/publicUrl';
+
+const FILTERS = [
+  { id: 'all', labelKey: 'filterAll' },
+  { id: 'web', labelKey: 'filterWeb' },
+  { id: 'app', labelKey: 'filterApp' },
+];
 
 const gridVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
 };
 
-const PROJECT_TYPES = {
-  platform: { ru: "Платформа", en: "Platform", he: "פלטפורמה" },
-  landing: { ru: "Лендинг", en: "Landing", he: "עמוד נחיתה" },
-  brand: { ru: "Бренд-сайт", en: "Brand site", he: "אתר מותג" },
-  shop: { ru: "E-commerce", en: "E-commerce", he: "מסחר" },
-  service: { ru: "Сервисный сайт", en: "Service site", he: "אתר שירות" },
-  education: { ru: "Образование", en: "Education", he: "חינוך" },
-  app: { ru: "Веб-приложение", en: "Web app", he: "אפליקציית ווב" },
-  realty: { ru: "Недвижимость", en: "Real estate", he: "נדל\"ן" },
-  travel: { ru: "Travel", en: "Travel", he: "תיירות" },
-  personal: { ru: "Персональный сайт", en: "Personal site", he: "אתר אישי" },
-  music: { ru: "Music promo", en: "Music promo", he: "קידום מוזיקה" },
-};
+const ProjectsSection = ({ t, language, onImageClick }) => {
+  const [activeFilter, setActiveFilter] = useState('all');
+  const p = t.projects;
 
-const PROJECTS = [
-  {
-    slug: "prague-carsharing",
-    name: "Prague Carsharing",
-    link: "https://prague-carsharing-website.usifmamedov5.workers.dev",
-    type: PROJECT_TYPES.platform,
-    tags: ["React", "Maps", "Booking"],
-    desc: {
-      ru: "Платформа поминутной аренды авто в Праге с картой и бронированием.",
-      en: "Per-minute car-sharing platform in Prague with live map and booking.",
-      he: "פלטפורמת שיתוף רכב לפי דקות בפראג עם מפה והזמנה.",
-    },
-  },
-  {
-    slug: "dodge-challenger",
-    name: "Dodge Challenger",
-    link: "https://dodge-challenger-lending.vercel.app/",
-    type: PROJECT_TYPES.landing,
-    tags: ["Motion", "Landing", "Brand"],
-    desc: {
-      ru: "Кинематографичный лендинг мускул-кара с динамичными анимациями.",
-      en: "Cinematic muscle-car landing page with dynamic motion.",
-      he: "עמוד נחיתה קולנועי לרכב שריר עם אנימציות דינמיות.",
-    },
-  },
-  {
-    slug: "neran",
-    name: "Neran",
-    link: "https://neran.io/",
-    type: PROJECT_TYPES.brand,
-    tags: ["Product", "Luxury UI", "Responsive"],
-    desc: {
-      ru: "Современный продуктовый сайт бренда с чистой типографикой.",
-      en: "Modern product brand site with clean editorial typography.",
-      he: "אתר מותג מוצר מודרני עם טיפוגרפיה נקייה.",
-    },
-  },
-  {
-    slug: "luxe-shop",
-    name: "LUXE",
-    link: "https://luxe-shop-theta.vercel.app",
-    type: PROJECT_TYPES.shop,
-    tags: ["Catalog", "E-commerce", "Minimal UI"],
-    desc: {
-      ru: "E-commerce премиальной моды: каталог и минималистичный UI.",
-      en: "Premium fashion e-commerce with a refined minimalist UI.",
-      he: "מסחר אופנה פרימיום עם ממשק מינימליסטי.",
-    },
-  },
-  {
-    slug: "wine",
-    name: "Wine House",
-    link: "https://wine-iusif-project.vercel.app",
-    type: PROJECT_TYPES.brand,
-    tags: ["Catalog", "Editorial", "Atmosphere"],
-    desc: {
-      ru: "Атмосферный сайт винного бренда с дегустациями и каталогом.",
-      en: "Atmospheric winery site with tastings and catalog.",
-      he: "אתר יקב אווירתי עם טעימות וקטלוג.",
-    },
-  },
-  {
-    slug: "mindvia",
-    name: "MindVia",
-    link: "https://www.psymindvia.com",
-    type: PROJECT_TYPES.education,
-    tags: ["Courses", "Consulting", "Content"],
-    desc: {
-      ru: "Школа психологии с курсами, консультациями и блогом.",
-      en: "Psychology school with courses, consultations and blog.",
-      he: "בית ספר לפסיכולוגיה עם קורסים וייעוץ.",
-    },
-  },
-  {
-    slug: "cleaningtwg-cz",
-    name: "Cleaning TWG",
-    link: "https://cleaningtwg.cz",
-    type: PROJECT_TYPES.service,
-    tags: ["Booking", "Local SEO", "Service"],
-    desc: {
-      ru: "Профессиональный клининг в Праге с онлайн-заказом.",
-      en: "Professional cleaning service in Prague with online booking.",
-      he: "שירות ניקיון מקצועי בפראג עם הזמנה מקוונת.",
-    },
-  },
-  {
-    slug: "web-studio",
-    name: "Web Studio",
-    link: "https://web-studio-contacts.netlify.app",
-    type: PROJECT_TYPES.personal,
-    tags: ["Portfolio", "Contacts", "Lead Form"],
-    desc: {
-      ru: "Сайт веб-студии: услуги, портфолио и форма контакта.",
-      en: "Web studio site: services, portfolio and contact flow.",
-      he: "אתר סטודיו ווב: שירותים, תיק עבודות וטופס יצירת קשר.",
-    },
-  },
-  {
-    slug: "cafe",
-    name: "Latte Cafe",
-    link: "https://cafe-nine-zeta.vercel.app",
-    type: PROJECT_TYPES.brand,
-    tags: ["Menu", "Cafe", "Landing"],
-    desc: {
-      ru: "Элегантный сайт кофейни со спешелти-кофе и меню.",
-      en: "Elegant cafe website with specialty coffee and menu.",
-      he: "אתר בית קפה אלגנטי עם קפה איכותי ותפריט.",
-    },
-  },
-  {
-    slug: "bakery",
-    name: "Bakery",
-    link: "https://bakeryiusifdeveloping.netlify.app",
-    type: PROJECT_TYPES.service,
-    tags: ["Catalog", "Orders", "Local"],
-    desc: {
-      ru: "Тёплый сайт пекарни с витриной выпечки и заказом.",
-      en: "Warm bakery site with a product showcase and ordering.",
-      he: "אתר מאפייה חמים עם מוצרים והזמנה.",
-    },
-  },
-  {
-    slug: "dubai-realty",
-    name: "Dubai Realty",
-    link: "https://dubai-appartmentsproject.netlify.app",
-    type: PROJECT_TYPES.realty,
-    tags: ["Listings", "Luxury", "Lead Form"],
-    desc: {
-      ru: "Премиальная недвижимость Дубая: каталог и консультации.",
-      en: "Premium Dubai real estate: listings and consultations.",
-      he: "נדל\"ן יוקרה בדובאי: מודעות וייעוץ.",
-    },
-  },
-  {
-    slug: "indonesia",
-    name: "Discover Indonesia",
-    link: "https://indonesia-project.netlify.app",
-    type: PROJECT_TYPES.travel,
-    tags: ["Travel", "Gallery", "Storytelling"],
-    desc: {
-      ru: "Тревел-портал для путешествий по Индонезии.",
-      en: "Travel portal to explore the beauty of Indonesia.",
-      he: "פורטל תיירות לחקר יופייה של אינדונזיה.",
-    },
-  },
-  {
-    slug: "filip-veksler",
-    name: "Filip Veksler",
-    link: "https://filipvekslerpage.netlify.app",
-    type: PROJECT_TYPES.personal,
-    tags: ["Personal Brand", "Consulting", "Landing"],
-    desc: {
-      ru: "Персональный сайт учёного, преподавателя и консультанта.",
-      en: "Personal site of a scientist, educator and consultant.",
-      he: "אתר אישי של מדען, מחנך ויועץ.",
-    },
-  },
-  {
-    slug: "iskatel",
-    name: "Iskatel School",
-    link: "https://www.iskatel.school/",
-    type: PROJECT_TYPES.education,
-    tags: ["Courses", "Community", "Schedule"],
-    desc: {
-      ru: "Образовательная платформа школы «Искатель» с курсами, расписанием и программами обучения.",
-      en: "Educational platform of the 'Iskatel' school with courses, schedules, and learning programs.",
-      he: "פלטפורמת חינוך של בית הספר 'איסקטל' עם קורסים, לוחות זמנים ותוכניות לימוד.",
-    },
-  },
-  {
-    slug: "chabad-shifts",
-    name: "Chabad Shifts",
-    link: "https://chabad-shifts.netlify.app",
-    type: PROJECT_TYPES.app,
-    tags: ["Dashboard", "Auth", "Scheduling"],
-    desc: {
-      ru: "Приложение учёта смен и расписания для команды.",
-      en: "Shift and schedule management app for teams.",
-      he: "אפליקציית ניהול משמרות ולוח זמנים.",
-    },
-  },
-  {
-    slug: "djbeckerman-2",
-    name: "DJ Beckerman",
-    link: "https://djbeckerman.vercel.app/",
-    type: PROJECT_TYPES.music,
-    tags: ["Events", "Audio", "Booking"],
-    desc: {
-      ru: "Сайт диджея: афиша, миксы и бронирование выступлений.",
-      en: "DJ website: events, mixes and performance booking.",
-      he: "אתר די-ג'יי: אירועים, מיקסים והזמנות.",
-    },
-  },
-];
-
-const localized = (field, language) => field[language] ?? field.en;
-
-const getDomain = (link) => {
-  try {
-    return new URL(link).hostname.replace(/^www\./, "");
-  } catch {
-    return "";
-  }
-};
-
-const ProjectsSection = ({ translations, language, onImageClick }) => {
-  const subtitle =
-    language === "ru"
-      ? "Избранные работы с аккуратной подачей, живыми ссылками и деталями интерфейса"
-      : language === "he"
-        ? "עבודות נבחרות עם קישורים חיים, פרטי ממשק והגשה נקייה"
-        : "Selected work with live links, polished interfaces and production details";
+  const filtered = PROJECTS.filter((project) => {
+    if (activeFilter === 'all') return true;
+    return PROJECT_TYPES[project.typeKey].category === activeFilter;
+  });
 
   return (
     <section className="projects-section" id="projects-section">
       <div className="container">
         <div className="section-head">
-          <h2 className="section-title">
-            {translations[language].projects.myProjects}
-          </h2>
-          <p className="section-subtitle">{subtitle}</p>
+          <h2 className="section-title">{p.myProjects}</h2>
+          <p className="section-subtitle">{p.subtitle}</p>
+        </div>
+        <div className="projects-filters" role="tablist" aria-label="Project filters">
+          {FILTERS.map(({ id, labelKey }) => (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={activeFilter === id}
+              className={`projects-filter${activeFilter === id ? ' is-active' : ''}`}
+              onClick={() => setActiveFilter(id)}
+            >
+              {p[labelKey]}
+            </button>
+          ))}
         </div>
         <motion.div
           className="projects-grid"
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.1 }}
+          key={activeFilter}
         >
-          {PROJECTS.map((project) => (
+          {filtered.map((project) => (
             <ProjectCard
               key={project.slug}
               project={{
-                image: `/projects/${project.slug}.png`,
-                preview: `/projects/previews/${project.slug}.webp`,
+                preview: getPublicAsset(`/projects/previews/${project.slug}.webp`),
+                image: getPublicAsset(`/projects/previews/${project.slug}.webp`),
                 alt: project.name,
                 title: project.name,
-                type: localized(project.type, language),
+                type: localized(PROJECT_TYPES[project.typeKey], language),
                 tags: project.tags,
                 domain: getDomain(project.link),
                 description: localized(project.desc, language),
                 link: project.link,
               }}
               onImageClick={onImageClick}
-              language={language}
+              labels={p}
             />
           ))}
         </motion.div>
