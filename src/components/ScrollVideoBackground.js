@@ -37,11 +37,6 @@ const ScrollVideoBackground = () => {
   }, [scrollYProgress]);
 
   useEffect(() => {
-    readyRef.current = false;
-    setHasError(false);
-  }, [VIDEO_SRC]);
-
-  useEffect(() => {
     const video = videoRef.current;
     if (!video || !canScrub || hasError) return undefined;
 

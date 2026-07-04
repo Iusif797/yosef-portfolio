@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "installCommand": "npm ci",
+  "framework": "create-react-app",
+  "env": {
+    "PUBLIC_URL": "",
+    "REACT_APP_SITE_URL": "https://webportfolio-yosef.vercel.app"
+  },
+  "rewrites": [
+    { "source": "/((?!static/).*)", "destination": "/index.html" }
+  ]
+}
