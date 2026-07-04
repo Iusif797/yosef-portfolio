@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/yosef-portfolio/static/css/main.8b5170df.css",
+    "main.js": "/yosef-portfolio/static/js/main.596eb4f1.js",
+    "static/js/453.b00c161f.chunk.js": "/yosef-portfolio/static/js/453.b00c161f.chunk.js",
+    "static/media/best-background.jpg": "/yosef-portfolio/static/media/best-background.04eb0e4a829bb61252d7.jpg",
+    "static/media/about-tech-visual.webp": "/yosef-portfolio/static/media/about-tech-visual.0b600ddcf375a2de1fb5.webp",
+    "static/media/Linkedin_Portfolio.webp": "/yosef-portfolio/static/media/Linkedin_Portfolio.86d47d1a33ccf82c7b2f.webp",
+    "index.html": "/yosef-portfolio/index.html",
+    "main.8b5170df.css.map": "/yosef-portfolio/static/css/main.8b5170df.css.map",
+    "main.596eb4f1.js.map": "/yosef-portfolio/static/js/main.596eb4f1.js.map",
+    "453.b00c161f.chunk.js.map": "/yosef-portfolio/static/js/453.b00c161f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8b5170df.css",
+    "static/js/main.596eb4f1.js"
+  ]
+}
