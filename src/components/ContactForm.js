@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FaGithub, FaLinkedin, FaTelegram } from 'react-icons/fa';
+import FormSelect from './FormSelect';
 
 const ContactForm = ({ t, language, onOpenPrivacy, presetType }) => {
   const [typeKey, setTypeKey] = useState('website');
@@ -15,13 +17,20 @@ const ContactForm = ({ t, language, onOpenPrivacy, presetType }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'projectType') {
-      const key = Object.keys(t.contact.types).find((k) => t.contact.types[k] === value) || 'website';
-      setTypeKey(key);
+      setTypeKey(value);
       return;
     }
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
+
+  const typeOptions = [
+    { value: 'website', label: t.contact.types.website },
+    { value: 'bot', label: t.contact.types.bot },
+    { value: 'crm', label: t.contact.types.crm },
+    { value: 'mobile', label: t.contact.types.mobile },
+    { value: 'card', label: t.contact.types.card },
+  ];
 
   const validate = () => {
     const next = {};
@@ -57,33 +66,46 @@ const ContactForm = ({ t, language, onOpenPrivacy, presetType }) => {
   return (
     <section className="contact-section" id="contact-section">
       <div className="container">
-        <div className="contact-header">
-          <h2 className="contact-title">{t.contact.contact}</h2>
-          <p className="contact-subtitle">{t.contact.subtitle}</p>
-        </div>
         <div className="contact-content">
-          <div className="contact-info">
-            <div className="contact-list">
-              <div className="contact-item">
-                <div className="contact-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
+          <aside className="contact-info">
+            <div className="contact-info-card">
+              <header className="contact-info-head">
+                <h2 className="contact-title">{t.contact.contact}</h2>
+                <p className="contact-subtitle">{t.contact.subtitle}</p>
+              </header>
+              <div className="contact-list">
+                <div className="contact-item">
+                  <div className="contact-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
+                  </div>
+                  <span className="contact-text">{t.contact.location}</span>
                 </div>
-                <span className="contact-text">{t.contact.location}</span>
+                <div className="contact-item">
+                  <div className="contact-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
+                  </div>
+                  <a href="mailto:usifmamedov5@gmail.com" className="contact-text contact-link">usifmamedov5@gmail.com</a>
+                </div>
+                <div className="contact-item">
+                  <div className="contact-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>
+                  </div>
+                  <a href="tel:+420773975235" className="contact-text contact-link">+420 773 975 235</a>
+                </div>
               </div>
-              <div className="contact-item">
-                <div className="contact-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
-                </div>
-                <a href="mailto:usifmamedov5@gmail.com" className="contact-text contact-link">usifmamedov5@gmail.com</a>
-              </div>
-              <div className="contact-item">
-                <div className="contact-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>
-                </div>
-                <a href="tel:+420773975235" className="contact-text contact-link">+420 773 975 235</a>
+              <div className="contact-social">
+                <a href="https://github.com/Iusif797" target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t.footer.github}>
+                  <FaGithub aria-hidden="true" />
+                </a>
+                <a href="https://www.linkedin.com/in/iusifmamedov/" target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t.footer.linkedin}>
+                  <FaLinkedin aria-hidden="true" />
+                </a>
+                <a href="https://t.me/beckerman979" target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t.footer.telegram}>
+                  <FaTelegram aria-hidden="true" />
+                </a>
               </div>
             </div>
-          </div>
+          </aside>
           <div className="contact-form-wrapper">
             <div className="contact-form-container">
               <div className="form-header">
@@ -103,14 +125,14 @@ const ContactForm = ({ t, language, onOpenPrivacy, presetType }) => {
                     {errors.email && <span className="error-message" role="alert">{errors.email}</span>}
                   </div>
                 </div>
-                <div className="form-group">
-                  <label className="form-label" htmlFor="contact-type">{t.contact.projectType}</label>
-                  <select id="contact-type" name="projectType" className="form-select" value={projectType} onChange={handleChange}>
-                    <option value={t.contact.types.website}>{t.contact.types.website}</option>
-                    <option value={t.contact.types.mobile}>{t.contact.types.mobile}</option>
-                    <option value={t.contact.types.card}>{t.contact.types.card}</option>
-                  </select>
-                </div>
+                <FormSelect
+                  id="contact-type"
+                  name="projectType"
+                  label={t.contact.projectType}
+                  options={typeOptions}
+                  value={typeKey}
+                  onChange={handleChange}
+                />
                 <div className="form-group">
                   <label className="form-label" htmlFor="contact-message">{t.contact.message}</label>
                   <textarea id="contact-message" name="message" className={`form-textarea${errors.message ? ' error' : ''}`} value={formData.message} onChange={handleChange} rows="5" />

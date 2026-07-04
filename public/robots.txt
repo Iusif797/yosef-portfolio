@@ -2,5 +2,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://web-studio-contacts.netlify.app/sitemap.xml
+Sitemap: https://webportfolio-yosef.vercel.app/sitemap.xml
 

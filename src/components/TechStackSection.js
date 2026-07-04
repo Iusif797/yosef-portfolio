@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   SiReact, SiNodedotjs, SiTypescript, SiNextdotjs,
-  SiTailwindcss, SiNetlify, SiVercel, SiFigma,
+  SiTailwindcss, SiNetlify, SiVercel, SiFigma, SiTelegram, SiPostgresql,
 } from 'react-icons/si';
 import '../styles/techstack.css';
 
@@ -11,6 +11,8 @@ const STACK = [
   { Icon: SiNodedotjs, name: 'Node.js' },
   { Icon: SiTypescript, name: 'TypeScript' },
   { Icon: SiNextdotjs, name: 'Next.js' },
+  { Icon: SiTelegram, name: 'Telegram Bot API' },
+  { Icon: SiPostgresql, name: 'PostgreSQL' },
   { Icon: SiTailwindcss, name: 'Tailwind' },
   { Icon: SiNetlify, name: 'Netlify' },
   { Icon: SiVercel, name: 'Vercel' },

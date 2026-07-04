@@ -1,9 +1,11 @@
 import React from 'react';
-import { FaDesktop, FaMobile, FaIdCard, FaCheck, FaStar } from 'react-icons/fa';
+import { FaDesktop, FaMobile, FaIdCard, FaCheck, FaStar, FaTelegram, FaDatabase } from 'react-icons/fa';
 
 const PricingSection = ({ t, onOrder }) => {
   const plans = [
     { icon: FaDesktop, title: t.pricing.website, price: t.pricing.priceWebsite, popular: true, type: 'website', features: t.pricing.features.website },
+    { icon: FaTelegram, title: t.pricing.telegramBot, price: t.pricing.priceTelegramBot, type: 'bot', features: t.pricing.features.bot },
+    { icon: FaDatabase, title: t.pricing.crm, price: t.pricing.priceCrm, type: 'crm', features: t.pricing.features.crm },
     { icon: FaMobile, title: t.pricing.mobileApp, price: t.pricing.priceMobileApp, type: 'mobile', features: t.pricing.features.mobile },
     { icon: FaIdCard, title: t.pricing.businessCard, price: t.pricing.priceBusinessCard, type: 'card', features: t.pricing.features.card },
   ];
@@ -20,12 +22,14 @@ const PricingSection = ({ t, onOrder }) => {
             const IconComponent = item.icon;
             return (
               <div key={item.type} className={`pricing-card${item.popular ? ' popular' : ''}`}>
-                {item.popular && (
-                  <div className="popular-badge">
-                    <FaStar aria-hidden="true" />
-                    {t.pricing.popular}
-                  </div>
-                )}
+                <div className="pricing-badge-slot">
+                  {item.popular && (
+                    <div className="popular-badge">
+                      <FaStar aria-hidden="true" />
+                      {t.pricing.popular}
+                    </div>
+                  )}
+                </div>
                 <div className="pricing-header-card">
                   <div className="pricing-icon"><IconComponent aria-hidden="true" /></div>
                   <h3 className="pricing-title">{item.title}</h3>

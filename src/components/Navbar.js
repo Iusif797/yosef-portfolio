@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
+import { getPublicAsset } from '../utils/publicUrl';
 import '../styles/navbar.css';
 
 const NAV_ITEMS = [
@@ -30,8 +31,8 @@ const Navbar = ({ t, language, changeLanguage, scrollToContact }) => {
   return (
     <header className={`site-nav${scrolled ? ' is-scrolled' : ''}`}>
       <div className="site-nav__inner container">
-        <button type="button" className="site-nav__brand" onClick={() => goTo('header')}>
-          YM
+        <button type="button" className="site-nav__brand" onClick={() => goTo('header')} aria-label={t.nav.home}>
+          <img src={getPublicAsset('/brand-logo.png')} alt="" className="site-nav__brand-logo" width="38" height="38" />
         </button>
         <nav className="site-nav__links" aria-label="Main navigation">
           {NAV_ITEMS.map(({ id, key }) => (

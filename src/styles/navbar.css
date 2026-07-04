@@ -23,18 +23,29 @@
 }
 
 .site-nav__brand {
-  font-family: var(--font-secondary);
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  color: var(--text-primary);
-  background: linear-gradient(135deg, var(--accent-light), var(--gold-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   cursor: pointer;
-  padding: 0.25rem 0;
+  padding: 0.15rem;
+  background: transparent;
+  border-radius: 12px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.site-nav__brand:hover,
+.site-nav__brand:focus-visible {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 4px 14px rgba(124, 108, 255, 0.45));
+  outline: none;
+}
+
+.site-nav__brand-logo {
+  display: block;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
 }
 
 .site-nav__links {

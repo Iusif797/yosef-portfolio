@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useCountUp } from '../hooks/useCountUp';
-import BannerImage from '../assets/about-tech-visual.webp';
+import BannerImage from '../assets/about-banner-natural.webp';
 
 const StatItem = ({ stat, active }) => {
   const count = useCountUp(stat.value, 1400, active);
@@ -45,8 +45,12 @@ const AboutSection = ({ t }) => {
             </div>
           </div>
           <div className="about-banner-container">
-            <div className="about-glow" />
-            <img src={BannerImage} alt={t.about.title} className="about-banner-image" loading="lazy" />
+            <div className="about-banner-ambient" aria-hidden="true" />
+            <div className="about-banner-frame">
+              <img src={BannerImage} alt={t.about.title} className="about-banner-image" loading="lazy" />
+              <div className="about-banner-blend" aria-hidden="true" />
+              <div className="about-glow" aria-hidden="true" />
+            </div>
           </div>
         </div>
       </div>

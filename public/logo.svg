@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="brand-border" x1="4" y1="2" x2="36" y2="38" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a599ff"/>
+      <stop offset="0.55" stop-color="#7c6cff"/>
+      <stop offset="1" stop-color="#8be9d0"/>
+    </linearGradient>
+    <linearGradient id="brand-fill" x1="10" y1="8" x2="30" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+    <linearGradient id="brand-glow" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c6cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#7c6cff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="#0b0d12" stroke="url(#brand-border)" stroke-width="1.4"/>
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="url(#brand-glow)"/>
+  <path d="M11 12.5L16.2 21.2L21.4 12.5M16.2 21.2V27.5" stroke="url(#brand-fill)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22.5 27.5V12.5L26.7 20.2L30.9 12.5V27.5" stroke="url(#brand-fill)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

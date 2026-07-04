@@ -1,5 +1,5 @@
 .tech-section {
-  padding: 7rem 0;
+  padding-block: var(--section-py);
   position: relative;
   z-index: 1;
   background: rgba(10, 13, 22, 0.35);
