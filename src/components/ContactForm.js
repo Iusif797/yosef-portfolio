@@ -135,7 +135,7 @@ const ContactForm = ({ t, language, onOpenPrivacy, presetType }) => {
                 />
                 <div className="form-group">
                   <label className="form-label" htmlFor="contact-message">{t.contact.message}</label>
-                  <textarea id="contact-message" name="message" className={`form-textarea${errors.message ? ' error' : ''}`} value={formData.message} onChange={handleChange} rows="5" />
+                  <textarea id="contact-message" name="message" className={`form-textarea${errors.message ? ' error' : ''}`} value={formData.message} onChange={handleChange} rows="4" />
                   {errors.message && <span className="error-message" role="alert">{errors.message}</span>}
                 </div>
                 <p className="contact-form-privacy-note">
